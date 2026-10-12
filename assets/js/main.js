@@ -207,7 +207,7 @@
   var stored = null;
   try { stored = localStorage.getItem("admed-theme"); } catch (e) {}
   var mq = window.matchMedia ? matchMedia("(prefers-color-scheme: dark)") : null;
-  applyTheme(stored || (mq && mq.matches ? "dark" : "light"));
+  applyTheme(root.getAttribute("data-theme") || stored || (mq && mq.matches ? "dark" : "light"));
   tt.addEventListener("click", function () {
     var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
     applyTheme(next);
