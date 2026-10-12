@@ -5,11 +5,14 @@ Static site (HTML + CSS + JS, no build step). Open `index.html` or host the fold
 ## Adding the clinic's real details
 Edit **`assets/js/config.js`** — the only file you need to touch:
 
-- `phone`, `whatsapp`, `email`, `address`, `hours`, `social` — anything left empty is hidden automatically.
-- `mapEmbedUrl` — paste the *Embed a map* `src` from Google Maps → Share → Embed to show a live map.
-- `photos` — put images in `assets/photos/` and list them (`hero`, `about`, `gallery`). The gallery appears once photos exist.
+- `phone`, `address`, `mapsUrl`, `mapEmbedUrl`, `announcement`, `googleRating` and `reviews` are filled from the clinic's Google Maps listing.
+- `whatsapp`, `email`, `hours`, `social` — still empty, so hidden. Add them to show WhatsApp/email booking, opening hours and social icons.
+- `photos` — put images in `assets/photos/` and list them (`hero`, `about`, `services` tiles, `gallery`). The gallery appears once photos exist.
 - `doctors`, `reviews` — the Team and Reviews sections appear once you add entries.
 
-The specialties list is in `index.html` (`#specialties`) — edit the cards to match the clinic's actual departments; the booking dropdowns update automatically.
+The six specialist services (Cardiac, Nephrology, Orthopedic, Gynecological, Hematology, Urology) are in `index.html` under `#specialties`; the booking dropdowns update automatically.
+
+## Day / night mode
+The sun/moon button in the header switches themes. The choice is remembered, and first-time visitors get their device's light/dark setting.
 
 Brand colours (sampled from the logo): navy `#00007E`, amber `#FCA901`, red `#FE0000`.

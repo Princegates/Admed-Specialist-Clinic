@@ -16,7 +16,8 @@
   var hours = Array.isArray(C.hours) ? C.hours : [];
   var has = {
     phone: !!C.phone, whatsapp: !!C.whatsapp, email: !!C.email,
-    address: !!C.address, hours: hours.length > 0, maps: !!C.mapsUrl
+    address: !!C.address, hours: hours.length > 0, maps: !!C.mapsUrl,
+    announcement: !!C.announcement, rating: !!(C.googleRating && C.googleRating.score)
   };
   var hrefs = {
     tel: C.phone ? "tel:" + digits(C.phone) : "",
@@ -45,6 +46,10 @@
       el.innerHTML = hours.map(function (h) {
         return "<span><span>" + esc(h.days) + "</span><b>" + esc(h.time) + "</b></span>";
       }).join("");
+    } else if (k === "ratingScore") {
+      el.textContent = C.googleRating ? C.googleRating.score : "";
+    } else if (k === "ratingCount") {
+      el.textContent = C.googleRating ? C.googleRating.count : "";
     } else if (C[k]) {
       el.textContent = C[k];
     }
@@ -78,6 +83,11 @@
   tryImage(P.hero, function (s) { $("#heroBg").style.backgroundImage = "url('" + s + "')"; });
   tryImage(P.about, function (s) {
     var a = $("#aboutImg"); a.style.backgroundImage = "url('" + s + "')"; a.classList.add("has-photo");
+  });
+  // Photo tiles in the Specialties section
+  $$("[data-photo]").forEach(function (tile) {
+    var src = (P.services || {})[tile.getAttribute("data-photo")];
+    tryImage(src, function (s) { tile.style.backgroundImage = "url('" + s + "')"; tile.classList.add("has-photo"); });
   });
   var gal = $("#galleryGrid"), shown = 0;
   (P.gallery || []).forEach(function (src, n) {
@@ -159,7 +169,8 @@
         window.location.href = hrefs.mail + "?subject=" + encodeURIComponent("Appointment request") + "&body=" + encodeURIComponent(body);
         set("Opening your email app to send your request. Thank you!", true);
       } else if (hrefs.tel) {
-        set("Please call us on " + C.phone + " to complete your booking.", true);
+        note.className = "form-note ok";
+        note.innerHTML = 'Thank you! To confirm your booking, please call <a href="' + esc(hrefs.tel) + '"><strong>' + esc(C.phone) + "</strong></a>.";
       } else {
         set("Online booking isn't connected yet — please use Get Directions to visit us.", false);
       }
@@ -184,6 +195,28 @@
   burger.addEventListener("click", function () { setNav(!nav.classList.contains("open")); });
   $$("a", nav).forEach(function (a) { a.addEventListener("click", function () { setNav(false); }); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") setNav(false); });
+
+  /* ---------- Day / night mode ---------- */
+  var root = document.documentElement, tt = $("#themeToggle"), metaTheme = $('meta[name="theme-color"]');
+  function applyTheme(t) {
+    root.setAttribute("data-theme", t);
+    tt.setAttribute("aria-label", t === "dark" ? "Switch to day mode" : "Switch to night mode");
+    tt.setAttribute("aria-pressed", t === "dark");
+    if (metaTheme) metaTheme.setAttribute("content", t === "dark" ? "#0a0c1f" : "#00007E");
+  }
+  var stored = null;
+  try { stored = localStorage.getItem("admed-theme"); } catch (e) {}
+  var mq = window.matchMedia ? matchMedia("(prefers-color-scheme: dark)") : null;
+  applyTheme(stored || (mq && mq.matches ? "dark" : "light"));
+  tt.addEventListener("click", function () {
+    var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    applyTheme(next);
+    try { localStorage.setItem("admed-theme", next); } catch (e) {}
+  });
+  if (mq && mq.addEventListener) mq.addEventListener("change", function (e) {
+    var saved = null; try { saved = localStorage.getItem("admed-theme"); } catch (x) {}
+    if (!saved) applyTheme(e.matches ? "dark" : "light");
+  });
 
   /* ---------- Scroll reveal ---------- */
   var io = "IntersectionObserver" in window ? new IntersectionObserver(function (en) {
