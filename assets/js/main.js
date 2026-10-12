@@ -124,9 +124,9 @@
   /* ---------- Specialty selects & footer list from the cards ---------- */
   var specs = $$("[data-specialty]").map(function (e) { return e.getAttribute("data-specialty").replace(/&amp;/g, "&"); });
   $$("[data-specialty-select]").forEach(function (sel) {
-    sel.innerHTML = '<option value="">Select a specialty</option>' +
+    sel.innerHTML = '<option value="">Select a service</option>' +
       specs.map(function (s) { return "<option>" + esc(s) + "</option>"; }).join("") +
-      "<option>Not sure — please advise</option>";
+      "<option>Not sure</option>";
   });
   $("#footerSpecs").innerHTML = specs.slice(0, 6).map(function (s) {
     return '<li><a href="#specialties">' + esc(s) + "</a></li>";
@@ -153,7 +153,7 @@
       });
       if (bad) return set("Please enter your name and phone number.", false);
 
-      var lines = ["Appointment request — ADMed Specialist Clinic",
+      var lines = ["Appointment request: ADMed Specialist Clinic",
         "Name: " + f.name.value.trim(), "Phone: " + f.phone.value.trim()];
       if (f.email && f.email.value.trim()) lines.push("Email: " + f.email.value.trim());
       if (f.specialty.value) lines.push("Specialty: " + f.specialty.value);
@@ -164,15 +164,15 @@
 
       if (hrefs.wa) {
         window.open(hrefs.wa + "?text=" + encodeURIComponent(body), "_blank", "noopener");
-        set("Opening WhatsApp so you can send your request. Thank you!", true);
+        set("Your request is ready to send on WhatsApp.", true);
       } else if (hrefs.mail) {
         window.location.href = hrefs.mail + "?subject=" + encodeURIComponent("Appointment request") + "&body=" + encodeURIComponent(body);
-        set("Opening your email app to send your request. Thank you!", true);
+        set("Your request is ready to send by email.", true);
       } else if (hrefs.tel) {
         note.className = "form-note ok";
-        note.innerHTML = 'Thank you! To confirm your booking, please call <a href="' + esc(hrefs.tel) + '"><strong>' + esc(C.phone) + "</strong></a>.";
+        note.innerHTML = 'To book, please call <a href="' + esc(hrefs.tel) + '"><strong>' + esc(C.phone) + "</strong></a>.";
       } else {
-        set("Online booking isn't connected yet — please use Get Directions to visit us.", false);
+        set("Online booking is not available yet. Please call the clinic.", false);
       }
     });
   });

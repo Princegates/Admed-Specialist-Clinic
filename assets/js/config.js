@@ -3,7 +3,7 @@
    --------------------------------------------------------------------------
    This is the ONLY file you need to edit to update the clinic's details.
    Anything left empty ("" or []) is hidden automatically — nothing on the
-   site is ever shown as a fake placeholder.
+   site is ever shown as an empty box.
    Source of the details below: the clinic's public Google Maps listing.
    ========================================================================== */
 window.ADMED = {
@@ -19,7 +19,7 @@ window.ADMED = {
   mapEmbedUrl: "https://maps.google.com/maps?q=5.6402194,-0.1061823&z=16&output=embed",
 
   // Latest notice from the clinic's Google listing (shown in the top strip)
-  announcement: "Weekend dialysis available — Saturday or Sunday",
+  announcement: "Weekend dialysis available on Saturday or Sunday",
 
   // Opening hours — e.g. [{ days: "Monday – Friday", time: "8:00 AM – 6:00 PM" }]
   hours: [
