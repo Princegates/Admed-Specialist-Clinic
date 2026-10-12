@@ -8,9 +8,9 @@
    ========================================================================== */
 window.ADMED = {
   // Contact ---------------------------------------------------------------
-  phone: "+233 55 699 6422",     // clinic
-  phone2: { label: "Call to book", number: "+233 24 356 0080" },  // optional second number
-  whatsapp: "",         // digits only with country code, e.g. "233243560080" (adds a WhatsApp button + sends booking requests there)
+  phone: "+233 24 356 0080",     // main number for calls
+  phone2: { label: "Booking & WhatsApp", number: "+233 55 699 6422" },  // optional second number
+  whatsapp: "233556996422",  // digits only with country code (used when the form key is not set)
   email: "medspecialistsconnect@gmail.com",  // booking form sends requests here when WhatsApp is not set
   address: "Spintex Road, Worship Curve (Off Coca Cola Roundabout), Accra",
   plusCode: "JVRV+3G Accra, Ghana",
@@ -31,9 +31,10 @@ window.ADMED = {
   chat: {
     title: "How can we help?",
     routes: [
-      { label: "Book an appointment or ask the clinic", hint: "Clinic reception", number: "+233 55 699 6422",
+      // whatsapp: number the chat opens in WhatsApp. call: number for the "Or call" link.
+      { label: "Book an appointment or ask the clinic", hint: "Clinic reception", whatsapp: "+233 55 699 6422", call: "+233 24 356 0080",
         message: "Hello ADMed Specialist Clinic, I would like to book an appointment." },
-      { label: "Speak to a specialist", hint: "Clinic line", number: "+233 24 356 0080",
+      { label: "Speak to a specialist", hint: "We will connect you with the right specialist", whatsapp: "+233 55 699 6422", call: "+233 24 356 0080",
         message: "Hello, I would like to speak to a specialist." }
     ]
   },

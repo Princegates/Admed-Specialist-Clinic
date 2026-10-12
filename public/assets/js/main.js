@@ -287,7 +287,7 @@
   });
 
   /* ---------- Chat: route visitors to the right number ---------- */
-  var chatCfg = C.chat || {}, routes = (chatCfg.routes || []).filter(function (r) { return r && r.number; });
+  var chatCfg = C.chat || {}, routes = (chatCfg.routes || []).filter(function (r) { return r && (r.number || r.whatsapp || r.call); });
   if (routes.length) {
     var chat = $("#chat"), panel = $("#chatPanel"), tgl = $("#chatToggle"), go = $("#chatGo"), callA = $("#chatCall"), msg = $("#chatMsg"), box = $("#chatRoutes");
     chat.hidden = false;
@@ -302,9 +302,10 @@
     var refresh = function () {
       var r = current(), text = msg.value.trim() || r.message || "";
       $$(".route", box).forEach(function (l) { l.classList.toggle("on", $("input", l).checked); });
-      go.href = "https://wa.me/" + digits(r.number).replace("+", "") + (text ? "?text=" + encodeURIComponent(text) : "");
-      callA.href = "tel:" + digits(r.number);
-      callA.textContent = "Or call " + r.number;
+      var wa = r.whatsapp || r.number, cl = r.call || r.number;
+      go.href = "https://wa.me/" + digits(wa).replace("+", "") + (text ? "?text=" + encodeURIComponent(text) : "");
+      callA.href = "tel:" + digits(cl);
+      callA.textContent = "Or call " + cl;
     };
     box.addEventListener("change", refresh); msg.addEventListener("input", refresh); refresh();
     var toggleChat = function (open) {
