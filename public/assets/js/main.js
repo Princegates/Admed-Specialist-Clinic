@@ -167,7 +167,35 @@
       if (f.message && f.message.value.trim()) lines.push("Notes: " + f.message.value.trim());
       var body = lines.join("\n");
 
-      if (hrefs.wa) {
+      if (C.formAccessKey) {
+        if (f.botcheck && f.botcheck.checked) return;
+        var btn = $('button[type="submit"]', form), label = btn.innerHTML;
+        btn.disabled = true; btn.textContent = "Sending...";
+        set("", true);
+        fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({
+            access_key: C.formAccessKey,
+            subject: "Appointment request: " + (f.specialty.value || "General"),
+            from_name: "ADMed Specialist Clinic website",
+            name: f.name.value.trim(), phone: f.phone.value.trim(),
+            email: f.email ? f.email.value.trim() : "",
+            service: f.specialty.value,
+            preferred_date: f.date ? f.date.value : "",
+            preferred_time: f.time ? f.time.value : "",
+            message: f.message ? f.message.value.trim() : "",
+            botcheck: false
+          })
+        }).then(function (r) { return r.json(); }).then(function (res) {
+          if (!res.success) throw new Error(res.message || "failed");
+          form.reset();
+          set("Thank you. Your request has been sent and we will call you to confirm.", true);
+        }).catch(function () {
+          note.className = "form-note bad";
+          note.innerHTML = "Your request could not be sent. Please call " + (hrefs.tel ? '<a href="' + esc(hrefs.tel) + '"><strong>' + esc(C.phone) + "</strong></a>" : "the clinic") + ".";
+        }).then(function () { btn.disabled = false; btn.innerHTML = label; });
+      } else if (hrefs.wa) {
         window.open(hrefs.wa + "?text=" + encodeURIComponent(body), "_blank", "noopener");
         set("Your request is ready to send on WhatsApp.", true);
       } else if (hrefs.mail) {
@@ -181,6 +209,36 @@
       }
     });
   });
+
+  /* ---------- Chat: route visitors to the right number ---------- */
+  var chatCfg = C.chat || {}, routes = (chatCfg.routes || []).filter(function (r) { return r && r.number; });
+  if (routes.length) {
+    var chat = $("#chat"), panel = $("#chatPanel"), tgl = $("#chatToggle"), go = $("#chatGo"), callA = $("#chatCall"), msg = $("#chatMsg"), box = $("#chatRoutes");
+    chat.hidden = false;
+    if (chatCfg.title) $("#chatTitle").textContent = chatCfg.title;
+    box.innerHTML = routes.map(function (r, i) {
+      return '<label class="route"><input type="radio" name="route" value="' + i + '"' + (i === 0 ? " checked" : "") + "><span>" + esc(r.label) + (r.hint ? "<small>" + esc(r.hint) + "</small>" : "") + "</span></label>";
+    }).join("");
+    var current = function () {
+      var c = $('input[name="route"]:checked', box);
+      return routes[c ? +c.value : 0];
+    };
+    var refresh = function () {
+      var r = current(), text = msg.value.trim() || r.message || "";
+      $$(".route", box).forEach(function (l) { l.classList.toggle("on", $("input", l).checked); });
+      go.href = "https://wa.me/" + digits(r.number).replace("+", "") + (text ? "?text=" + encodeURIComponent(text) : "");
+      callA.href = "tel:" + digits(r.number);
+      callA.textContent = "Or call " + r.number;
+    };
+    box.addEventListener("change", refresh); msg.addEventListener("input", refresh); refresh();
+    var toggleChat = function (open) {
+      panel.hidden = !open; tgl.setAttribute("aria-expanded", open);
+      if (open) { var first = $('input[name="route"]:checked', box); if (first) first.focus(); }
+    };
+    tgl.addEventListener("click", function () { toggleChat(panel.hidden); });
+    $("#chatClose").addEventListener("click", function () { toggleChat(false); tgl.focus(); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !panel.hidden) { toggleChat(false); tgl.focus(); } });
+  }
 
   /* ---------- Header, nav, back-to-top ---------- */
   var header = $(".header"), toTop = $("#toTop"), nav = $("#nav"), burger = $("#burger");

@@ -19,6 +19,25 @@ window.ADMED = {
   mapsUrl: "https://maps.app.goo.gl/TjCBQmsAGRaL31dE7?g_st=ic",
   mapEmbedUrl: "https://maps.google.com/maps?q=5.6402194,-0.1061823&z=16&output=embed",
 
+  // Appointment forms ------------------------------------------------------
+  // Requests are emailed to the address above through Web3Forms (free).
+  // 1) Go to https://web3forms.com, enter medspecialistsconnect@gmail.com
+  // 2) Copy the access key they email you and paste it here.
+  // Until a key is added, the form opens the visitor's email app instead.
+  formAccessKey: "",
+
+  // Chat button: sends visitors to the right number for what they need.
+  // Each route opens WhatsApp (with their message) or lets them call.
+  chat: {
+    title: "How can we help?",
+    routes: [
+      { label: "Book an appointment or ask the clinic", hint: "Clinic reception", number: "+233 55 699 6422",
+        message: "Hello ADMed Specialist Clinic, I would like to book an appointment." },
+      { label: "Speak to a specialist", hint: "Specialist line", number: "+233 55 692 4777",
+        message: "Hello, I would like to speak to a specialist." }
+    ]
+  },
+
   // Latest notice from the clinic's Google listing (shown in the top strip)
   announcement: "Weekend dialysis available on Saturday or Sunday",
 
