@@ -212,9 +212,12 @@
   var news = Array.isArray(C.news) ? C.news : [];
   if (news.length) {
     $("#updates").hidden = false;
-    $("#newsGrid").innerHTML = news.map(function (n, i) {
-      var tag = n.url ? "a" : "div", href = n.url ? ' href="' + esc(n.url) + '" target="_blank" rel="noopener"' : "";
-      return "<" + tag + ' class="news__item' + (i === 0 ? " news__item--lead" : "") + '"' + href + "><small>" + esc(n.date) + "</small><h3>" + esc(n.title) + "</h3>" + (n.tag ? '<span class="tag">' + esc(n.tag) + "</span>" : "") + "</" + tag + ">";
+    $("#newsGrid").innerHTML = news.map(function (n) {
+      var link = n.url || n.image || "";
+      var open = link ? '<a class="news__item" href="' + esc(link) + '" target="_blank" rel="noopener">' : '<div class="news__item">';
+      var close = link ? "</a>" : "</div>";
+      var img = n.image ? '<img loading="lazy" src="' + esc(n.image) + '" alt="' + esc(n.title) + '">' : "";
+      return open + img + '<div class="news__body">' + (n.date ? "<small>" + esc(n.date) + "</small>" : "") + "<h3>" + esc(n.title) + "</h3>" + (n.tag ? '<span class="tag">' + esc(n.tag) + "</span>" : "") + "</div>" + close;
     }).join("");
   }
 

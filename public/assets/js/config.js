@@ -12,7 +12,7 @@ window.ADMED = {
   phone2: { label: "Specialist line", number: "+233 24 356 0080" },  // optional second number
   whatsapp: "",         // digits only with country code, e.g. "233243560080" (adds a WhatsApp button + sends booking requests there)
   email: "medspecialistsconnect@gmail.com",  // booking form sends requests here when WhatsApp is not set
-  address: "Worship Curve, Accra, Ghana",
+  address: "Spintex Road, Worship Curve (Off Coca Cola Roundabout), Accra",
   plusCode: "JVRV+3G Accra, Ghana",
 
   // Google Maps
@@ -59,13 +59,17 @@ window.ADMED = {
     hero: "assets/photos/clinic-building-full.jpg",
     about: "assets/photos/clinic-building.jpg",
     // Photo tiles in the Specialties section (optional)
-    services: { cardiac: "", nephrology: "", orthopedic: "", gynecological: "", hematology: "", urology: "" },
-    gallery: []         // e.g. ["assets/photos/1.jpg", "assets/photos/2.jpg"]
+    services: { cardiac: "", nephrology: "assets/photos/dialysis-unit.jpg", orthopedic: "", gynecological: "", hematology: "", urology: "" },
+    gallery: ["assets/photos/corridor.jpg", "assets/photos/dialysis-unit.jpg"]
   },
 
   // Latest updates (section is hidden until you add at least one)
-  // { date: "12 Oct 2026", title: "Headline", tag: "Notice", url: "https://optional-link" }
-  news: [],
+  // { title: "Headline", tag: "Notice", image: "assets/photos/x.jpg", date: "12 Oct 2026", url: "https://optional-link" }
+  // date, tag and url are optional. Clicking a card opens url, or the full-size image.
+  news: [
+    { title: "Hypertension: the silent killer", tag: "Health awareness", image: "assets/photos/news-hypertension.jpg" },
+    { title: "Live a healthy lifestyle with your family", tag: "From the clinic", image: "assets/photos/news-family.jpg" }
+  ],
 
   // Specialists (section is hidden until you add at least one) --------------
   // { name: "Dr. Full Name", role: "Consultant Nephrologist", photo: "assets/photos/dr-name.jpg" }
