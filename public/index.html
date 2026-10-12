@@ -64,6 +64,7 @@
     <symbol id="i-tiktok" viewBox="0 0 24 24"><path d="M9 12a4 4 0 1 0 4 4V3a5 5 0 0 0 5 5"/></symbol>
     <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.300-4.300"/></symbol>
     <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v16M5 13l7 7 7-7"/></symbol>
     <symbol id="i-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
     <symbol id="i-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
   </defs>
@@ -155,6 +156,21 @@
 
 <!-- Services -->
 <section class="services" id="services">
+  <div class="container svc-tools">
+    <form class="svc-search" id="svcSearch" role="search" onsubmit="return false">
+      <label class="sr" for="svcInput">Search for a medical specialty</label>
+      <svg class="ic"><use href="#i-search"/></svg>
+      <input id="svcInput" type="search" placeholder="Search for a medical specialty" autocomplete="off">
+    </form>
+    <div class="sortwrap">
+      <button type="button" class="sortbtn" id="sortBtn" aria-haspopup="true" aria-expanded="false" aria-controls="sortMenu"><svg class="ic"><use href="#i-down"/></svg> Sort by</button>
+      <div class="sortmenu" id="sortMenu" role="menu">
+        <button type="button" role="menuitem" data-sort="default" class="on">Default order</button>
+        <button type="button" role="menuitem" data-sort="az">Name A to Z</button>
+        <button type="button" role="menuitem" data-sort="za">Name Z to A</button>
+      </div>
+    </div>
+  </div>
   <div class="container services__in">
     <div class="services__intro reveal">
       <p class="label">Our services</p>
@@ -170,6 +186,7 @@
       <a class="tile reveal" href="#book" data-specialty="Hematology" data-photo="hematology"><span class="tile__ic"><svg class="ic"><use href="#i-drop"/></svg></span><span class="tile__body"><h3>Hematology</h3><p>Anemia, sickle cell disease, bleeding and clotting disorders, blood cancers, transfusions and iron infusions.</p><span class="pill">Book Now</span></span></a>
       <a class="tile reveal" href="#book" data-specialty="Urology" data-photo="urology"><span class="tile__ic"><svg class="ic"><use href="#i-stetho"/></svg></span><span class="tile__body"><h3>Urology</h3><p>Prostate conditions, urinary tract infections, kidney stones, painful or frequent urination, blood in urine and male sexual health.</p><span class="pill">Book Now</span></span></a>
     </div>
+    <p class="svc-empty" id="svcEmpty" hidden></p>
   </div>
 </section>
 

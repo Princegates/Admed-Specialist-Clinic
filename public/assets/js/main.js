@@ -177,6 +177,54 @@
     target.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 
+  /* ---------- Services: live search and sort ---------- */
+  var tilesEl = $$(".tile"), svcInput = $("#svcInput"), sortMode = "default", svcQuery = "";
+  var tileInfo = tilesEl.map(function (t, i) {
+    var name = $("h3", t).textContent.trim();
+    return { el: t, i: i, name: name, text: (name + " " + $("p", t).textContent + " " + (t.getAttribute("data-specialty") || "")).toLowerCase() };
+  });
+  function tileMatches(info, q) {
+    if (!q) return true;
+    if (info.text.indexOf(q) > -1) return true;
+    var key = info.el.getAttribute("data-specialty") || "";
+    return (keywords[key] || []).some(function (k) { return k.indexOf(q) > -1 || (q.length > 2 && q.indexOf(k) > -1); });
+  }
+  function renderTiles() {
+    var list = tileInfo.slice();
+    if (sortMode === "az") list.sort(function (a, b) { return a.name.localeCompare(b.name); });
+    if (sortMode === "za") list.sort(function (a, b) { return b.name.localeCompare(a.name); });
+    var shown = 0;
+    list.forEach(function (info, pos) {
+      info.el.style.order = pos;
+      var ok = tileMatches(info, svcQuery);
+      info.el.hidden = !ok;
+      info.el.classList.remove("tile--down");
+      if (ok) { if (shown % 2 === 1) info.el.classList.add("tile--down"); shown++; }
+    });
+    var empty = $("#svcEmpty");
+    if (empty) {
+      empty.hidden = shown > 0;
+      if (!shown) empty.innerHTML = "No service found for “" + esc(svcInput.value.trim()) + "”. " +
+        (hrefs.tel ? 'Call <a href="' + esc(hrefs.tel) + '">' + esc(C.phone) + "</a> and we will direct you to the right specialist." : "Please contact the clinic and we will direct you to the right specialist.");
+    }
+  }
+  if (svcInput) svcInput.addEventListener("input", function () { svcQuery = svcInput.value.trim().toLowerCase(); renderTiles(); });
+  var sBtn = $("#sortBtn"), sMenu = $("#sortMenu");
+  if (sBtn && sMenu) {
+    var setSort = function (open) { sMenu.classList.toggle("open", open); sBtn.setAttribute("aria-expanded", open); };
+    sBtn.addEventListener("click", function (e) { e.stopPropagation(); setSort(!sMenu.classList.contains("open")); });
+    $$("button[data-sort]", sMenu).forEach(function (b) {
+      b.addEventListener("click", function () {
+        sortMode = b.getAttribute("data-sort");
+        $$("button[data-sort]", sMenu).forEach(function (x) { x.classList.toggle("on", x === b); });
+        setSort(false); renderTiles();
+      });
+    });
+    document.addEventListener("click", function (e) { if (!sMenu.contains(e.target)) setSort(false); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") setSort(false); });
+  }
+  renderTiles();
+
   /* ---------- Patient Information dropdown ---------- */
   var hm = $(".has-menu"), hb = $("#infoBtn");
   if (hm && hb) {
