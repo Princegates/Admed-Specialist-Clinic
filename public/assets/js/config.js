@@ -51,7 +51,7 @@ window.ADMED = {
   googleRating: { score: "4.9", count: 17 },
 
   // Social links (full URLs)
-  social: { facebook: "", instagram: "https://www.instagram.com/a.dmedspecialists/", x: "", youtube: "", tiktok: "" },
+  social: { facebook: "https://web.facebook.com/admedspcecialistshospital", instagram: "https://www.instagram.com/a.dmedspecialists/", x: "", youtube: "", tiktok: "" },
 
   // Photos -----------------------------------------------------------------
   // Put image files in /assets/photos/ and list them here.
