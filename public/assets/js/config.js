@@ -60,7 +60,14 @@ window.ADMED = {
     hero: "assets/photos/clinic-building-full.jpg",
     about: "assets/photos/clinic-building.jpg",
     // Photo tiles in the Specialties section (optional)
-    services: { cardiac: "", nephrology: "assets/photos/dialysis-unit.jpg", orthopedic: "", gynecological: "", hematology: "", urology: "" },
+    services: {
+      cardiac: "assets/photos/cardiac-care.jpg",
+      nephrology: "assets/photos/dialysis-unit.jpg",
+      orthopedic: "assets/photos/orthopedic-care.jpg",
+      gynecological: "assets/photos/gynecological-care.jpg",
+      hematology: "assets/photos/hematology-care.jpg",
+      urology: "assets/photos/urology-care.jpg"
+    },
     gallery: ["assets/photos/corridor.jpg", "assets/photos/dialysis-unit.jpg"]
   },
 

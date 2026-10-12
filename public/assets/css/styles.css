@@ -164,7 +164,7 @@ p{margin:0 0 1em}
 .pill{display:inline-block;padding:.5em 1.6em;border:1.5px solid currentColor;border-radius:999px;font:500 .85rem var(--font);transition:background .2s,color .2s}
 .tile:hover .pill{background:var(--navy);border-color:var(--navy);color:#fff}
 .tile.has-photo{color:#fff}
-.tile.has-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,79,.9) 8%,rgba(0,0,79,.05) 70%)}
+.tile.has-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,79,.94) 10%,rgba(0,0,79,.78) 42%,rgba(0,0,79,.08) 82%)}
 .tile.has-photo .tile__ic{background:var(--amber)}
 .tile.has-photo:hover .pill{background:#fff;border-color:#fff;color:var(--navy)}
 
