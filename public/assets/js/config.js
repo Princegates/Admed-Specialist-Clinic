@@ -87,8 +87,24 @@ window.ADMED = {
   ],
 
   // Specialists (section is hidden until you add at least one) --------------
-  // { name: "Dr. Full Name", role: "Consultant Nephrologist", photo: "assets/photos/dr-name.jpg" }
-  doctors: [],
+  // { name, role, detail (optional line under the role), bio (optional), photo (optional) }
+  // Without a photo the card shows the doctor's initials.
+  doctors: [
+    {
+      name: "Dr. Kwame Acheampong Adomako",
+      role: "Consultant Cardiothoracic Surgeon",
+      detail: "Head of the Cardiothoracic Unit, 37 Military Hospital, Accra, Ghana",
+      bio: "Under his leadership, the hospital achieved its first dual-chamber pacemaker implantation at the Cardiothoracic Centre. He advances cardiothoracic care and the delivery of specialised cardiac procedures in Ghana.",
+      photo: ""
+    },
+    {
+      name: "Prof. Martin Tamatey",
+      role: "Consultant Cardiothoracic Surgeon",
+      detail: "National Cardiothoracic Centre, Korle Bu Teaching Hospital, Accra",
+      bio: "Associate Professor at the University of Health and Allied Sciences (UHAS), where he has also served as Head of the Department of Surgery, School of Medicine. His work covers clinical practice, medical education and research in cardiothoracic surgery.",
+      photo: ""
+    }
+  ],
 
   // Patient reviews — real Google reviews, shown with attribution -----------
   reviews: [

@@ -105,10 +105,19 @@
   var docs = Array.isArray(C.doctors) ? C.doctors : [];
   var navHide = function (sec) { $$('[data-need-section="' + sec + '"]').forEach(function (a) { a.hidden = true; }); };
   if (docs.length) {
-    $("#team").hidden = false;
+    $("#doctors").hidden = false;
+    var initials = function (n) {
+      var w = String(n || "").replace(/^(dr|prof|mr|mrs|ms)\.?\s+/i, "").split(/\s+/).filter(Boolean);
+      return w.length ? (w[0][0] + (w.length > 1 ? w[w.length - 1][0] : "")).toUpperCase() : "";
+    };
     $("#teamGrid").innerHTML = docs.map(function (d) {
-      var bg = d.photo ? ' style="background-image:url(\'' + esc(d.photo) + '\')"' : "";
-      return '<article class="doc"><div class="doc__photo"' + bg + '></div><h3>' + esc(d.name) + "</h3><p>" + esc(d.role) + '</p><a class="btn btn--outline btn--sm" href="#book">Book a Consultation</a></article>';
+      var photo = d.photo
+        ? '<div class="doc__photo" style="background-image:url(\'' + esc(d.photo) + '\')" role="img" aria-label="' + esc(d.name) + '"></div>'
+        : '<div class="doc__photo doc__photo--initials" aria-hidden="true">' + esc(initials(d.name)) + "</div>";
+      return '<article class="doc">' + photo + "<h3>" + esc(d.name) + '</h3><p class="doc__role">' + esc(d.role) + "</p>" +
+        (d.detail ? '<p class="doc__detail">' + esc(d.detail) + "</p>" : "") +
+        (d.bio ? '<p class="doc__bio">' + esc(d.bio) + "</p>" : "") +
+        '<a class="btn btn--outline btn--sm" href="#book">Book a Consultation</a></article>';
     }).join("");
   } else navHide("doctors");
 
