@@ -24,7 +24,7 @@ window.ADMED = {
   // 1) Go to https://web3forms.com, enter medspecialistsconnect@gmail.com
   // 2) Copy the access key they email you and paste it here.
   // Until a key is added, the form opens the visitor's email app instead.
-  formAccessKey: "",
+  formAccessKey: "854b631a-56b3-4f7e-8823-79fc038c3daa",
 
   // Chat button: sends visitors to the right number for what they need.
   // Each route opens WhatsApp (with their message) or lets them call.
