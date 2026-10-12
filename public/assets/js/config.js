@@ -38,8 +38,8 @@ window.ADMED = {
     ]
   },
 
-  // Latest notice from the clinic's Google listing (shown in the top strip)
-  announcement: "Weekend dialysis available on Saturday or Sunday",
+  // Short notice shown in the strip at the very top of the site
+  announcement: "Specialist consultations Monday to Saturday, 6 AM to 6 PM",
 
   // Opening hours — e.g. [{ days: "Monday – Friday", time: "8:00 AM – 6:00 PM" }]
   hours: [
