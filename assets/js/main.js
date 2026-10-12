@@ -202,7 +202,7 @@
     root.setAttribute("data-theme", t);
     tt.setAttribute("aria-label", t === "dark" ? "Switch to day mode" : "Switch to night mode");
     tt.setAttribute("aria-pressed", t === "dark");
-    if (metaTheme) metaTheme.setAttribute("content", t === "dark" ? "#0a0c1f" : "#00007E");
+    if (metaTheme) metaTheme.setAttribute("content", t === "dark" ? "#111113" : "#FCA901");
   }
   var stored = null;
   try { stored = localStorage.getItem("admed-theme"); } catch (e) {}
