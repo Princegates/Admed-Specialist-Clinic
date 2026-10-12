@@ -164,11 +164,11 @@
     </div>
     <div class="tiles">
       <a class="tile reveal" href="#book" data-specialty="Cardiac" data-photo="cardiac"><span class="tile__ic"><svg class="ic"><use href="#i-pulse"/></svg></span><span class="tile__body"><h3>Cardiac</h3><p>Care for heart conditions.</p><span class="pill">Book Now</span></span></a>
-      <a class="tile reveal" href="#book" data-specialty="Nephrology (incl. dialysis)" data-photo="nephrology"><span class="tile__ic"><svg class="ic"><use href="#i-kidney"/></svg></span><span class="tile__body"><h3>Nephrology</h3><p>Kidney care, dialysis including weekends, and AV fistula procedures.</p><span class="pill">Book Now</span></span></a>
+      <a class="tile reveal" href="#book" data-specialty="Nephrology (incl. dialysis)" data-photo="nephrology"><span class="tile__ic"><svg class="ic"><use href="#i-kidney"/></svg></span><span class="tile__body"><h3>Nephrology</h3><p>Chronic kidney disease care, kidney-related blood pressure, AV fistula and tunnel line placement, dialysis and kidney function tests.</p><span class="tile__day">Clinic day: Saturdays, 10 AM</span><span class="pill">Book Now</span></span></a>
       <a class="tile reveal" href="#book" data-specialty="Orthopedic" data-photo="orthopedic"><span class="tile__ic"><svg class="ic"><use href="#i-bone"/></svg></span><span class="tile__body"><h3>Orthopedic</h3><p>Care for bones, joints and muscles.</p><span class="pill">Book Now</span></span></a>
-      <a class="tile reveal" href="#book" data-specialty="Gynecological" data-photo="gynecological"><span class="tile__ic"><svg class="ic"><use href="#i-woman"/></svg></span><span class="tile__body"><h3>Gynecological</h3><p>Consultations and care for women.</p><span class="pill">Book Now</span></span></a>
-      <a class="tile reveal" href="#book" data-specialty="Hematology" data-photo="hematology"><span class="tile__ic"><svg class="ic"><use href="#i-drop"/></svg></span><span class="tile__body"><h3>Hematology</h3><p>Care for blood disorders.</p><span class="pill">Book Now</span></span></a>
-      <a class="tile reveal" href="#book" data-specialty="Urology" data-photo="urology"><span class="tile__ic"><svg class="ic"><use href="#i-stetho"/></svg></span><span class="tile__body"><h3>Urology</h3><p>Care for the urinary system.</p><span class="pill">Book Now</span></span></a>
+      <a class="tile reveal" href="#book" data-specialty="Gynecological" data-photo="gynecological"><span class="tile__ic"><svg class="ic"><use href="#i-woman"/></svg></span><span class="tile__body"><h3>Gynecological</h3><p>Breast lumps, irregular or heavy periods, abnormal discharge, pelvic pain and painful intercourse.</p><span class="tile__day">Clinic day: Fridays</span><span class="pill">Book Now</span></span></a>
+      <a class="tile reveal" href="#book" data-specialty="Hematology" data-photo="hematology"><span class="tile__ic"><svg class="ic"><use href="#i-drop"/></svg></span><span class="tile__body"><h3>Hematology</h3><p>Anemia, sickle cell disease, bleeding and clotting disorders, blood cancers, transfusions and iron infusions.</p><span class="pill">Book Now</span></span></a>
+      <a class="tile reveal" href="#book" data-specialty="Urology" data-photo="urology"><span class="tile__ic"><svg class="ic"><use href="#i-stetho"/></svg></span><span class="tile__body"><h3>Urology</h3><p>Prostate conditions, urinary tract infections, kidney stones, painful or frequent urination, blood in urine and male sexual health.</p><span class="pill">Book Now</span></span></a>
     </div>
   </div>
 </section>
@@ -223,6 +223,7 @@
     </div>
     <div class="faq__list">
       <details open><summary>How do I book an appointment?</summary><p>Use the form on this page or call <strong><a data-href="tel" data-bind="phone"></a></strong>. Tell us which service you need and we will confirm a time with you.</p></details>
+      <details><summary>When are the specialist clinic days?</summary><p>The nephrology clinic runs on Saturdays at 10:00 AM and the gynecology clinic on Fridays. Please call us to confirm days for the other specialties.</p></details>
       <details><summary>Is weekend dialysis available?</summary><p>Yes. Dialysis is available on Saturday or Sunday. Please call us to arrange your session.</p></details>
       <details><summary>What are your opening hours?</summary><p>We are open Monday to Saturday, 6:00 AM – 6:00 PM, and closed on Sundays. For weekend dialysis sessions, please call us to arrange a time.</p></details>
       <details><summary>Where is the clinic?</summary><p>We are on Spintex Road, Worship Curve (off Coca Cola Roundabout), Accra (Google plus code JVRV+3G). The Directions button on this page opens the exact location in Google Maps.</p></details>
@@ -272,7 +273,7 @@
     <div class="contact">
       <div class="contact__cards">
         <div class="cc" data-need="address"><span class="cc__ic"><svg class="ic"><use href="#i-pin"/></svg></span><div><h3>Address</h3><p data-bind="address"></p></div></div>
-        <div class="cc" data-need="phone"><span class="cc__ic"><svg class="ic"><use href="#i-phone"/></svg></span><div><h3>Phone</h3><p><span class="muted">Clinic:</span> <a data-href="tel" data-bind="phone"></a></p><p data-need="phone2"><span class="muted"><span data-bind="phone2Label"></span>:</span> <a data-href="tel2" data-bind="phone2"></a></p></div></div>
+        <div class="cc" data-need="phone"><span class="cc__ic"><svg class="ic"><use href="#i-phone"/></svg></span><div><h3>Phone</h3><p><span class="muted">Booking &amp; WhatsApp:</span> <a data-href="tel" data-bind="phone"></a></p><p data-need="phone2"><span class="muted"><span data-bind="phone2Label"></span>:</span> <a data-href="tel2" data-bind="phone2"></a></p></div></div>
         <div class="cc" data-need="email"><span class="cc__ic"><svg class="ic"><use href="#i-mail"/></svg></span><div><h3>Email</h3><p><a data-href="mail" data-bind="email"></a></p></div></div>
         <div class="cc" data-need="hours"><span class="cc__ic"><svg class="ic"><use href="#i-clock"/></svg></span><div><h3>Opening hours</h3><div data-bind="hoursList"></div></div></div>
         <div class="cc"><span class="cc__ic"><svg class="ic"><use href="#i-pin"/></svg></span><div><h3>Google Maps</h3><p>Location, photos, reviews and directions.</p><a class="btn btn--primary btn--sm" data-href="maps" target="_blank" rel="noopener">Open in Google Maps</a></div></div>

@@ -9,7 +9,7 @@
 window.ADMED = {
   // Contact ---------------------------------------------------------------
   phone: "+233 55 699 6422",     // clinic
-  phone2: { label: "Specialist line", number: "+233 24 356 0080" },  // optional second number
+  phone2: { label: "Call to book", number: "+233 24 356 0080" },  // optional second number
   whatsapp: "",         // digits only with country code, e.g. "233243560080" (adds a WhatsApp button + sends booking requests there)
   email: "medspecialistsconnect@gmail.com",  // booking form sends requests here when WhatsApp is not set
   address: "Spintex Road, Worship Curve (Off Coca Cola Roundabout), Accra",
@@ -33,7 +33,7 @@ window.ADMED = {
     routes: [
       { label: "Book an appointment or ask the clinic", hint: "Clinic reception", number: "+233 55 699 6422",
         message: "Hello ADMed Specialist Clinic, I would like to book an appointment." },
-      { label: "Speak to a specialist", hint: "Specialist line", number: "+233 24 356 0080",
+      { label: "Speak to a specialist", hint: "Clinic line", number: "+233 24 356 0080",
         message: "Hello, I would like to speak to a specialist." }
     ]
   },
@@ -68,6 +68,10 @@ window.ADMED = {
   // date, tag and url are optional. Clicking a card opens url, or the full-size image.
   news: [
     { title: "Hypertension: the silent killer", tag: "Health awareness", image: "assets/photos/news-hypertension.jpg" },
+    { title: "Nephrology service", tag: "Clinic days: Saturdays at 10:00 AM", image: "assets/photos/news-nephrology.jpg" },
+    { title: "Know when you need a gynecologist", tag: "Clinic days: Fridays", image: "assets/photos/news-gynecology.jpg" },
+    { title: "Hematology services", tag: "Specialist-led care", image: "assets/photos/news-hematology.jpg" },
+    { title: "Urology clinic", tag: "Urinary and men's health", image: "assets/photos/news-urology.jpg" },
     { title: "Live a healthy lifestyle with your family", tag: "From the clinic", image: "assets/photos/news-family.jpg" }
   ],
 

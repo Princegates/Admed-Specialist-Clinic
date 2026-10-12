@@ -159,7 +159,8 @@ p{margin:0 0 1em}
 .tile__ic .ic{width:28px;height:28px}
 .tile__body{position:relative;z-index:1;padding:22px;display:block;width:100%}
 .tile h3{color:inherit;font-size:1.3rem;margin-bottom:.3em}
-.tile p{margin:0 0 16px;font-size:.92rem;color:inherit}
+.tile p{margin:0 0 14px;font-size:.92rem;color:inherit}
+.tile__day{display:block;margin:-6px 0 14px;font-size:.84rem;font-weight:500}
 .pill{display:inline-block;padding:.5em 1.6em;border:1.5px solid currentColor;border-radius:999px;font:500 .85rem var(--font);transition:background .2s,color .2s}
 .tile:hover .pill{background:var(--navy);border-color:var(--navy);color:#fff}
 .tile.has-photo{color:#fff}
@@ -194,10 +195,10 @@ p{margin:0 0 1em}
 
 /* Updates */
 .updates{background:var(--tint)}
-.news{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,320px));gap:22px;margin-top:34px}
-.news__item{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s}
+.news{columns:3 280px;column-gap:22px;margin-top:34px}
+.news__item{display:flex;flex-direction:column;break-inside:avoid;margin:0 0 22px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:transform .3s,box-shadow .3s}
 a.news__item:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
-.news__item img{width:100%;aspect-ratio:2/3;object-fit:cover;background:var(--soft)}
+.news__item img{width:100%;height:auto;background:var(--soft)}
 .news__body{padding:18px 20px 22px;display:flex;flex-direction:column;gap:6px}
 .news__body small{color:var(--muted)}
 .news__body h3{font-size:1.08rem;margin:0}
@@ -344,7 +345,7 @@ textarea{resize:vertical}
   .hero__bg{inset:0;background-position:center 30%}
   .hero__in{min-height:0}
   .tiles,.doc-grid,.footer__cols,.footer__pills,.form__row{grid-template-columns:1fr}
-  .news{grid-template-columns:1fr}
+  .news{columns:1}
   .tile{min-height:230px}
   .tile:nth-child(even),.tile.reveal:nth-child(even).in{transform:none}
   .tile:nth-child(even):hover{transform:translateY(-6px)}
