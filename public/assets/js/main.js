@@ -129,7 +129,7 @@
       specs.map(function (s) { return "<option>" + esc(s) + "</option>"; }).join("") +
       "<option>Not sure</option>";
   });
-  $("#footerSpecs").innerHTML = specs.slice(0, 6).map(function (s) {
+  $("#footerSpecs").innerHTML = specs.map(function (s) {
     return '<li><a href="#services">' + esc(s) + "</a></li>";
   }).join("");
   var media = [];
@@ -155,7 +155,9 @@
     "Orthopedic": ["orthopedic", "orthopaedic", "bone", "joint", "fracture", "knee", "back pain", "spine", "muscle"],
     "Gynecological": ["gynecolog", "gynaecolog", "women", "pregnan", "antenatal", "period", "pap", "uterus"],
     "Hematology": ["hematolog", "haematolog", "blood", "anemia", "anaemia", "sickle", "clot"],
-    "Urology": ["urolog", "urinary", "bladder", "prostate", "urine", "stone"]
+    "Urology": ["urolog", "urinary", "bladder", "prostate", "urine", "stone"],
+    "Internal Medicine": ["internal", "medicine", "diabet", "fever", "general", "check-up", "checkup", "hypertension", "malaria"],
+    "Medical Laboratory": ["laborator", "lab", "test", "scan", "sample", "culture", "screening"]
   };
   var sList = $("#searchList");
   if (sList) sList.innerHTML = specs.map(function (s) { return '<option value="' + esc(s) + '">'; }).join("");
