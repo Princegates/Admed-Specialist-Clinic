@@ -157,6 +157,7 @@
     "Hematology": ["hematolog", "haematolog", "blood", "anemia", "anaemia", "sickle", "clot"],
     "Urology": ["urolog", "urinary", "bladder", "prostate", "urine", "stone"],
     "Internal Medicine": ["internal", "medicine", "diabet", "fever", "general", "check-up", "checkup", "hypertension", "malaria"],
+    "Physician Specialist": ["physician", "specialist", "consultant", "second opinion"],
     "Medical Laboratory": ["laborator", "lab", "test", "scan", "sample", "culture", "screening"]
   };
   var sList = $("#searchList");

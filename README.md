@@ -13,7 +13,7 @@ Edit **`public/assets/js/config.js`** — the only file you need to touch:
 - `photos` — put images in `public/assets/photos/` and list them (`hero`, `about`, `services` tiles, `gallery`). The gallery appears once photos exist.
 - `doctors`, `reviews` — the Team and Reviews sections appear once you add entries.
 
-The eight services (Cardiac, Nephrology, Orthopedic, Gynecological, Hematology, Urology, Internal Medicine, Medical Laboratory) are in `public/index.html` under `#specialties`; the booking dropdowns update automatically.
+The nine services (Cardiac, Nephrology, Orthopedic, Gynecological, Hematology, Urology, Internal Medicine, Physician Specialist, Medical Laboratory) are in `public/index.html` under `#specialties`; the booking dropdowns update automatically.
 
 ## Automatic deploys (GitHub Actions)
 `.github/workflows/deploy.yml` deploys the site to Cloudflare on every push. Add two repository secrets in GitHub (Settings, Secrets and variables, Actions): `CLOUDFLARE_API_TOKEN` (a token from the "Edit Cloudflare Workers" template) and `CLOUDFLARE_ACCOUNT_ID`. You can also run it by hand from the Actions tab.

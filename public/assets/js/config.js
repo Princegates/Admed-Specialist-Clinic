@@ -68,6 +68,7 @@ window.ADMED = {
       hematology: "assets/photos/hematology-care.jpg",
       urology: "assets/photos/urology-care.jpg",
       internal: "",
+      physician: "",
       laboratory: ""
     },
     gallery: ["assets/photos/corridor.jpg", "assets/photos/dialysis-unit.jpg"]
