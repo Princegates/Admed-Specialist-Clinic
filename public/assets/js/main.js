@@ -251,6 +251,7 @@
 
   function setNav(open) {
     nav.classList.toggle("open", open);
+    document.documentElement.classList.toggle("nav-open", open);
     burger.setAttribute("aria-expanded", open);
     burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
     burger.innerHTML = '<svg class="ic"><use href="#' + (open ? "i-close" : "i-menu") + '"/></svg>';
