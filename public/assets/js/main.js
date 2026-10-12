@@ -67,10 +67,6 @@
   }).join("");
   $$("[data-social]").forEach(function (el) { el.innerHTML = socialHtml; if (!socialHtml) el.hidden = true; });
 
-  // Hide the whole top bar when it has nothing to show
-  var tb = $(".topbar");
-  if (tb && !$$(".topbar__item", tb).some(function (e) { return !e.hidden; }) && !socialHtml) tb.hidden = true;
-
   // Map embed (optional)
   if (C.mapEmbedUrl) {
     var f = $("#mapFrame");
@@ -112,7 +108,7 @@
     $("#team").hidden = false;
     $("#teamGrid").innerHTML = docs.map(function (d) {
       var bg = d.photo ? ' style="background-image:url(\'' + esc(d.photo) + '\')"' : "";
-      return '<article class="doc reveal"><div class="doc__photo"' + bg + '></div><div class="doc__body"><h3>' + esc(d.name) + "</h3><p>" + esc(d.role) + "</p></div></article>";
+      return '<article class="doc"><div class="doc__photo"' + bg + '></div><h3>' + esc(d.name) + "</h3><p>" + esc(d.role) + '</p><a class="btn btn--outline btn--sm" href="#book">Book a Consultation</a></article>';
     }).join("");
   } else navHide("doctors");
 
@@ -122,7 +118,7 @@
     $("#reviewGrid").innerHTML = revs.map(function (r) {
       var n = Math.max(1, Math.min(5, Math.round(r.rating || 5))), stars = "";
       for (var i = 0; i < n; i++) stars += '<svg class="ic"><use href="#i-star"/></svg>';
-      return '<figure class="rev reveal" style="margin:0"><div class="rev__stars" role="img" aria-label="' + n + ' out of 5 stars">' + stars + "</div><p>“" + esc(r.text) + "”</p><strong>" + esc(r.name) + "</strong></figure>";
+      return '<figure class="rev"><div class="rev__stars" role="img" aria-label="' + n + ' out of 5 stars">' + stars + "</div><blockquote>“" + esc(r.text) + "”</blockquote><figcaption>" + esc(r.name) + " · Google review</figcaption></figure>";
     }).join("");
   } else navHide("reviews");
 
@@ -134,8 +130,15 @@
       "<option>Not sure</option>";
   });
   $("#footerSpecs").innerHTML = specs.slice(0, 6).map(function (s) {
-    return '<li><a href="#specialties">' + esc(s) + "</a></li>";
+    return '<li><a href="#services">' + esc(s) + "</a></li>";
   }).join("");
+  var media = [];
+  if (revs.length) media.push('<li><a href="#reviews">Patient reviews</a></li>');
+  Object.keys(C.social || {}).forEach(function (k) {
+    if (C.social[k]) media.push('<li><a href="' + esc(C.social[k]) + '" target="_blank" rel="noopener">' + k.charAt(0).toUpperCase() + k.slice(1) + "</a></li>");
+  });
+  if (hrefs.maps) media.push('<li><a href="' + esc(hrefs.maps) + '" target="_blank" rel="noopener">Google Maps</a></li>');
+  $("#footerMedia").innerHTML = media.join("");
 
   // Clicking a specialty card pre-selects it in the booking form
   $$("[data-specialty]").forEach(function (card) {
@@ -144,6 +147,76 @@
       $$("[data-specialty-select]").forEach(function (sel) { sel.value = v; });
     });
   });
+
+  /* ---------- Hero search: jump to the matching service ---------- */
+  var keywords = {
+    "Cardiac": ["cardiac", "heart", "chest", "blood pressure", "palpitation", "cardiology"],
+    "Nephrology (incl. dialysis)": ["nephrology", "kidney", "renal", "dialysis", "fistula", "urine test"],
+    "Orthopedic": ["orthopedic", "orthopaedic", "bone", "joint", "fracture", "knee", "back pain", "spine", "muscle"],
+    "Gynecological": ["gynecolog", "gynaecolog", "women", "pregnan", "antenatal", "period", "pap", "uterus"],
+    "Hematology": ["hematolog", "haematolog", "blood", "anemia", "anaemia", "sickle", "clot"],
+    "Urology": ["urolog", "urinary", "bladder", "prostate", "urine", "stone"]
+  };
+  var sList = $("#searchList");
+  if (sList) sList.innerHTML = specs.map(function (s) { return '<option value="' + esc(s) + '">'; }).join("");
+  var sForm = $("#heroSearch");
+  if (sForm) sForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var q = $("#searchInput").value.trim().toLowerCase(), hit = "";
+    if (q) {
+      specs.forEach(function (s) { if (!hit && s.toLowerCase().indexOf(q) > -1) hit = s; });
+      Object.keys(keywords).forEach(function (s) {
+        if (!hit && keywords[s].some(function (k) { return q.indexOf(k) > -1 || k.indexOf(q) > -1 && q.length > 2; })) hit = s;
+      });
+    }
+    var target;
+    if (hit) {
+      $$("[data-specialty-select]").forEach(function (sel) { sel.value = hit; });
+      target = $("#book");
+    } else target = $("#services");
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  /* ---------- Patient Information dropdown ---------- */
+  var hm = $(".has-menu"), hb = $("#infoBtn");
+  if (hm && hb) {
+    var setMenu = function (open) { hm.classList.toggle("open", open); hb.setAttribute("aria-expanded", open); };
+    hb.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var desk = window.matchMedia("(min-width:901px)").matches;
+      setMenu(desk ? true : !hm.classList.contains("open"));
+    });
+    hm.addEventListener("mouseenter", function () { if (window.matchMedia("(min-width:901px)").matches) setMenu(true); });
+    hm.addEventListener("mouseleave", function () { if (window.matchMedia("(min-width:901px)").matches) setMenu(false); });
+    document.addEventListener("click", function (e) { if (!hm.contains(e.target)) setMenu(false); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") setMenu(false); });
+    $$(".menu a", hm).forEach(function (a) { a.addEventListener("click", function () { setMenu(false); }); });
+  }
+
+  /* ---------- Reviews slider arrows ---------- */
+  var track = $("#reviewGrid"), prev = $("#revPrev"), next = $("#revNext");
+  if (track && prev && next) {
+    var step = function () { var c = track.firstElementChild; return c ? c.getBoundingClientRect().width + 22 : 300; };
+    var sync = function () {
+      var arrows = prev.parentNode; arrows.hidden = track.scrollWidth <= track.clientWidth + 4;
+      prev.disabled = track.scrollLeft < 4;
+      next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+      prev.classList.toggle("arrow--on", !prev.disabled); next.classList.toggle("arrow--on", !next.disabled);
+    };
+    prev.addEventListener("click", function () { track.scrollBy({ left: -step(), behavior: "smooth" }); });
+    next.addEventListener("click", function () { track.scrollBy({ left: step(), behavior: "smooth" }); });
+    track.addEventListener("scroll", sync, { passive: true }); window.addEventListener("resize", sync); sync();
+  }
+
+  /* ---------- Latest updates (render only if provided) ---------- */
+  var news = Array.isArray(C.news) ? C.news : [];
+  if (news.length) {
+    $("#updates").hidden = false;
+    $("#newsGrid").innerHTML = news.map(function (n, i) {
+      var tag = n.url ? "a" : "div", href = n.url ? ' href="' + esc(n.url) + '" target="_blank" rel="noopener"' : "";
+      return "<" + tag + ' class="news__item' + (i === 0 ? " news__item--lead" : "") + '"' + href + "><small>" + esc(n.date) + "</small><h3>" + esc(n.title) + "</h3>" + (n.tag ? '<span class="tag">' + esc(n.tag) + "</span>" : "") + "</" + tag + ">";
+    }).join("");
+  }
 
   /* ---------- Booking forms ---------- */
   $$("form[data-booking]").forEach(function (form) {

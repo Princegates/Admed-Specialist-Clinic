@@ -17,7 +17,7 @@
   <meta property="og:image" content="assets/img/og.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/styles.css">
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"MedicalClinic","name":"ADMed Specialist Clinic","slogan":"An Ease to Medical Care","logo":"assets/img/logo.png","telephone":"+233556996422","email":"medspecialistsconnect@gmail.com","address":{"@type":"PostalAddress","streetAddress":"Worship Curve","addressLocality":"Accra","addressCountry":"GH"},"geo":{"@type":"GeoCoordinates","latitude":5.6402194,"longitude":-0.1061823},"medicalSpecialty":["Cardiovascular","Nephrology","Musculoskeletal","Gynecologic","Hematologic","Urologic"]}
@@ -62,27 +62,18 @@
     <symbol id="i-x" viewBox="0 0 24 24"><path d="M4 4l16 16M20 4 4 20"/></symbol>
     <symbol id="i-youtube" viewBox="0 0 24 24"><path d="M22.500 7.200a2.700 2.700 0 0 0-1.900-1.900C19 5 12 5 12 5s-7 0-8.600.3A2.700 2.700 0 0 0 1.500 7.200C1.200 8.800 1.200 12 1.200 12s0 3.200.3 4.800a2.700 2.700 0 0 0 1.900 1.900C5 19 12 19 12 19s7 0 8.600-.3a2.700 2.700 0 0 0 1.900-1.900c.3-1.600.3-4.800.3-4.800s0-3.200-.3-4.800z"/><path d="m10 15 5-3-5-3z"/></symbol>
     <symbol id="i-tiktok" viewBox="0 0 24 24"><path d="M9 12a4 4 0 1 0 4 4V3a5 5 0 0 0 5 5"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.300-4.300"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
   </defs>
 </svg>
 
 <a class="skip" href="#main">Skip to content</a>
 
-<!-- Announcement -->
-<div class="announce" data-need="announcement"><div class="container"><span data-bind="announcement"></span><a data-need="phone" data-href="tel">Call to book <svg class="ic"><use href="#i-arrow"/></svg></a></div></div>
-
 <!-- Top bar -->
-<div class="topbar">
-  <div class="container topbar__in">
-    <div class="topbar__left">
-      <span class="topbar__item" data-need="hours"><svg class="ic"><use href="#i-clock"/></svg><span data-bind="hoursShort"></span></span>
-      <a class="topbar__item" data-need="address" data-href="maps"><svg class="ic"><use href="#i-pin"/></svg><span data-bind="address"></span></a>
-    </div>
-    <div class="topbar__right">
-      <a class="topbar__item" data-need="phone" data-href="tel"><svg class="ic"><use href="#i-phone"/></svg><span data-bind="phone"></span></a>
-      <a class="topbar__item" data-need="email" data-href="mail"><svg class="ic"><use href="#i-mail"/></svg><span data-bind="email"></span></a>
-      <span class="social" data-social></span>
-    </div>
-  </div>
+<div class="topbar" data-need="phone">
+  <p>For enquiries and booking, kindly call <a data-href="tel" data-bind="phone"></a><span data-need="email"> or send an email to <a data-href="mail" data-bind="email"></a></span></p>
 </div>
 
 <!-- Header -->
@@ -93,14 +84,19 @@
       <span class="brand__text"><strong>ADMed</strong> Specialist Clinic<small>An ease to medical care</small></span>
     </a>
     <nav class="nav" id="nav" aria-label="Main">
-      <a href="#about">About</a>
-      <a href="#specialties">Services</a>
-      <a href="#team" data-need-section="doctors">Doctors</a>
-      <a href="#reviews" data-need-section="reviews">Reviews</a>
-      <a href="#faq">FAQ</a>
-      <a href="#contact">Contact</a>
-      <a class="btn btn--outline nav__call" data-need="phone" data-href="tel"><svg class="ic"><use href="#i-phone"/></svg> Call us</a>
-      <a class="btn btn--primary nav__cta" href="#book">Book Appointment</a>
+      <a href="#about">About ADMed</a>
+      <a href="#services">Our Services</a>
+      <a href="#doctors" data-need-section="doctors">Find a Doctor</a>
+      <div class="has-menu">
+        <button type="button" class="menu-btn" id="infoBtn" aria-expanded="false" aria-controls="infoMenu">Patient Information <svg class="ic"><use href="#i-chev"/></svg></button>
+        <div class="menu" id="infoMenu">
+          <a href="#contact">Opening hours &amp; location</a>
+          <a href="#faq">Frequently asked questions</a>
+          <a href="#reviews" data-need-section="reviews">Patient reviews</a>
+        </div>
+      </div>
+      <a href="#book">Book Appointment</a>
+      <a class="btn btn--outline nav__call" data-need="phone" data-href="tel"><svg class="ic"><use href="#i-phone"/></svg> Call us today</a>
     </nav>
     <div class="header__actions">
       <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to night mode" title="Day / night mode"><svg class="ic i-moon"><use href="#i-moon"/></svg><svg class="ic i-sun"><use href="#i-sun"/></svg></button>
@@ -115,115 +111,117 @@
 <section class="hero" id="hero">
   <div class="hero__bg" id="heroBg"></div>
   <div class="container hero__in">
-    <div class="hero__copy reveal">
+    <div class="hero__copy">
       <h1>An ease to medical care</h1>
       <p class="lead">ADMed Specialist Clinic in Accra, Ghana. Cardiac, nephrology, orthopedic, gynecological, hematology and urology services.</p>
-      <div class="hero__cta">
-        <a class="btn btn--accent" href="#book"><svg class="ic"><use href="#i-calendar"/></svg> Book an Appointment</a>
-        <a class="btn btn--ghost" data-need="phone" data-href="tel"><svg class="ic"><use href="#i-phone"/></svg> Call <span data-bind="phone"></span></a>
-        <a class="btn btn--ghost" data-show-without="phone" href="#specialties">Our Services <svg class="ic"><use href="#i-arrow"/></svg></a>
-      </div>
-      <ul class="hero__ticks">
-        <li><svg class="ic"><use href="#i-check"/></svg> Six specialist services</li>
-        <li><svg class="ic"><use href="#i-check"/></svg> Open Monday to Saturday</li>
-        <li><svg class="ic"><use href="#i-check"/></svg> Wheelchair accessible</li>
-      </ul>
-      <a class="rating" data-need="rating" data-href="maps" target="_blank" rel="noopener" aria-label="Rated on Google"><span class="rating__stars"><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg></span><strong data-bind="ratingScore"></strong><span>on Google, <span data-bind="ratingCount"></span> reviews</span></a>
+      <form class="search" id="heroSearch" role="search" autocomplete="off">
+        <label class="sr" for="searchInput">How can we help you?</label>
+        <svg class="ic"><use href="#i-search"/></svg>
+        <input id="searchInput" type="search" list="searchList" placeholder="How can we help you?" enterkeyhint="search">
+        <datalist id="searchList"></datalist>
+        <button type="submit" class="search__go" aria-label="Search"><svg class="ic"><use href="#i-arrow"/></svg></button>
+      </form>
     </div>
-
-    <div class="hero__art reveal"><img src="assets/img/logo.png" alt="ADMed Specialist Clinic emblem" width="360" height="360"></div>
   </div>
 </section>
 
-<!-- Quick access -->
-<section class="quick-access" aria-label="Quick access">
-  <div class="container qa__grid">
-    <a class="qa reveal" href="#book"><span class="qa__ic"><svg class="ic"><use href="#i-calendar"/></svg></span><span><strong>Book an appointment</strong><small>Send a request online</small></span></a>
-    <a class="qa reveal" href="#specialties"><span class="qa__ic"><svg class="ic"><use href="#i-stetho"/></svg></span><span><strong>Our services</strong><small>Six specialist services</small></span></a>
-    <a class="qa reveal" data-need="phone" data-href="tel"><span class="qa__ic"><svg class="ic"><use href="#i-phone"/></svg></span><span><strong>Call us</strong><small data-bind="phone"></small></span></a>
-    <a class="qa reveal" data-href="maps" target="_blank" rel="noopener"><span class="qa__ic"><svg class="ic"><use href="#i-pin"/></svg></span><span><strong>Directions</strong><small>Open in Google Maps</small></span></a>
-  </div>
-</section>
-
-<!-- About -->
-<section class="section" id="about">
-  <div class="container about">
-    <div class="about__media reveal" id="aboutMedia">
+<!-- Welcome -->
+<section class="section welcome" id="about">
+  <div class="container welcome__in">
+    <div class="welcome__copy reveal">
+      <h2 class="display">Welcome to ADMed Specialist Clinic</h2>
+      <p>ADMed Specialist Clinic is in Accra, Ghana. We offer cardiac, nephrology, orthopedic, gynecological, hematology and urology services in one clinic.</p>
+      <p>Patient reviews on Google mention professional, caring doctors and nurses and clean facilities. The clinic is open Monday to Saturday, 6 AM to 6 PM, and has a wheelchair-accessible entrance and parking.</p>
+      <p class="welcome__tag">An ease to medical care.</p>
+    </div>
+    <div class="welcome__media reveal">
       <div class="about__img" id="aboutImg" role="img" aria-label="ADMed Specialist Clinic entrance"></div>
     </div>
-    <div class="about__copy reveal">
-      <h2>About ADMed Specialist Clinic</h2>
-      <p>ADMed Specialist Clinic is in Accra, Ghana. Our name says what we aim for: an ease to medical care.</p>
-      <p>We offer cardiac, nephrology, orthopedic, gynecological, hematology and urology services. Patient reviews on Google mention professional, caring doctors and nurses and clean facilities.</p>
-      <ul class="ticks">
-        <li><svg class="ic"><use href="#i-check"/></svg> Six specialist services in one clinic</li>
-        <li><svg class="ic"><use href="#i-check"/></svg> Wheelchair-accessible entrance and parking</li>
-        <li><svg class="ic"><use href="#i-check"/></svg> Open Monday to Saturday, 6 AM to 6 PM</li>
-      </ul>
-      <a class="btn btn--primary" href="#book">Book an Appointment</a>
-    </div>
   </div>
 </section>
 
-<!-- Specialties -->
-<section class="section services" id="specialties">
+<!-- At a glance -->
+<section class="glance" aria-label="At a glance">
+  <div class="container glance__in">
+    <h3>At a glance:</h3>
+    <ul>
+      <li data-need="rating"><svg class="ic star"><use href="#i-star"/></svg><span><strong data-bind="ratingScore"></strong> on Google, <span data-bind="ratingCount"></span> reviews</span></li>
+      <li data-need="hours"><svg class="ic"><use href="#i-clock"/></svg><span data-bind="hoursShort"></span></li>
+      <li data-need="address"><svg class="ic"><use href="#i-pin"/></svg><span data-bind="address"></span></li>
+      <li><svg class="ic"><use href="#i-check"/></svg><span>Wheelchair accessible</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- Services -->
+<section class="services" id="services">
   <div class="container services__in">
     <div class="services__intro reveal">
-      <h2>Our specialist services</h2>
+      <p class="label">Our services</p>
+      <h2>Specialist care across six departments</h2>
       <p>Choose a service to start your appointment request.</p>
-      <a class="btn btn--accent" href="#book">Book an Appointment</a>
+      <a class="btn btn--light" href="#book"><svg class="ic"><use href="#i-calendar"/></svg> Book an Appointment</a>
     </div>
     <div class="tiles">
-      <a class="tile reveal" href="#book" data-specialty="Cardiac" data-photo="cardiac"><span class="tile__ic"><svg class="ic"><use href="#i-pulse"/></svg></span><span class="tile__body"><h3>Cardiac</h3><p>Care for heart conditions.</p><span class="pill">Book</span></span></a>
-      <a class="tile reveal" href="#book" data-specialty="Nephrology (incl. dialysis)" data-photo="nephrology"><span class="tile__ic"><svg class="ic"><use href="#i-kidney"/></svg></span><span class="tile__body"><h3>Nephrology</h3><p>Kidney care, dialysis including weekends, and AV fistula procedures.</p><span class="pill">Book</span></span></a>
-      <a class="tile reveal" href="#book" data-specialty="Orthopedic" data-photo="orthopedic"><span class="tile__ic"><svg class="ic"><use href="#i-bone"/></svg></span><span class="tile__body"><h3>Orthopedic</h3><p>Care for bones, joints and muscles.</p><span class="pill">Book</span></span></a>
-      <a class="tile reveal" href="#book" data-specialty="Gynecological" data-photo="gynecological"><span class="tile__ic"><svg class="ic"><use href="#i-woman"/></svg></span><span class="tile__body"><h3>Gynecological</h3><p>Consultations and care for women.</p><span class="pill">Book</span></span></a>
-      <a class="tile reveal" href="#book" data-specialty="Hematology" data-photo="hematology"><span class="tile__ic"><svg class="ic"><use href="#i-drop"/></svg></span><span class="tile__body"><h3>Hematology</h3><p>Care for blood disorders.</p><span class="pill">Book</span></span></a>
-      <a class="tile reveal" href="#book" data-specialty="Urology" data-photo="urology"><span class="tile__ic"><svg class="ic"><use href="#i-stetho"/></svg></span><span class="tile__body"><h3>Urology</h3><p>Care for the urinary system.</p><span class="pill">Book</span></span></a>
+      <a class="tile reveal" href="#book" data-specialty="Cardiac" data-photo="cardiac"><span class="tile__ic"><svg class="ic"><use href="#i-pulse"/></svg></span><span class="tile__body"><h3>Cardiac</h3><p>Care for heart conditions.</p><span class="pill">Book Now</span></span></a>
+      <a class="tile reveal" href="#book" data-specialty="Nephrology (incl. dialysis)" data-photo="nephrology"><span class="tile__ic"><svg class="ic"><use href="#i-kidney"/></svg></span><span class="tile__body"><h3>Nephrology</h3><p>Kidney care, dialysis including weekends, and AV fistula procedures.</p><span class="pill">Book Now</span></span></a>
+      <a class="tile reveal" href="#book" data-specialty="Orthopedic" data-photo="orthopedic"><span class="tile__ic"><svg class="ic"><use href="#i-bone"/></svg></span><span class="tile__body"><h3>Orthopedic</h3><p>Care for bones, joints and muscles.</p><span class="pill">Book Now</span></span></a>
+      <a class="tile reveal" href="#book" data-specialty="Gynecological" data-photo="gynecological"><span class="tile__ic"><svg class="ic"><use href="#i-woman"/></svg></span><span class="tile__body"><h3>Gynecological</h3><p>Consultations and care for women.</p><span class="pill">Book Now</span></span></a>
+      <a class="tile reveal" href="#book" data-specialty="Hematology" data-photo="hematology"><span class="tile__ic"><svg class="ic"><use href="#i-drop"/></svg></span><span class="tile__body"><h3>Hematology</h3><p>Care for blood disorders.</p><span class="pill">Book Now</span></span></a>
+      <a class="tile reveal" href="#book" data-specialty="Urology" data-photo="urology"><span class="tile__ic"><svg class="ic"><use href="#i-stetho"/></svg></span><span class="tile__body"><h3>Urology</h3><p>Care for the urinary system.</p><span class="pill">Book Now</span></span></a>
     </div>
   </div>
 </section>
 
-<!-- Team (hidden until config.doctors has entries) -->
-<section class="section" id="team" hidden>
+<!-- Doctors (hidden until config.doctors has entries) -->
+<section class="section doctors" id="doctors" hidden>
   <div class="container">
-    <div class="section__head reveal">
-      <h2>Our doctors</h2>
+    <div class="head-row">
+      <div><p class="label label--dark">Our doctors</p><h2>Meet our doctors</h2></div>
+      <a class="btn btn--outline" href="#book"><svg class="ic"><use href="#i-calendar"/></svg> Book a Consultation</a>
     </div>
-    <div class="grid grid--4" id="teamGrid"></div>
+    <div class="doc-grid" id="teamGrid"></div>
+  </div>
+</section>
+
+<!-- Patient reviews (hidden until config.reviews has entries) -->
+<section class="section reviews" id="reviews" hidden>
+  <div class="container">
+    <div class="head-row head-row--top">
+      <div><h2>Hear from our patients</h2><p class="muted">Reviews from the clinic's Google listing.</p></div>
+      <div class="arrows"><button type="button" class="arrow" id="revPrev" aria-label="Previous review"><svg class="ic"><use href="#i-left"/></svg></button><button type="button" class="arrow arrow--on" id="revNext" aria-label="Next review"><svg class="ic"><use href="#i-right"/></svg></button></div>
+    </div>
+    <div class="rev-track" id="reviewGrid" tabindex="0" aria-label="Patient reviews"></div>
+    <p class="reviews__cta"><a class="btn btn--outline" data-href="maps" target="_blank" rel="noopener">Read all reviews on Google</a></p>
+  </div>
+</section>
+
+<!-- Updates (hidden until config.news has entries) -->
+<section class="section updates" id="updates" hidden>
+  <div class="container">
+    <h2>Latest updates from ADMed</h2>
+    <p class="muted">News, health tips and notices from the clinic.</p>
+    <div class="news" id="newsGrid"></div>
   </div>
 </section>
 
 <!-- Gallery (hidden until photos load) -->
-<section class="section section--tint" id="gallery" hidden>
+<section class="section" id="gallery" hidden>
   <div class="container">
-    <div class="section__head reveal">
-      <h2>Photos</h2>
-    </div>
+    <h2>Photos</h2>
     <div class="gallery" id="galleryGrid"></div>
-  </div>
-</section>
-
-<!-- Reviews (hidden until config.reviews has entries) -->
-<section class="section" id="reviews" hidden>
-  <div class="container">
-    <div class="section__head reveal">
-      <h2>Patient reviews</h2>
-    </div>
-    <div class="rev-grid" id="reviewGrid"></div>
-    <p class="reviews__cta reveal"><a class="btn btn--primary" data-href="maps" target="_blank" rel="noopener">Read all reviews on Google</a></p>
   </div>
 </section>
 
 <!-- FAQ -->
 <section class="section section--tint" id="faq">
   <div class="container faq">
-    <div class="faq__intro reveal">
+    <div class="faq__intro">
       <h2>Frequently asked questions</h2>
       <p class="muted">For anything else, please call or visit us.</p>
-      <a class="btn btn--primary" href="#contact">Contact Us</a>
+      <a class="btn btn--outline" href="#contact">Contact Us</a>
     </div>
-    <div class="faq__list reveal">
+    <div class="faq__list">
       <details open><summary>How do I book an appointment?</summary><p>Use the form on this page or call <strong><a data-href="tel" data-bind="phone"></a></strong>. Tell us which service you need and we will confirm a time with you.</p></details>
       <details><summary>Is weekend dialysis available?</summary><p>Yes. Dialysis is available on Saturday or Sunday. Please call us to arrange your session.</p></details>
       <details><summary>What are your opening hours?</summary><p>We are open Monday to Saturday, 6:00 AM – 6:00 PM, and closed on Sundays. For weekend dialysis sessions, please call us to arrange a time.</p></details>
@@ -238,12 +236,12 @@
 <!-- Booking -->
 <section class="section book" id="book">
   <div class="container book__in">
-    <div class="book__copy reveal">
+    <div class="book__copy">
       <h2>Book an appointment</h2>
       <p>Send us your details and a preferred time. We will call you to confirm your appointment.</p>
       <div class="book__alert"><svg class="ic"><use href="#i-alert"/></svg><p><strong>Emergency?</strong> Do not wait for an appointment. Call your local emergency number or go to the nearest emergency department.</p></div>
     </div>
-    <form class="card form reveal" data-booking novalidate aria-labelledby="btitle">
+    <form class="card form" data-booking novalidate aria-labelledby="btitle">
       <h3 id="btitle">Appointment request</h3>
       <input class="hp" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div class="form__row">
@@ -261,7 +259,7 @@
         </label>
       </div>
       <label>Message <span class="opt">(optional)</span><textarea name="message" rows="3"></textarea></label>
-      <button class="btn btn--accent btn--block" type="submit">Send Request</button>
+      <button class="btn btn--primary btn--block" type="submit">Send Request</button>
       <p class="form-note" role="status" aria-live="polite"></p>
     </form>
   </div>
@@ -270,24 +268,22 @@
 <!-- Contact -->
 <section class="section" id="contact">
   <div class="container">
-    <div class="section__head reveal">
-      <h2>Contact us</h2>
-    </div>
+    <h2>Opening hours &amp; location</h2>
     <div class="contact">
       <div class="contact__cards">
-        <div class="cc reveal" data-need="address"><span class="cc__ic"><svg class="ic"><use href="#i-pin"/></svg></span><div><h3>Address</h3><p data-bind="address"></p></div></div>
-        <div class="cc reveal" data-need="phone"><span class="cc__ic"><svg class="ic"><use href="#i-phone"/></svg></span><div><h3>Phone</h3><p><span class="muted">Clinic:</span> <a data-href="tel" data-bind="phone"></a></p><p data-need="phone2"><span class="muted"><span data-bind="phone2Label"></span>:</span> <a data-href="tel2" data-bind="phone2"></a></p></div></div>
-        <div class="cc reveal" data-need="email"><span class="cc__ic"><svg class="ic"><use href="#i-mail"/></svg></span><div><h3>Email</h3><p><a data-href="mail" data-bind="email"></a></p></div></div>
-        <div class="cc reveal" data-need="hours"><span class="cc__ic"><svg class="ic"><use href="#i-clock"/></svg></span><div><h3>Opening hours</h3><div data-bind="hoursList"></div></div></div>
-        <div class="cc reveal"><span class="cc__ic"><svg class="ic"><use href="#i-pin"/></svg></span><div><h3>Google Maps</h3><p>Location, photos, reviews and directions.</p><a class="btn btn--primary btn--sm" data-href="maps" target="_blank" rel="noopener">Open in Google Maps</a></div></div>
+        <div class="cc" data-need="address"><span class="cc__ic"><svg class="ic"><use href="#i-pin"/></svg></span><div><h3>Address</h3><p data-bind="address"></p></div></div>
+        <div class="cc" data-need="phone"><span class="cc__ic"><svg class="ic"><use href="#i-phone"/></svg></span><div><h3>Phone</h3><p><span class="muted">Clinic:</span> <a data-href="tel" data-bind="phone"></a></p><p data-need="phone2"><span class="muted"><span data-bind="phone2Label"></span>:</span> <a data-href="tel2" data-bind="phone2"></a></p></div></div>
+        <div class="cc" data-need="email"><span class="cc__ic"><svg class="ic"><use href="#i-mail"/></svg></span><div><h3>Email</h3><p><a data-href="mail" data-bind="email"></a></p></div></div>
+        <div class="cc" data-need="hours"><span class="cc__ic"><svg class="ic"><use href="#i-clock"/></svg></span><div><h3>Opening hours</h3><div data-bind="hoursList"></div></div></div>
+        <div class="cc"><span class="cc__ic"><svg class="ic"><use href="#i-pin"/></svg></span><div><h3>Google Maps</h3><p>Location, photos, reviews and directions.</p><a class="btn btn--primary btn--sm" data-href="maps" target="_blank" rel="noopener">Open in Google Maps</a></div></div>
       </div>
-      <div class="map reveal" id="mapBox">
+      <div class="map" id="mapBox">
         <iframe id="mapFrame" title="Map showing ADMed Specialist Clinic" loading="lazy" referrerpolicy="no-referrer-when-downgrade" hidden></iframe>
         <div class="map__fallback" id="mapFallback">
           <img src="assets/img/logo.png" alt="" width="110" height="110" loading="lazy">
           <h3>ADMed Specialist Clinic</h3>
           <p>View our location on Google Maps.</p>
-          <a class="btn btn--accent" data-href="maps" target="_blank" rel="noopener"><svg class="ic"><use href="#i-pin"/></svg> Directions</a>
+          <a class="btn btn--primary" data-href="maps" target="_blank" rel="noopener"><svg class="ic"><use href="#i-pin"/></svg> Directions</a>
         </div>
       </div>
     </div>
@@ -298,29 +294,34 @@
 
 <!-- Footer -->
 <footer class="footer">
-  <div class="container footer__grid">
-    <div class="footer__brand">
-      <a class="brand brand--light" href="#top"><img src="assets/img/logo.png" alt="" width="56" height="56"><span class="brand__text"><strong>ADMed</strong> Specialist Clinic<small>An ease to medical care</small></span></a>
-      <p>Worship Curve, Accra, Ghana</p>
-      <span class="social" data-social></span>
+  <div class="container">
+    <div class="footer__top">
+      <a class="brand" href="#top"><img src="assets/img/logo.png" alt="" width="56" height="56"><span class="brand__text"><strong>ADMed</strong> Specialist Clinic<small>An ease to medical care</small></span></a>
+      <p class="footer__enq" data-need="phone">Enquiries &amp; Appointments: <a data-href="tel" data-bind="phone"></a></p>
     </div>
-    <div><h4>Explore</h4><ul><li><a href="#about">About</a></li><li><a href="#specialties">Services</a></li><li><a href="#book">Book an appointment</a></li><li><a href="#faq">FAQ</a></li></ul></div>
-    <div><h4>Services</h4><ul id="footerSpecs"></ul></div>
-    <div>
-      <h4>Contact</h4>
-      <ul class="footer__contact">
-        <li data-need="address"><svg class="ic"><use href="#i-pin"/></svg><span data-bind="address"></span></li>
-        <li data-need="phone"><svg class="ic"><use href="#i-phone"/></svg><a data-href="tel" data-bind="phone"></a></li>
-        <li data-need="phone2"><svg class="ic"><use href="#i-phone"/></svg><span><span data-bind="phone2Label"></span>: <a data-href="tel2" data-bind="phone2"></a></span></li>
-        <li data-need="email"><svg class="ic"><use href="#i-mail"/></svg><a data-href="mail" data-bind="email"></a></li>
-        <li><svg class="ic"><use href="#i-pin"/></svg><a data-href="maps" target="_blank" rel="noopener">Google Maps</a></li>
-      </ul>
+    <div class="footer__pills">
+      <a class="btn btn--outline" href="#book"><svg class="ic"><use href="#i-phone"/></svg> Book Appointment</a>
+      <a class="btn btn--outline" data-href="maps" target="_blank" rel="noopener"><svg class="ic"><use href="#i-arrow"/></svg> Get Directions</a>
+      <a class="btn btn--outline" href="#services"><svg class="ic"><use href="#i-check"/></svg> Our Services</a>
+      <a class="btn btn--outline" data-need="email" data-href="mail"><svg class="ic"><use href="#i-mail"/></svg> Email Us</a>
     </div>
+    <div class="footer__cols">
+      <div><h4>About ADMed</h4><ul><li><a href="#about">Who we are</a></li><li><a href="#contact">Opening hours</a></li><li><a href="#reviews" data-need-section="reviews">Patient reviews</a></li><li><a href="#faq">FAQ</a></li></ul></div>
+      <div><h4>Service lines</h4><ul id="footerSpecs"></ul></div>
+      <div><h4>Media</h4><ul id="footerMedia"></ul></div>
+      <div class="footer__contact">
+        <p data-need="address" data-bind="address"></p>
+        <p data-need="email"><a data-href="mail" data-bind="email"></a></p>
+        <p data-need="phone"><a data-href="tel" data-bind="phone"></a></p>
+        <p data-need="phone2"><a data-href="tel2" data-bind="phone2"></a></p>
+        <span class="social" data-social></span>
+      </div>
+    </div>
+    <div class="footer__bar"><p>© <span id="year"></span> ADMed Specialist Clinic. All rights reserved.</p><p>Powered by <a href="https://anknovate.com" target="_blank" rel="noopener">Anknovate IT Services</a></p></div>
   </div>
-  <div class="footer__bar"><div class="container"><p>© <span id="year"></span> ADMed Specialist Clinic. All rights reserved.</p><p>For emergencies, call your local emergency number.</p><p>Powered by <a href="https://anknovate.com" target="_blank" rel="noopener">Anknovate IT Services</a></p></div></div>
 </footer>
 
-<!-- Floating actions -->
+<!-- Chat -->
 <div class="chat" id="chat" hidden>
   <div class="chat__panel" id="chatPanel" role="dialog" aria-labelledby="chatTitle" hidden>
     <div class="chat__head"><strong id="chatTitle">How can we help?</strong><button type="button" class="chat__x" id="chatClose" aria-label="Close chat"><svg class="ic"><use href="#i-close"/></svg></button></div>

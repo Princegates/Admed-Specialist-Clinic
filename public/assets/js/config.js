@@ -56,12 +56,16 @@ window.ADMED = {
   // Photos -----------------------------------------------------------------
   // Put image files in /assets/photos/ and list them here.
   photos: {
-    hero: "",           // e.g. "assets/photos/hero.jpg"
+    hero: "assets/photos/clinic-building-full.jpg",
     about: "assets/photos/clinic-building.jpg",
     // Photo tiles in the Specialties section (optional)
     services: { cardiac: "", nephrology: "", orthopedic: "", gynecological: "", hematology: "", urology: "" },
     gallery: []         // e.g. ["assets/photos/1.jpg", "assets/photos/2.jpg"]
   },
+
+  // Latest updates (section is hidden until you add at least one)
+  // { date: "12 Oct 2026", title: "Headline", tag: "Notice", url: "https://optional-link" }
+  news: [],
 
   // Specialists (section is hidden until you add at least one) --------------
   // { name: "Dr. Full Name", role: "Consultant Nephrologist", photo: "assets/photos/dr-name.jpg" }
