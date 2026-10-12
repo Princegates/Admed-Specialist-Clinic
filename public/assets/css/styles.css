@@ -120,14 +120,14 @@ a.topbar__item:hover{color:#fff}
 .hero__bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.3}
 .hero__in{position:relative;display:grid;grid-template-columns:1.25fr .85fr;gap:56px;align-items:center;padding-block:84px 120px;z-index:1}
 .hero .lead{font-size:1.15rem;color:var(--ink);max-width:580px;margin-bottom:1.8em}
+.hero__art{display:grid;place-items:center}
+.hero__art img{width:min(360px,100%);height:auto;border-radius:50%;background:#fff;box-shadow:var(--shadow-lg)}
 .hero__cta{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:28px}
 .hero__ticks{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:12px 28px;color:var(--ink);font-weight:500;font-size:.95rem}
 .hero__ticks li{display:flex;gap:.5em;align-items:center}
 .hero__ticks .ic{color:var(--amber-600)}
 
 .card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow-lg);border:1px solid var(--line)}
-.quick{padding:30px;color:var(--ink)}
-.quick h2{font-size:1.45rem;margin-bottom:.2em}
 label{display:block;font:600 .85rem var(--font-head);color:var(--head);margin-bottom:14px}
 .opt{font-weight:500;color:var(--muted)}
 input,select,textarea{width:100%;margin-top:6px;padding:.8em 1em;border:1.5px solid var(--line);border-radius:var(--radius-sm);font:400 .95rem var(--font-body);color:var(--ink);background:var(--field);transition:border-color .2s,box-shadow .2s}
@@ -317,8 +317,8 @@ details p{color:var(--muted);padding-bottom:20px;margin:0}
   .grid--4{grid-template-columns:repeat(2,1fr)}
   .qa__grid{grid-template-columns:repeat(2,1fr)}
   .hero__in{grid-template-columns:1fr;padding-block:64px 110px}
-  .quick{max-width:520px}
-  .about,.faq,.book__in,.contact,.services__in{grid-template-columns:1fr;gap:44px}
+  .hero__art{display:none}
+    .about,.faq,.book__in,.contact,.services__in{grid-template-columns:1fr;gap:44px}
   .about__media{max-width:520px}
   .footer__grid{grid-template-columns:1fr 1fr}
 }
@@ -344,8 +344,7 @@ details p{color:var(--muted);padding-bottom:20px;margin:0}
   .quick-access{margin-top:-48px}
   .brand__text{font-size:.92rem}
   .brand img{width:48px;height:48px}
-  .form,.quick{padding:24px}
-  .topbar__left{display:none}
+  .form,  .topbar__left{display:none}
   .fab{right:14px}
   .chat__toggle{right:14px}
   .chat__panel{right:14px}
