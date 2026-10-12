@@ -273,6 +273,8 @@ details p{color:var(--muted);padding-bottom:20px;margin:0}
 .footer__bar{border-top:1px solid rgba(255,255,255,.1);padding-block:20px;font-size:.85rem}
 .footer__bar .container{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .footer__bar p{margin:0}
+.footer__bar a{color:#fff;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.footer__bar a:hover{color:var(--amber)}
 
 /* Floating */
 .fab{position:fixed;right:20px;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;color:#fff;box-shadow:0 10px 24px rgba(0,0,0,.25);z-index:90;border:0;cursor:pointer;transition:transform .2s}
