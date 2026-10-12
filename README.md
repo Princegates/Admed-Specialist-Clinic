@@ -15,6 +15,9 @@ Edit **`public/assets/js/config.js`** — the only file you need to touch:
 
 The six specialist services (Cardiac, Nephrology, Orthopedic, Gynecological, Hematology, Urology) are in `public/index.html` under `#specialties`; the booking dropdowns update automatically.
 
+## Automatic deploys (GitHub Actions)
+`.github/workflows/deploy.yml` deploys the site to Cloudflare on every push. Add two repository secrets in GitHub (Settings, Secrets and variables, Actions): `CLOUDFLARE_API_TOKEN` (a token from the "Edit Cloudflare Workers" template) and `CLOUDFLARE_ACCOUNT_ID`. You can also run it by hand from the Actions tab.
+
 ## Appointment emails and chat
 - **Forms to email:** the appointment forms send requests to the clinic's email through Web3Forms (free). Go to web3forms.com, enter the clinic email, then paste the access key they email you into `formAccessKey` in `public/assets/js/config.js`. Until then the form opens the visitor's email app.
 - **Chat button:** `chat.routes` in the same file lists what visitors can pick (appointment/clinic, specialist) and which number each goes to. Each opens WhatsApp with their message, or lets them call.
