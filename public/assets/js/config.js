@@ -8,9 +8,10 @@
    ========================================================================== */
 window.ADMED = {
   // Contact ---------------------------------------------------------------
-  phone: "+233 24 356 0080",
+  phone: "+233 55 699 6422",     // clinic
+  phone2: { label: "Specialist line", number: "+233 55 692 4777" },  // optional second number
   whatsapp: "",         // digits only with country code, e.g. "233243560080" (adds a WhatsApp button + sends booking requests there)
-  email: "",            // e.g. "info@yourdomain.com" (booking form falls back to this)
+  email: "medspecialistsconnect@gmail.com",  // booking form sends requests here when WhatsApp is not set
   address: "Worship Curve, Accra, Ghana",
   plusCode: "JVRV+3G Accra, Ghana",
 

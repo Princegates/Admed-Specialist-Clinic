@@ -15,12 +15,13 @@
   /* ---------- Contact details: bind, link and hide anything empty ---------- */
   var hours = Array.isArray(C.hours) ? C.hours : [];
   var has = {
-    phone: !!C.phone, whatsapp: !!C.whatsapp, email: !!C.email,
+    phone: !!C.phone, phone2: !!(C.phone2 && C.phone2.number), whatsapp: !!C.whatsapp, email: !!C.email,
     address: !!C.address, hours: hours.length > 0, maps: !!C.mapsUrl,
     announcement: !!C.announcement, rating: !!(C.googleRating && C.googleRating.score)
   };
   var hrefs = {
     tel: C.phone ? "tel:" + digits(C.phone) : "",
+    tel2: C.phone2 && C.phone2.number ? "tel:" + digits(C.phone2.number) : "",
     mail: C.email ? "mailto:" + C.email : "",
     maps: C.mapsUrl || "",
     wa: C.whatsapp ? "https://wa.me/" + digits(C.whatsapp).replace("+", "") : ""
@@ -46,6 +47,10 @@
       el.innerHTML = hours.map(function (h) {
         return "<span><span>" + esc(h.days) + "</span><b>" + esc(h.time) + "</b></span>";
       }).join("");
+    } else if (k === "phone2") {
+      el.textContent = C.phone2 ? C.phone2.number : "";
+    } else if (k === "phone2Label") {
+      el.textContent = C.phone2 ? C.phone2.label : "";
     } else if (k === "ratingScore") {
       el.textContent = C.googleRating ? C.googleRating.score : "";
     } else if (k === "ratingCount") {
