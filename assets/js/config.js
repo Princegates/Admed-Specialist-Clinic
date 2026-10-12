@@ -22,7 +22,10 @@ window.ADMED = {
   announcement: "Weekend dialysis available — Saturday or Sunday",
 
   // Opening hours — e.g. [{ days: "Monday – Friday", time: "8:00 AM – 6:00 PM" }]
-  hours: [],
+  hours: [
+    { days: "Monday – Saturday", time: "6:00 AM – 6:00 PM" },
+    { days: "Sunday", time: "Closed" }
+  ],
 
   // Google rating shown on the site (update when it changes)
   googleRating: { score: "4.9", count: 17 },
