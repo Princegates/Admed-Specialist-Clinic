@@ -16,10 +16,10 @@
 /* Night mode — set by the toggle, or by the visitor's system preference */
 :root[data-theme="dark"]{
   color-scheme:dark;
-  --bg:#111113; --tint:#17171a; --surface:#1c1c20; --ink:#ececf1; --muted:#a3a3b0; --line:#2d2d34;
-  --head:#f6efe0; --amber-600:#ffbe3d; --amber-soft:rgba(252,169,1,.15); --red-50:rgba(254,0,0,.16);
-  --soft:#2a2a30; --soft-2:#3b3b44; --field:#141417; --header-bg:rgba(17,17,19,.98);
-  --hero-bg:#17171a; --dark-bg:#0c0c0e;
+  --bg:#0a0c1f; --tint:#0f1230; --surface:#13173d; --ink:#e7e9fb; --muted:#a4a9cc; --line:#262b5c;
+  --head:#f2f3ff; --amber-600:#ffbe3d; --amber-soft:rgba(252,169,1,.15); --red-50:rgba(254,0,0,.16);
+  --soft:#1c2152; --soft-2:#2b3178; --field:#0d1030; --header-bg:rgba(10,12,31,.98);
+  --hero-bg:linear-gradient(135deg,#00004f 0%,#00007E 55%,#1a1a96 100%); --dark-bg:#00004f;
   --shadow:0 10px 30px rgba(0,0,0,.4); --shadow-lg:0 24px 60px rgba(0,0,0,.55);
 }
 :root:not([data-theme]){color-scheme:light}
