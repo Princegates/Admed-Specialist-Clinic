@@ -32,6 +32,7 @@ def to_sub(fragment):
     fragment = fragment.replace('href="#', 'href="../index.html#')
     fragment = fragment.replace('src="assets/', 'src="../assets/')
     fragment = fragment.replace('<use href="../index.html#', '<use href="#')   # icon references stay local
+    fragment = fragment.replace('href="cookies.html"', 'href="../cookies.html"')
     return fragment
 
 
@@ -191,3 +192,95 @@ for s in SERVICES:
     with open(os.path.join(out_dir, s["slug"] + ".html"), "w", encoding="utf-8") as f:
         f.write(page)
     print("wrote services/%s.html" % s["slug"])
+
+
+# ---------------------------------------------------------------- cookie policy (site root)
+COOKIE_TABLE = [
+    ("Day / night mode choice", "Local storage in your browser (admed-theme)", "Remembers whether you chose day or night mode.", "Until you clear your browser data", "Our site"),
+    ("Google Fonts", "Fonts loaded from Google servers", "Displays the site's typeface. Google receives your IP address and browser details when the font files load.", "Set by Google", "Google"),
+    ("Google Maps", "Embedded map on the Contact section", "Shows our location. Google may set cookies and receive data about your visit when the map loads.", "Set by Google", "Google"),
+    ("Appointment request form", "Form data sent when you press Send Request", "Delivers your request to the clinic by email. The details you type are passed to our form service, Web3Forms, for that purpose only.", "Not stored in your browser", "Web3Forms"),
+]
+COOKIE_SECTIONS = [
+    ("What are cookies?", [
+        "Cookies are small text files that a website places on your device. Websites also use similar technologies, such as your browser's local storage, to remember choices you make. They are widely used to make websites work and to give site owners information about how they are used."]),
+    ("How we use cookies and similar technologies", [
+        "This website does not set advertising or analytics cookies of its own. It uses your browser's local storage to remember your day or night mode choice, and it relies on a few services provided by other companies. These are listed in the table below."]),
+    ("Services from other companies", [
+        "When you use our website, content from other companies may load, and those companies may use cookies or collect information according to their own policies. We do not control this. Please read their policies for details:"]),
+    ("Links to other websites", [
+        "Our pages link to WhatsApp, Facebook, Instagram, Google Maps and our website developer. These sites have their own cookie and privacy policies, which apply once you leave our website."]),
+    ("Your choices", [
+        "You can delete cookies and site data, or block them, in your browser settings. Blocking third-party cookies may stop the map from displaying fully. If you clear this site's data, the site will forget your day or night mode choice and use your device setting again.",
+        "Most browsers explain how to manage cookies in their Help or Settings pages."]),
+    ("Changes to this policy", [
+        "We may update this policy if the way the website works changes. The date at the top of the page shows when it was last updated."]),
+]
+
+
+def cookie_page():
+    def to_root(fragment):
+        fragment = fragment.replace('href="#', 'href="index.html#')
+        fragment = fragment.replace('<use href="index.html#', '<use href="#')
+        return fragment
+
+    tmpl = PAGE.replace("../", "")
+    head = tmpl[: tmpl.index('<main id="main">')]
+    tail = tmpl[tmpl.index("</main>"):]
+    rows = "".join(
+        "<tr><td data-label=\"Item\"><strong>%s</strong></td><td data-label=\"Type\">%s</td><td data-label=\"Purpose\">%s</td><td data-label=\"How long\">%s</td><td data-label=\"Provider\">%s</td></tr>"
+        % tuple(e(c) for c in row)
+        for row in COOKIE_TABLE
+    )
+    table = (
+        '<div class="policy-table-wrap"><table class="policy-table"><thead><tr><th>Item</th><th>Type</th><th>Purpose</th><th>How long</th><th>Provider</th></tr></thead><tbody>%s</tbody></table></div>' % rows
+    )
+    links = (
+        '<ul class="dots"><li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a></li>'
+        '<li><a href="https://web3forms.com/privacy" target="_blank" rel="noopener">Web3Forms privacy information</a></li></ul>'
+    )
+    body = []
+    for h, paras in COOKIE_SECTIONS:
+        body.append("<h2>%s</h2>" % e(h))
+        for p in paras:
+            body.append("<p>%s</p>" % e(p))
+        if h.startswith("How we use"):
+            body.append(table)
+        if h.startswith("Services from"):
+            body.append(links)
+    body.append('<h2>Contact us</h2><p>If you have a question about this policy, contact us at <a data-href="mail" data-bind="email"></a> or call <a data-href="tel" data-bind="phone"></a>.</p>')
+    main = """<main id="main">
+<section class="svc-banner svc-banner--plain">
+  <div class="container svc-banner__in">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><span aria-current="page">Cookie Policy</span></nav>
+    <h1>Cookie Policy</h1>
+    <p class="lead">How ADMed Specialist Clinic's website uses cookies and similar technologies.</p>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <article class="svc-article policy">
+      <p class="small-print" style="border:0;padding:0;margin:0 0 1.4em">Last updated: %(updated)s</p>
+      %(body)s
+    </article>
+  </div>
+</section>
+"""
+    page = head % {
+        "title": "Cookie Policy",
+        "desc": "How ADMed Specialist Clinic's website uses cookies, local storage and services from other companies.",
+    } if False else None
+    return head, tail, main, body, to_root
+
+
+head_t, tail_t, main_t, body_t, to_root = cookie_page()
+import datetime
+updated = datetime.date.today().strftime("%d %B %Y").lstrip("0")
+sprite_r, header_r, chat_r = sprite, to_root(between("<!-- Top bar -->", '<main id="main">')), to_root(between("<!-- Chat -->", '<script src="assets/js/config.js">'))
+foot_r = to_root(between("<!-- Footer -->", "<!-- Chat -->"))
+foot_r = re.sub(r'<ul id="footerSpecs"></ul>', '<ul id="footerSpecs">%s</ul>' % "".join('<li><a href="services/%s.html">%s</a></li>' % (s["slug"], e(s["name"])) for s in SERVICES), foot_r)
+head_filled = head_t % {"title": "Cookie Policy", "desc": "How ADMed Specialist Clinic's website uses cookies, local storage and services from other companies.", "sprite": sprite_r, "header": header_r}
+page = head_filled + (main_t % {"updated": updated, "body": "\n      ".join(body_t)}) + "\n</main>\n\n" + foot_r + "\n" + chat_r + '\n<script src="assets/js/config.js"></script>\n<script src="assets/js/main.js"></script>\n</body>\n</html>\n'
+with open(os.path.join(PUBLIC, "cookies.html"), "w", encoding="utf-8") as f:
+    f.write(page)
+print("wrote cookies.html")
