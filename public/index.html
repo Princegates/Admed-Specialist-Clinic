@@ -318,6 +318,7 @@
         </label>
       </div>
       <label>Message <span class="opt">(optional)</span><textarea name="message" rows="3"></textarea></label>
+      <label class="consent"><input type="checkbox" name="consent" required> <span>I agree that ADMed Specialist Clinic may use the details I enter here to contact me about my appointment request. Please do not include sensitive medical details in the message; the clinic will ask for them when it calls.</span></label>
       <button class="btn btn--primary btn--block" type="submit">Send Request</button>
       <p class="form-note" role="status" aria-live="polite"></p>
     </form>
@@ -340,7 +341,8 @@
         <div class="map__fallback" id="mapFallback">
           <img src="assets/img/logo.png" alt="" width="110" height="110" loading="lazy">
           <h3>ADMed Specialist Clinic</h3>
-          <p>View our location on Google Maps.</p>
+          <p>The map loads when you accept third-party content (Google Maps). You can also open it directly.</p>
+          <button type="button" class="btn btn--outline btn--sm" data-show-map>Show the map here</button>
           <a class="btn btn--primary" data-href="maps" target="_blank" rel="noopener"><svg class="ic"><use href="#i-pin"/></svg> Directions</a>
         </div>
       </div>
@@ -373,7 +375,7 @@
         <span class="social" data-social></span>
       </div>
     </div>
-    <div class="footer__bar"><p>© <span id="year"></span> ADMed Specialist Clinic. All rights reserved. <span class="sep" aria-hidden="true">·</span> <a href="cookies.html">Cookie Policy</a></p><p>Powered by <a href="https://anknovate.com" target="_blank" rel="noopener">Anknovate IT Services</a></p></div>
+    <div class="footer__bar"><p>© <span id="year"></span> ADMed Specialist Clinic. All rights reserved. <span class="sep" aria-hidden="true">·</span> <a href="cookies.html">Cookie Policy</a> <span class="sep" aria-hidden="true">·</span> <a href="#" data-cookie-settings>Cookie settings</a></p><p>Powered by <a href="https://anknovate.com" target="_blank" rel="noopener">Anknovate IT Services</a></p></div>
   </div>
 </footer>
 

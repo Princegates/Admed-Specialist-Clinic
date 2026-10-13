@@ -69,10 +69,38 @@
   $$("[data-social]").forEach(function (el) { el.innerHTML = socialHtml; if (!socialHtml) el.hidden = true; });
 
   // Map embed (optional)
-  if (C.mapEmbedUrl && $("#mapFrame")) {
+  /* ---------- Cookie notice and consent ---------- */
+  var CONSENT_KEY = "admed-consent";
+  var getConsent = function () { try { return localStorage.getItem(CONSENT_KEY); } catch (e) { return null; } };
+  var setConsent = function (v) { try { localStorage.setItem(CONSENT_KEY, v); } catch (e) {} };
+  var cookiePage = (base ? base.replace("index.html", "") : "") + "cookies.html";
+  function loadMap() {
+    if (!C.mapEmbedUrl || !$("#mapFrame")) return;
     var f = $("#mapFrame");
-    f.src = C.mapEmbedUrl; f.hidden = false; $("#mapFallback").hidden = true;
+    if (!f.src) f.src = C.mapEmbedUrl;
+    f.hidden = false; $("#mapFallback").hidden = true;
   }
+  function applyConsent() {
+    if (getConsent() === "all") loadMap();
+    else if ($("#mapFrame")) { $("#mapFrame").hidden = true; $("#mapFallback").hidden = false; }
+  }
+  var banner = null;
+  function closeBanner() { if (banner) { banner.remove(); banner = null; } }
+  function openBanner() {
+    if (banner) return;
+    banner = document.createElement("div");
+    banner.className = "cookie-banner"; banner.setAttribute("role", "dialog"); banner.setAttribute("aria-label", "Cookie notice");
+    banner.innerHTML = '<p><strong>Cookies and third-party content.</strong> We remember your day or night choice on this device. Google Maps and Google Fonts are provided by Google, which may set cookies. Accept to show the map on this page. <a href="' + cookiePage + '">Read our Cookie Policy</a>.</p>' +
+      '<div class="cookie-banner__btns"><button type="button" class="btn btn--outline btn--sm" data-consent="essential">Necessary only</button><button type="button" class="btn btn--primary btn--sm" data-consent="all">Accept</button></div>';
+    document.body.appendChild(banner);
+    $$("button[data-consent]", banner).forEach(function (b) {
+      b.addEventListener("click", function () { setConsent(b.getAttribute("data-consent")); closeBanner(); applyConsent(); });
+    });
+  }
+  applyConsent();
+  if (!getConsent()) openBanner();
+  $$("[data-cookie-settings]").forEach(function (a) { a.addEventListener("click", function (e) { e.preventDefault(); openBanner(); }); });
+  $$("[data-show-map]").forEach(function (b) { b.addEventListener("click", function () { setConsent("all"); closeBanner(); applyConsent(); }); });
 
   /* ---------- Photos: only shown when they actually load ---------- */
   function tryImage(src, ok) {
@@ -308,6 +336,7 @@
         f[k].classList.toggle("err", empty); if (empty) bad = true;
       });
       if (bad) return set("Please enter your name and phone number.", false);
+      if (f.consent && !f.consent.checked) return set("Please tick the box to agree before sending.", false);
 
       var lines = ["Appointment request: ADMed Specialist Clinic",
         "Name: " + f.name.value.trim(), "Phone: " + f.phone.value.trim()];

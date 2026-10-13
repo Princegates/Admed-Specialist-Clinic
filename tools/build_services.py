@@ -198,20 +198,22 @@ for s in SERVICES:
 COOKIE_TABLE = [
     ("Day / night mode choice", "Local storage in your browser (admed-theme)", "Remembers whether you chose day or night mode.", "Until you clear your browser data", "Our site"),
     ("Google Fonts", "Fonts loaded from Google servers", "Displays the site's typeface. Google receives your IP address and browser details when the font files load.", "Set by Google", "Google"),
-    ("Google Maps", "Embedded map on the Contact section", "Shows our location. Google may set cookies and receive data about your visit when the map loads.", "Set by Google", "Google"),
+    ("Your cookie choice", "Local storage in your browser (admed-consent)", "Remembers whether you accepted third-party content or chose necessary only, so we do not ask on every visit.", "Until you clear your browser data", "Our site"),
+    ("Google Maps", "Embedded map on the Contact section", "Shows our location. The map only loads after you accept. Google may then set cookies and receive data about your visit.", "Set by Google", "Google"),
     ("Appointment request form", "Form data sent when you press Send Request", "Delivers your request to the clinic by email. The details you type are passed to our form service, Web3Forms, for that purpose only.", "Not stored in your browser", "Web3Forms"),
 ]
 COOKIE_SECTIONS = [
     ("What are cookies?", [
         "Cookies are small text files that a website places on your device. Websites also use similar technologies, such as your browser's local storage, to remember choices you make. They are widely used to make websites work and to give site owners information about how they are used."]),
     ("How we use cookies and similar technologies", [
-        "This website does not set advertising or analytics cookies of its own. It uses your browser's local storage to remember your day or night mode choice, and it relies on a few services provided by other companies. These are listed in the table below."]),
+        "This website does not set advertising or analytics cookies of its own. It uses your browser's local storage to remember your day or night mode and your cookie choice, and it relies on a few services provided by other companies. These are listed in the table below."]),
     ("Services from other companies", [
         "When you use our website, content from other companies may load, and those companies may use cookies or collect information according to their own policies. We do not control this. Please read their policies for details:"]),
     ("Links to other websites", [
         "Our pages link to WhatsApp, Facebook, Instagram, Google Maps and our website developer. These sites have their own cookie and privacy policies, which apply once you leave our website."]),
     ("Your choices", [
-        "You can delete cookies and site data, or block them, in your browser settings. Blocking third-party cookies may stop the map from displaying fully. If you clear this site's data, the site will forget your day or night mode choice and use your device setting again.",
+        "The first time you visit, a notice asks whether to accept third-party content or use necessary storage only. You can change your choice at any time with the Cookie settings link at the bottom of every page.",
+        "You can also delete cookies and site data, or block them, in your browser settings. If you clear this site's data, the site will forget your day or night mode and cookie choices.",
         "Most browsers explain how to manage cookies in their Help or Settings pages."]),
     ("Changes to this policy", [
         "We may update this policy if the way the website works changes. The date at the top of the page shows when it was last updated."]),

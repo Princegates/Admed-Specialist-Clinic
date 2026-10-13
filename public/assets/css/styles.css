@@ -492,3 +492,12 @@ textarea{resize:vertical}
   .policy-table td{border:0;padding:6px 16px}
   .policy-table td::before{content:attr(data-label) ": ";font-weight:500;color:var(--head)}
 }
+
+/* Cookie notice and consent */
+.cookie-banner{position:fixed;left:16px;bottom:16px;z-index:140;width:min(560px,calc(100vw - 32px));background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-lg);padding:18px 20px;display:grid;gap:14px}
+.cookie-banner p{margin:0;font-size:.92rem;line-height:1.55}
+.cookie-banner a{text-decoration:underline;text-underline-offset:3px;color:var(--head)}
+.cookie-banner__btns{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+.consent{display:flex;gap:10px;align-items:flex-start;font:400 .88rem var(--font);color:var(--ink);margin:4px 0 16px}
+.consent input{width:auto;margin:4px 0 0;flex:none;accent-color:var(--amber)}
+.map__fallback .btn{margin-top:6px}
