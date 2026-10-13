@@ -146,7 +146,6 @@ SERVICES = [
   ],
   "offers": ["Medical laboratory services", "Laboratory investigations requested by your doctor"],
   "sections": [
-   {"h": "What is a medical laboratory?", "p": ["A medical laboratory examines samples such as blood and urine to look for signs of disease or to measure how well your body is working. Your doctor uses the results, together with your symptoms and examination, to guide your care."]},
    {"h": "Getting ready for a test", "p": ["Some tests need preparation, such as not eating for a number of hours beforehand. Ask when you book, or follow the instructions your doctor gives you. Bring your test request and your ID, and let the team know about any medicines you take."]},
    {"h": "Your results", "p": ["Your doctor will explain your results and what they mean for your care. If you have a question about a result, please ask your doctor or call the clinic."]},
   ],
