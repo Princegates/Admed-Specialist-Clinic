@@ -57,7 +57,7 @@ window.ADMED = {
   // Photos -----------------------------------------------------------------
   // Put image files in /assets/photos/ and list them here.
   photos: {
-    hero: "assets/photos/clinic-building-full.jpg",
+    hero: "assets/photos/hero-staff.jpg",
     about: "assets/photos/about-corridor.jpg",
     // Photo tiles in the Specialties section (optional)
     services: {
