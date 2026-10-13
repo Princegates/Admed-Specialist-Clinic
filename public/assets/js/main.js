@@ -11,6 +11,7 @@
   };
 
   document.documentElement.classList.remove("no-js");
+  var base = document.body.getAttribute("data-base") || "";   // "../index.html" on service pages
 
   /* ---------- Contact details: bind, link and hide anything empty ---------- */
   var hours = Array.isArray(C.hours) ? C.hours : [];
@@ -68,7 +69,7 @@
   $$("[data-social]").forEach(function (el) { el.innerHTML = socialHtml; if (!socialHtml) el.hidden = true; });
 
   // Map embed (optional)
-  if (C.mapEmbedUrl) {
+  if (C.mapEmbedUrl && $("#mapFrame")) {
     var f = $("#mapFrame");
     f.src = C.mapEmbedUrl; f.hidden = false; $("#mapFallback").hidden = true;
   }
@@ -81,8 +82,8 @@
     i.src = src;
   }
   var P = C.photos || {};
-  tryImage(P.hero, function (s) { $("#heroBg").style.backgroundImage = "url('" + s + "')"; });
-  tryImage(P.about, function (s) {
+  if ($("#heroBg")) tryImage(P.hero, function (s) { $("#heroBg").style.backgroundImage = "url('" + s + "')"; });
+  if ($("#aboutImg")) tryImage(P.about, function (s) {
     var a = $("#aboutImg"); a.style.backgroundImage = "url('" + s + "')"; a.classList.add("has-photo");
   });
   // Photo tiles in the Specialties section
@@ -91,7 +92,7 @@
     tryImage(src, function (s) { tile.style.backgroundImage = "url('" + s + "')"; tile.classList.add("has-photo"); });
   });
   var gal = $("#galleryGrid"), shown = 0;
-  (P.gallery || []).forEach(function (item, n) {
+  (gal ? (P.gallery || []) : []).forEach(function (item, n) {
     var src = typeof item === "string" ? item : item.src;
     var alt = (item && item.alt) || "ADMed Specialist Clinic photo " + (n + 1);
     tryImage(src, function () {
@@ -107,7 +108,7 @@
   /* ---------- Doctors & reviews (render only if provided) ---------- */
   var docs = Array.isArray(C.doctors) ? C.doctors : [];
   var navHide = function (sec) { $$('[data-need-section="' + sec + '"]').forEach(function (a) { a.hidden = true; }); };
-  if (docs.length) {
+  if (docs.length && $("#doctors")) {
     $("#doctors").hidden = false;
     var initials = function (n) {
       var w = String(n || "").replace(/^(dr|prof|mr|mrs|ms)\.?\s+/i, "").split(/\s+/).filter(Boolean);
@@ -122,17 +123,17 @@
         (d.bio ? '<p class="doc__bio">' + esc(d.bio) + "</p>" : "") +
         '<a class="btn btn--outline btn--sm" href="#book">Book a Consultation</a></article>';
     }).join("");
-  } else navHide("doctors");
+  } else if (!docs.length) navHide("doctors");
 
   var revs = Array.isArray(C.reviews) ? C.reviews : [];
-  if (revs.length) {
+  if (revs.length && $("#reviews")) {
     $("#reviews").hidden = false;
     $("#reviewGrid").innerHTML = revs.map(function (r) {
       var n = Math.max(1, Math.min(5, Math.round(r.rating || 5))), stars = "";
       for (var i = 0; i < n; i++) stars += '<svg class="ic"><use href="#i-star"/></svg>';
       return '<figure class="rev"><div class="rev__stars" role="img" aria-label="' + n + ' out of 5 stars">' + stars + "</div><blockquote>“" + esc(r.text) + "”</blockquote><figcaption>" + esc(r.name) + " · Google review</figcaption></figure>";
     }).join("");
-  } else navHide("reviews");
+  } else if (!revs.length) navHide("reviews");
 
   /* ---------- Specialty selects & footer list from the cards ---------- */
   var specs = $$("[data-specialty]").map(function (e) { return e.getAttribute("data-specialty").replace(/&amp;/g, "&"); });
@@ -141,16 +142,24 @@
       specs.map(function (s) { return "<option>" + esc(s) + "</option>"; }).join("") +
       "<option>Not sure</option>";
   });
-  $("#footerSpecs").innerHTML = specs.map(function (s) {
+  if (specs.length && $("#footerSpecs")) $("#footerSpecs").innerHTML = specs.map(function (s) {
     return '<li><a href="#services">' + esc(s) + "</a></li>";
   }).join("");
   var media = [];
-  if (revs.length) media.push('<li><a href="#reviews">Patient reviews</a></li>');
+  if (revs.length) media.push('<li><a href="' + base + '#reviews">Patient reviews</a></li>');
   Object.keys(C.social || {}).forEach(function (k) {
     if (C.social[k]) media.push('<li><a href="' + esc(C.social[k]) + '" target="_blank" rel="noopener">' + k.charAt(0).toUpperCase() + k.slice(1) + "</a></li>");
   });
   if (hrefs.maps) media.push('<li><a href="' + esc(hrefs.maps) + '" target="_blank" rel="noopener">Google Maps</a></li>');
-  $("#footerMedia").innerHTML = media.join("");
+  if ($("#footerMedia")) $("#footerMedia").innerHTML = media.join("");
+
+  // Arriving from a service page: pre-select that service in the booking form
+  try {
+    var wanted = new URLSearchParams(window.location.search).get("service");
+    if (wanted) $$("[data-specialty-select]").forEach(function (sel) {
+      Array.prototype.some.call(sel.options, function (o) { if (o.text === wanted) { sel.value = o.value || o.text; return true; } });
+    });
+  } catch (e) {}
 
   // Clicking a specialty card pre-selects it in the booking form
   $$("[data-specialty]").forEach(function (card) {
@@ -164,9 +173,9 @@
   var keywords = {
     "Cardiac": ["cardiac", "heart", "chest", "blood pressure", "palpitation", "cardiology"],
     "Nephrology (incl. dialysis)": ["nephrology", "kidney", "renal", "dialysis", "fistula", "urine test"],
-    "Orthopedic": ["orthopedic", "orthopaedic", "bone", "joint", "fracture", "knee", "back pain", "spine", "muscle"],
-    "Gynecological": ["gynecolog", "gynaecolog", "women", "pregnan", "antenatal", "period", "pap", "uterus"],
-    "Hematology": ["hematolog", "haematolog", "blood", "anemia", "anaemia", "sickle", "clot"],
+    "Orthopaedic": ["orthopedic", "orthopaedic", "bone", "joint", "fracture", "knee", "back pain", "spine", "muscle"],
+    "Gynaecological": ["gynecolog", "gynaecolog", "women", "pregnan", "antenatal", "period", "pap", "uterus"],
+    "Haematology": ["hematolog", "haematolog", "blood", "anemia", "anaemia", "sickle", "clot"],
     "Urology": ["urolog", "urinary", "bladder", "prostate", "urine", "stone"],
     "Internal Medicine": ["internal", "medicine", "diabet", "fever", "general", "check-up", "checkup", "hypertension", "malaria"],
     "Physician Specialist": ["physician", "specialist", "consultant", "second opinion"],
@@ -273,7 +282,7 @@
 
   /* ---------- Latest updates (render only if provided) ---------- */
   var news = Array.isArray(C.news) ? C.news : [];
-  if (news.length) {
+  if (news.length && $("#updates")) {
     $("#updates").hidden = false;
     $("#newsGrid").innerHTML = news.map(function (n) {
       var link = n.url || n.image || "";

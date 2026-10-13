@@ -22,6 +22,15 @@ The nine services (Cardiac, Nephrology, Orthopedic, Gynecological, Hematology, U
 - **Forms to email:** the appointment forms send requests to the clinic's email through Web3Forms (free). Go to web3forms.com, enter the clinic email, then paste the access key they email you into `formAccessKey` in `public/assets/js/config.js`. Until then the form opens the visitor's email app.
 - **Chat button:** `chat.routes` in the same file lists what visitors can pick (appointment/clinic, specialist) and which number each goes to. Each opens WhatsApp with their message, or lets them call.
 
+## Service pages
+Each service tile on the home page opens its own page (`public/services/<name>.html`), for example `public/services/nephrology.html`. The nine pages are generated from one template so they always match the home page:
+
+1. Edit the text in `tools/services_content.py` (offers, explanations, when to book, clinic days).
+2. Run `python3 tools/build_services.py`.
+3. Commit the changed files in `public/services/`.
+
+If you add or rename a service, also update its tile in `public/index.html`.
+
 ## Day / night mode
 The sun/moon button in the header switches themes. The choice is remembered, and first-time visitors get their device's light/dark setting.
 
