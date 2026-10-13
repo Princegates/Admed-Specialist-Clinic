@@ -71,7 +71,14 @@ window.ADMED = {
       physician: "assets/photos/physician-care.jpg",
       laboratory: "assets/photos/laboratory-care.jpg"
     },
-    gallery: ["assets/photos/corridor.jpg", "assets/photos/dialysis-unit.jpg"]
+    // Each entry: a file path, or { src, alt } to describe the photo
+    gallery: [
+      { src: "assets/photos/theatre-team.jpg", alt: "Theatre team preparing for a procedure at ADMed Specialist Clinic" },
+      { src: "assets/photos/theatre-prep.jpg", alt: "Staff preparing the operating theatre" },
+      { src: "assets/photos/dialysis-unit.jpg", alt: "Dialysis unit with patient chairs and dialysis machines" },
+      { src: "assets/photos/recovery-ward-corridor.jpg", alt: "Corridor to the recovery ward and theatre" },
+      { src: "assets/photos/corridor.jpg", alt: "Clinic corridor with hand hygiene and standard precautions posters" }
+    ]
   },
 
   // Latest updates (section is hidden until you add at least one)

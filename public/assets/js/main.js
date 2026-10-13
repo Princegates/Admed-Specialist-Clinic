@@ -91,11 +91,14 @@
     tryImage(src, function (s) { tile.style.backgroundImage = "url('" + s + "')"; tile.classList.add("has-photo"); });
   });
   var gal = $("#galleryGrid"), shown = 0;
-  (P.gallery || []).forEach(function (src, n) {
+  (P.gallery || []).forEach(function (item, n) {
+    var src = typeof item === "string" ? item : item.src;
+    var alt = (item && item.alt) || "ADMed Specialist Clinic photo " + (n + 1);
     tryImage(src, function () {
       var a = document.createElement("a");
-      a.href = src; a.target = "_blank"; a.rel = "noopener"; a.setAttribute("aria-label", "View clinic photo " + (n + 1));
-      a.innerHTML = '<img loading="lazy" alt="ADMed Specialist Clinic photo ' + (n + 1) + '" src="' + esc(src) + '">';
+      a.href = src; a.target = "_blank"; a.rel = "noopener"; a.setAttribute("aria-label", "View photo: " + alt);
+      a.style.order = n;
+      a.innerHTML = '<img loading="lazy" alt="' + esc(alt) + '" src="' + esc(src) + '">';
       gal.appendChild(a); shown++;
       $("#gallery").hidden = false; observe(a);
     });
