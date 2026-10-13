@@ -105,6 +105,9 @@
     });
   });
 
+  var fa = $("#founderAvatar");
+  if (fa && C.founderPhoto) tryImage(C.founderPhoto, function (s) { fa.style.backgroundImage = "url('" + s + "')"; fa.classList.add("has-photo"); });
+
   /* ---------- Doctors & reviews (render only if provided) ---------- */
   var docs = Array.isArray(C.doctors) ? C.doctors : [];
   var navHide = function (sec) { $$('[data-need-section="' + sec + '"]').forEach(function (a) { a.hidden = true; }); };

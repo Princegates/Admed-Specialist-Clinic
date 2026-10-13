@@ -81,6 +81,9 @@ window.ADMED = {
     ]
   },
 
+  // Founder photo (optional). Without one, the card shows initials.
+  founderPhoto: "",
+
   // Latest updates (section is hidden until you add at least one)
   // { title: "Headline", tag: "Notice", image: "assets/photos/x.jpg", date: "12 Oct 2026", url: "https://optional-link" }
   // date, tag and url are optional. Clicking a card opens url, or the full-size image.
