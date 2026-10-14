@@ -86,7 +86,7 @@ p{margin:0 0 1em}
 .brand__text small{font:400 .66rem var(--font);letter-spacing:.14em;text-transform:uppercase;color:var(--amber-600);margin-top:2px}
 .nav{display:flex;align-items:center;gap:26px}
 .nav a,.nav .btn,.menu-btn{white-space:nowrap}
-.nav>a:not(.btn),.menu-btn{font:400 .95rem var(--font);color:var(--ink);background:none;border:0;padding:6px 0;cursor:pointer;position:relative}
+.nav>a:not(.btn),.menu-btn{font:600 .95rem var(--font);color:var(--ink);background:none;border:0;padding:6px 0;cursor:pointer;position:relative}
 .nav>a:not(.btn):hover,.menu-btn:hover{color:var(--head)}
 .nav>a:not(.btn)::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--amber);transition:width .25s}
 .nav>a:not(.btn):hover::after{width:100%}
@@ -369,6 +369,12 @@ textarea{resize:vertical}
 @media (max-width:1240px){
   .nav{gap:20px}
   .nav__call{display:none}
+}
+@media (min-width:901px) and (max-width:1080px){
+  .nav{gap:14px}
+  .nav>a:not(.btn),.menu-btn{font-size:.86rem}
+  .brand__text{font-size:.88rem}
+  .brand img{width:46px;height:46px}
 }
 @media (max-width:1080px){
   .welcome__in,.faq,.book__in,.contact,.services__in,.founder__in{grid-template-columns:1fr}
