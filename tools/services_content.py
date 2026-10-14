@@ -72,7 +72,7 @@ SERVICES = [
  },
  {
   "slug": "dialysis-access", "name": "Dialysis Access Procedures", "select": "Dialysis Access Procedures", "icon": "drop",
-  "photo": "surgery-banner.jpg", "pos": "center 40%", "tile": "AV-Fistula Creation, Central Venous Catheter insertion and AV-Graft Creation for patients who need dialysis.",
+  "photo": "dialysis-access.jpg", "pos": "center 45%", "tile": "AV-Fistula Creation, Central Venous Catheter insertion and AV-Graft Creation for patients who need dialysis.",
   "banner": "Vascular access for dialysis: fistula, graft and catheter",
   "intro": [
    "ADMed Specialist Clinic provides the following access services for patients who need or receive haemodialysis.",
