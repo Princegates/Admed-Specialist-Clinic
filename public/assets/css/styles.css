@@ -632,3 +632,6 @@ body.promo-open{overflow:hidden}
 .careers-form{max-width:760px;margin:30px 0}
 .form-hint{margin:-4px 0 14px;font-size:.88rem;color:var(--muted)}
 .ext{font-size:.9em}
+.svc-poster{margin:28px 0;max-width:420px}
+.svc-poster img{display:block;width:100%;height:auto;border-radius:var(--radius);border:1px solid var(--line);box-shadow:var(--shadow)}
+.svc-article .values{margin:16px 0 8px}

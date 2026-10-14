@@ -53,21 +53,30 @@ SERVICES = [
  },
  {
   "slug": "dialysis", "name": "Dialysis Treatment", "select": "Dialysis Treatment", "icon": "kidney",
-  "photo": "dialysis-unit-wide.jpg", "pos": "center 55%", "tile": "Dialysis sessions, including weekends, with AV-Fistula Creation (for dialysis access), Central Venous Catheter insertion and AV-Graft Creation.",
-  "banner": "Specialist Kidney Care and Dialysis Support",
+  "photo": "dialysis-unit-wide.jpg", "pos": "center 55%", "tile": "Dialysis sessions with monthly specialist consults, a doctor available during treatment, renal nutrition guidance and monthly laboratory monitoring.",
+  "banner": "Compassionate Care. Advanced Treatment. Better Living.",
   "figure": ["dialysis-unit-wide.jpg", "The ADMed dialysis unit, with dialysis machines and reclining patient chairs"],
-  "offers_h": "Our Dialysis Services Include:",
   "intro": [
-   "At ADMed Specialist Clinic, we are committed to providing compassionate, patient-centred dialysis care in a professional and supportive environment. Our dialysis services are designed to support individuals living with kidney failure or other conditions requiring dialysis, in accordance with their clinical needs and the recommendations of their treating healthcare professionals.",
-   "Our dialysis unit is equipped with dialysis machines and reclining patient chairs to support patient comfort during treatment. We also provide vascular access procedures for dialysis, including AV-Fistula Creation, Central Venous Catheter insertion and AV-Graft Creation, and arrange appropriate care based on each patient's individual clinical circumstances.",
-   "Weekend dialysis appointments may be available, subject to scheduling and clinical assessment.",
+   "At ADMed Specialist Clinic, our dialysis service is built around you. We provide compassionate, patient-centred dialysis care in a professional and supportive environment for people living with kidney failure or other conditions that need dialysis, in line with their clinical needs and the recommendations of their treating healthcare professionals.",
+   "Our dialysis unit is equipped with dialysis machines and reclining patient chairs to support your comfort during treatment. Weekend dialysis appointments may be available, subject to scheduling and clinical assessment.",
   ],
-  "offers": ["Haemodialysis sessions, including scheduled weekend appointments where available.", "Assessment and guidance regarding dialysis vascular access.", "AV-Fistula Creation (for dialysis access).", "Central Venous Catheter insertion.", "AV-Graft Creation.", "Ongoing clinical support and patient education related to dialysis treatment."],
+  "cards_h": "Our Comprehensive Service Package",
+  "cards": [
+   ["Monthly Specialist Consult", "Regular assessment and personalised care by our experienced nephrologist to monitor your progress and well-being."],
+   ["Available Medical Doctor During Treatment", "A medical doctor is available throughout your treatment for immediate attention and medical preparedness."],
+   ["Renal Nutrition", "Guidance on a kidney-friendly diet and nutrition to support your health, energy and overall recovery."],
+   ["Iron Sucrose Therapy (prescribed when appropriate)", "Iron sucrose therapy to help manage anaemia, boost energy and improve your quality of life."],
+   ["Transparent Patient Monitoring", "Your monthly laboratory investigations are performed by our independent partner, Lancet Laboratories Ghana, providing objective results that help guide your treatment and monitor your progress."],
+  ],
+  "poster": ["dialysis-flyer.jpg", "ADMed Specialist Clinic dialysis services flyer: monthly specialist consult, a medical doctor available during treatment, renal nutrition, iron sucrose therapy when appropriate and transparent patient monitoring. Call 024 356 0080 to book."],
   "sections": [
-   {"h": "Dialysis access procedures", "p": ["A vascular access is the route that lets blood leave your body and return to it during haemodialysis. Our team provides AV-Fistula Creation, Central Venous Catheter insertion and AV-Graft Creation, and can help you choose the option that suits you."], "link": ["Learn more about our Dialysis Access Procedures", "dialysis-access.html"]},
+   {"h": "More Than Dialysis. We Care for the Whole You.", "p": [
+     "Dialysis is one part of looking after your kidneys. Our team strives to treat every patient with dignity, respect, confidentiality and compassion while supporting informed decisions about their care."],
+    "bullets": ["Compassionate care", "An experienced team", "Safe and reliable treatment", "Patient-centred service"]},
+   {"h": "Dialysis access procedures", "p": ["Many patients need a vascular access before they can start dialysis. Our access procedures are described on their own page."], "link": ["Learn more about our Dialysis Access Procedures", "dialysis-access.html"]},
    {"h": "Your Care, Our Commitment", "p": [
-     "We recognise that living with kidney disease can be challenging. Our team strives to treat every patient with dignity, respect, confidentiality and compassion while supporting informed decisions about their care.",
-     "To enquire about our dialysis services, vascular access procedures, appointment availability, or referral requirements, please contact our clinic. All treatment arrangements are subject to clinical assessment and the availability of appropriate services and resources."]},
+     "We recognise that living with kidney disease can be challenging, and we are here to support you at every step.",
+     "To enquire about our dialysis services, appointment availability, or referral requirements, please contact our clinic. All treatment arrangements are subject to clinical assessment and the availability of appropriate services and resources."]},
   ],
  },
  {

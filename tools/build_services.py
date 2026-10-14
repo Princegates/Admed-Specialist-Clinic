@@ -67,11 +67,18 @@ def article(s):
         out.append('<p class="day"><svg class="ic"><use href="#i-calendar"/></svg> <strong>Clinic day:</strong> %s</p>' % e(s["day"]))
     if s.get("figure"):
         out.append('<figure class="svc-fig"><img src="../assets/photos/%s" alt="%s" width="1080" height="810" loading="lazy"></figure>' % (e(s["figure"][0]), e(s["figure"][1])))
-    if s.get("offers_ids"):
+    if s.get("cards"):
+        out.append("<h2>%s</h2>" % e(s.get("cards_h", "What we offer")) + '<div class="values">%s</div>' % "".join('<div class="value"><h3>%s</h3><p>%s</p></div>' % (e(h), e(b)) for h, b in s["cards"]))
+    if s.get("poster"):
+        out.append('<figure class="svc-poster"><a href="../assets/photos/%s" target="_blank" rel="noopener"><img src="../assets/photos/%s" alt="%s" width="854" height="1280" loading="lazy"></a></figure>' % (e(s["poster"][0]), e(s["poster"][0]), e(s["poster"][1])))
+    if not s.get("offers"):
+        offers_html = ""
+    elif s.get("offers_ids"):
         offers_html = '<ul class="checks">%s</ul>' % "".join('<li><a class="more-link" href="#%s">%s</a></li>' % (i, e(o)) for o, i in zip(s["offers"], s["offers_ids"]))
     else:
         offers_html = bullets(s["offers"])
-    out.append("<h2>%s</h2>" % e(s.get("offers_h", "What we offer")) + offers_html)
+    if s.get("offers"):
+        out.append("<h2>%s</h2>" % e(s.get("offers_h", "What we offer")) + offers_html)
     for sec in s["sections"]:
         out.append('<h2%s>%s</h2>' % (' id="%s"' % sec["id"] if sec.get("id") else "", e(sec["h"])))
         for p in sec.get("p", []):
