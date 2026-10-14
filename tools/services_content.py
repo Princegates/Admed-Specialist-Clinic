@@ -100,7 +100,7 @@ SERVICES = [
      "After the operation, a fistula should be reviewed regularly to make sure it keeps working well."], "link": ["Read our patient guide to the AV fistula", "../insight.html?id=av-fistula-guide"]},
    {"h": "AV Graft (AVG) creation", "id": "avg", "p": [
      "An AV graft works in a similar way to a fistula, but a soft artificial tube, called a graft, is used to connect the artery and the vein. The dialysis needles are placed into the graft.",
-     "A graft may be considered when a patient's own blood vessels are not suitable for a fistula. Like a fistula, it needs time to heal before use and regular follow-up."]},
+     "A graft may be considered when a patient's own blood vessels are not suitable for a fistula. Like a fistula, it needs time to heal before use and regular follow-up."], "link": ["Read our patient guide to the AV graft", "../insight.html?id=av-graft-guide"]},
    {"h": "Planning your access with us", "p": [
      "If you are starting dialysis, please bring your earlier test results, any referral letter from your doctor and a list of the medicines you take, and speak to us early, as planning ahead gives you more choice."], "link": ["Learn more about our Dialysis Treatment service", "dialysis.html"]},
   ],

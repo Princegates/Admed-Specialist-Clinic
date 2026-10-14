@@ -168,6 +168,34 @@ window.ADMED = {
       ]
     },
     {
+      type: "insight", id: "av-graft-guide", date: "2026-10-13", service: "dialysis-access",
+      title: "The AV graft and other fistula options for dialysis",
+      summary: "How an AV graft works, why it is used less often than a fistula, and what a basilic vein transposition is.",
+      body: [
+        "The AV fistula is the most common access operation for dialysis, but it is not the only one. This guide explains the AV graft and one other option, the basilic vein transposition, and why your surgeon may suggest them. It does not replace the advice of your own surgeon or nephrologist.",
+        "## What is an AV graft?",
+        "In an AV graft, the artery and the vein are not joined directly. Instead, a soft artificial tube, called a graft, is placed between them. At dialysis, the needles are placed into the graft and blood is drawn through it. A graft can be placed in the arm, the forearm or the groin.",
+        "## Why is an AV graft not the first choice?",
+        "A graft is used less often than a fistula because it blocks easily. Blood clots can form inside it, a problem called graft thrombosis. A graft can also become infected more easily. When either of these happens, the graft usually cannot be used again.",
+        "A graft may still be the right choice when your own vessels are not suitable for a fistula, and your surgeon will explain which option is best for you.",
+        "## Basilic vein transposition (BVT)",
+        "In a basilic vein transposition, a vein in the arm, called the basilic vein, is moved slightly and connected to the artery in the upper arm, called the brachial artery. The vessels used are larger than those in a usual AV fistula, so the fistula that develops is bigger.",
+        "- It is usually kept for when the usual AV fistulas have failed, because once a BVT is spoilt, no other fistula can be made again in that arm",
+        "- It is a larger operation than the usual fistula and can be more painful, so it is usually done under general anaesthesia, which means you are asleep",
+        "## Looking after any dialysis access",
+        "Your access is your lifeline for dialysis, and the places where one can be made are limited. Whichever type you have, please:",
+        "- Protect the arm: avoid repeated needle punctures in the arms you may need for access, and tell staff that you need to protect your veins",
+        "- Keep the area clean, and report any redness, pain, swelling or discharge early",
+        "- Follow the advice of your dialysis team about checking and caring for it",
+        "- Never let anyone take blood or place a drip in your access arm without checking first",
+        "## When to get help",
+        "- Redness, swelling, pain or pus over the graft or fistula",
+        "- Fever or chills",
+        "- The graft or fistula has stopped working, or you can no longer feel the buzzing over it",
+        "- Bleeding that does not stop. If it is heavy, go to the nearest hospital or clinic immediately"
+      ]
+    },
+    {
       type: "insight", id: "dialysis-catheter-guide", date: "2026-10-12", service: "dialysis-access",
       title: "The dialysis catheter (dialysis line): insertion, care and complications",
       summary: "What a dialysis catheter is, where it is placed, how it is inserted, how to look after it and which problems to report.",
