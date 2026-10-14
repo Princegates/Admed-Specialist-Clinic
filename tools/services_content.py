@@ -97,7 +97,7 @@ SERVICES = [
    {"h": "AV Fistula (AVF) creation", "id": "avf", "p": [
      "An AV fistula is made by a small operation that joins an artery to a vein, usually in the arm. The extra blood flow makes the vein larger and stronger, so that dialysis needles can be placed in it regularly and blood can flow fast enough for effective treatment.",
      "A fistula needs several weeks to mature before it can be used, so it is best planned well before dialysis is due to start. Compared with a catheter or a graft, a fistula generally lasts longer and carries a lower risk of infection and clotting, which is why it is often called the lifeline of a dialysis patient.",
-     "After the operation, a fistula should be reviewed regularly to make sure it keeps working well."]},
+     "After the operation, a fistula should be reviewed regularly to make sure it keeps working well."], "link": ["Read our patient guide to the AV fistula", "../insight.html?id=av-fistula-guide"]},
    {"h": "AV Graft (AVG) creation", "id": "avg", "p": [
      "An AV graft works in a similar way to a fistula, but a soft artificial tube, called a graft, is used to connect the artery and the vein. The dialysis needles are placed into the graft.",
      "A graft may be considered when a patient's own blood vessels are not suitable for a fistula. Like a fistula, it needs time to heal before use and regular follow-up."]},
