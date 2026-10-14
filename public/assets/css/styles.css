@@ -507,3 +507,6 @@ textarea{resize:vertical}
 .find-us img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover}
 .find-us figcaption{padding:14px 18px;font-size:.92rem;color:var(--muted)}
 .find-us figcaption strong{color:var(--head)}
+
+.svc-links a{color:var(--head);text-decoration:underline;text-decoration-color:var(--amber);text-decoration-thickness:2px;text-underline-offset:3px;transition:color .2s,text-decoration-color .2s}
+.svc-links a:hover{color:var(--amber-600);text-decoration-color:currentColor}
