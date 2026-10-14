@@ -82,7 +82,7 @@ window.ADMED = {
   },
 
   // Founder photo (optional). Without one, the card shows initials.
-  founderPhoto: "",
+  founderPhoto: "assets/photos/founder.jpg",
 
   // Vacancies shown on the Careers page. Leave the list empty when there are none: the page then
   // invites expressions of interest. Each vacancy:
