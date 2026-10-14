@@ -337,46 +337,67 @@
     return a._i - b._i;
   });
   if (newsAll.length && $("#updates")) {
-    var PAGE = 6, shown = PAGE, filter = "all";
     $("#updates").hidden = false;
-    var card = function (n) {
-      var href = "", label = "", ext = false;
-      if (n._type === "insight" && n.id) { href = "insight.html?id=" + encodeURIComponent(n.id); label = "Read the full article"; }
-      else if (n.link) { href = n.link; ext = true; label = n._type === "local" && n.source ? "Read at " + n.source : "Learn more"; }
-      else if (n.image) { href = n.image; ext = true; label = "View full size"; }
-      var attrs = href ? ' href="' + esc(href) + '"' + (ext ? ' target="_blank" rel="noopener"' : "") : "";
-      var img = n.image ? '<img loading="lazy" src="' + esc(n.image) + '" alt="' + esc(n.title) + '">' : "";
-      if (img && href) img = "<a" + attrs + ' tabindex="-1" aria-hidden="true">' + img + "</a>";
-      return '<article class="news__item" data-type="' + n._type + '">' + img + '<div class="news__body">' +
-        '<div class="news__meta"><span class="tag tag--' + n._type + '">' + TYPES[n._type] + "</span>" +
-        (n.date ? "<time>" + esc(niceDate(n.date)) + "</time>" : "") + "</div>" +
-        "<h3>" + esc(n.title) + "</h3>" +
-        (n.summary ? "<p>" + esc(n.summary) + "</p>" : "") +
-        (href ? '<a class="news__more"' + attrs + ">" + esc(label) + ' <span aria-hidden="true">&rarr;</span></a>' : "") +
-        "</div></article>";
+    var linkOf = function (n) {
+      if (n._type === "insight" && n.id) return { href: "insight.html?id=" + encodeURIComponent(n.id), ext: false, label: "Read the full article" };
+      if (n.link) return { href: n.link, ext: true, label: n._type === "local" && n.source ? "Read at " + n.source : "Learn more" };
+      if (n.image) return { href: n.image, ext: true, label: "View full size" };
+      return null;
     };
-    var drawNews = function () {
-      var list = newsAll.filter(function (n) { return filter === "all" || n._type === filter; });
-      $("#newsGrid").innerHTML = list.slice(0, shown).map(card).join("");
-      var more = $("#newsMoreWrap");
-      if (more) more.hidden = list.length <= shown;
+    var aAttr = function (l) { return ' href="' + esc(l.href) + '"' + (l.ext ? ' target="_blank" rel="noopener"' : ""); };
+    var arrow = ' <span aria-hidden="true">&rarr;</span>';
+    var when = function (n) { return n.date ? "<time>" + esc(niceDate(n.date)) + "</time>" : ""; };
+    var renderers = {
+      insight: function (list, shown) {
+        var first = list[0], rest = list.slice(1, shown);
+        var fl = linkOf(first);
+        var feat = '<article class="nx__feature">' + when(first) + "<h4>" + esc(first.title) + "</h4>" +
+          (first.summary ? "<p>" + esc(first.summary) + "</p>" : "") +
+          (fl ? '<a class="news__more"' + aAttr(fl) + ">" + esc(fl.label) + arrow + "</a>" : "") + "</article>";
+        var side = rest.map(function (n) {
+          var l = linkOf(n);
+          return '<li class="nx__item">' + when(n) + "<h4>" + (l ? "<a" + aAttr(l) + ">" + esc(n.title) + "</a>" : esc(n.title)) + "</h4>" +
+            (n.summary ? "<p>" + esc(n.summary) + "</p>" : "") + "</li>";
+        }).join("");
+        return feat + (side ? '<ul class="nx__side">' + side + "</ul>" : "");
+      },
+      clinic: function (list, shown) {
+        return list.slice(0, shown).map(function (n) {
+          var l = linkOf(n);
+          var img = n.image ? '<img loading="lazy" src="' + esc(n.image) + '" alt="' + esc(n.title) + '">' : "";
+          if (img && l) img = "<a" + aAttr(l) + ' tabindex="-1" aria-hidden="true">' + img + "</a>";
+          return '<article class="news__item">' + img + '<div class="news__body">' + when(n) + "<h4>" + esc(n.title) + "</h4>" +
+            (n.summary ? "<p>" + esc(n.summary) + "</p>" : "") +
+            (l ? '<a class="news__more"' + aAttr(l) + ">" + esc(l.label) + arrow + "</a>" : "") + "</div></article>";
+        }).join("");
+      },
+      local: function (list, shown) {
+        return list.slice(0, shown).map(function (n) {
+          var l = linkOf(n);
+          return '<li class="nx__row"><div class="nx__when">' + (n.date ? esc(niceDate(n.date)) : "") + '</div><div><h4>' + esc(n.title) + "</h4>" +
+            (n.summary ? "<p>" + esc(n.summary) + "</p>" : "") +
+            (l ? '<a class="news__more"' + aAttr(l) + ">" + esc(l.label) + arrow + "</a>" : "") + "</div></li>";
+        }).join("");
+      }
     };
-    var present = Object.keys(TYPES).filter(function (t) { return newsAll.some(function (n) { return n._type === t; }); });
-    var fbox = $("#newsFilters");
-    if (present.length > 1 && fbox) {
-      fbox.innerHTML = ["all"].concat(present).map(function (t) {
-        return '<button type="button" class="chip' + (t === "all" ? " on" : "") + '" data-f="' + t + '" aria-pressed="' + (t === "all") + '">' + (t === "all" ? "All" : TYPES[t]) + "</button>";
-      }).join("");
-      fbox.addEventListener("click", function (ev) {
-        var b = ev.target.closest("[data-f]"); if (!b) return;
-        filter = b.getAttribute("data-f"); shown = PAGE;
-        $$("[data-f]", fbox).forEach(function (x) { var on = x === b; x.classList.toggle("on", on); x.setAttribute("aria-pressed", on); });
-        drawNews();
+    var ids = { insight: ["#nxInsight", "#nxInsightBody"], clinic: ["#nxClinic", "#nxClinicBody"], local: ["#nxLocal", "#nxLocalBody"] };
+    var step = { insight: 4, clinic: 3, local: 5 }, shownOf = { insight: 4, clinic: 3, local: 5 };
+    var drawGroup = function (t) {
+      var list = newsAll.filter(function (n) { return n._type === t; });
+      var box = $(ids[t][0]);
+      if (!box) return;
+      box.hidden = !list.length;
+      if (!list.length) return;
+      $(ids[t][1]).innerHTML = renderers[t](list, shownOf[t]);
+      var more = $(".nx__more", box);
+      if (more) more.hidden = list.length <= shownOf[t];
+    };
+    Object.keys(ids).forEach(drawGroup);
+    $$("[data-more]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var t = b.getAttribute("data-more"); shownOf[t] += step[t]; drawGroup(t);
       });
-    } else if (fbox) fbox.hidden = true;
-    var moreBtn = $("#newsMore");
-    if (moreBtn) moreBtn.addEventListener("click", function () { shown += PAGE; drawNews(); });
-    drawNews();
+    });
   } else if (!newsAll.length) navHide("updates");
 
   /* ---------- Health Insights article page ---------- */

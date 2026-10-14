@@ -277,10 +277,25 @@
 <section class="section updates" id="updates" hidden>
   <div class="container">
     <h2>News, Updates &amp; Health Insights</h2>
-    <p class="muted">Clinic notices, health advice from our team and local health news.</p>
-    <div class="news-filters" id="newsFilters" role="group" aria-label="Filter by type"></div>
-    <div class="news" id="newsGrid"></div>
-    <div class="news-more" id="newsMoreWrap" hidden><button type="button" class="btn btn--outline" id="newsMore">Show more</button></div>
+    <p class="muted">Health advice from our team, notices from the clinic and local health news.</p>
+
+    <div class="nx nx--insight" id="nxInsight" hidden>
+      <div class="nx__head"><h3>Health Insights</h3><p>Plain-language advice from the ADMed team.</p></div>
+      <div class="nx__insight" id="nxInsightBody"></div>
+      <div class="nx__more" hidden><button type="button" class="btn btn--outline" data-more="insight">More insights</button></div>
+    </div>
+
+    <div class="nx nx--clinic" id="nxClinic" hidden>
+      <div class="nx__head"><h3>Clinic Updates</h3><p>Services, clinic days and notices.</p></div>
+      <div class="nx__posters" id="nxClinicBody"></div>
+      <div class="nx__more" hidden><button type="button" class="btn btn--outline" data-more="clinic">More updates</button></div>
+    </div>
+
+    <div class="nx nx--local" id="nxLocal" hidden>
+      <div class="nx__head"><h3>Local Health News</h3><p>What is happening in health in Ghana, with links to the source.</p></div>
+      <ul class="nx__list" id="nxLocalBody"></ul>
+      <div class="nx__more" hidden><button type="button" class="btn btn--outline" data-more="local">More news</button></div>
+    </div>
   </div>
 </section>
 
