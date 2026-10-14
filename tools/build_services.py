@@ -63,6 +63,8 @@ def article(s):
         out.append('<p class="lead-p">%s</p>' % e(p))
     if s.get("day"):
         out.append('<p class="day"><svg class="ic"><use href="#i-calendar"/></svg> <strong>Clinic day:</strong> %s</p>' % e(s["day"]))
+    if s.get("figure"):
+        out.append('<figure class="svc-fig"><img src="../assets/photos/%s" alt="%s" width="1080" height="810" loading="lazy"></figure>' % (e(s["figure"][0]), e(s["figure"][1])))
     out.append("<h2>%s</h2>" % e(s.get("offers_h", "What we offer")) + bullets(s["offers"]))
     for sec in s["sections"]:
         out.append('<h2%s>%s</h2>' % (' id="%s"' % sec["id"] if sec.get("id") else "", e(sec["h"])))

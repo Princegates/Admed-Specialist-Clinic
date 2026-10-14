@@ -50,8 +50,9 @@ SERVICES = [
  },
  {
   "slug": "dialysis", "name": "Dialysis Treatment", "select": "Dialysis Treatment", "icon": "kidney",
-  "photo": "dialysis-machine.jpg", "pos": "center 40%", "tile": "Dialysis sessions, including weekends, with AV-Fistula Creation (for dialysis access), Central Venous Catheter insertion and AV-Graft Creation.",
+  "photo": "dialysis-unit-wide.jpg", "pos": "center 55%", "tile": "Dialysis sessions, including weekends, with AV-Fistula Creation (for dialysis access), Central Venous Catheter insertion and AV-Graft Creation.",
   "banner": "Specialist Kidney Care and Dialysis Support",
+  "figure": ["dialysis-unit-wide.jpg", "The ADMed dialysis unit, with dialysis machines and reclining patient chairs"],
   "offers_h": "Our Dialysis Services Include:",
   "intro": [
    "At ADMed Specialist Clinic, we are committed to providing compassionate, patient-centred dialysis care in a professional and supportive environment. Our dialysis services are designed to support individuals living with kidney failure or other conditions requiring dialysis, in accordance with their clinical needs and the recommendations of their treating healthcare professionals.",
