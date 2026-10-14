@@ -65,9 +65,11 @@ def article(s):
         out.append('<p class="day"><svg class="ic"><use href="#i-calendar"/></svg> <strong>Clinic day:</strong> %s</p>' % e(s["day"]))
     out.append("<h2>What we offer</h2>" + bullets(s["offers"]))
     for sec in s["sections"]:
-        out.append("<h2>%s</h2>" % e(sec["h"]))
+        out.append('<h2%s>%s</h2>' % (' id="%s"' % sec["id"] if sec.get("id") else "", e(sec["h"])))
         for p in sec.get("p", []):
             out.append("<p>%s</p>" % e(p))
+        if sec.get("jump"):
+            out.append('<ul class="dots">%s</ul>' % "".join('<li><a class="more-link" href="#%s">%s</a></li>' % (e(i), e(h)) for h, i in sec["jump"]))
         if sec.get("bullets"):
             out.append(bullets(sec["bullets"], "dots"))
         if sec.get("link"):
