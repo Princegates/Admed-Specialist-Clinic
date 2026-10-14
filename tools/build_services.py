@@ -314,9 +314,10 @@ collab_cta = (
     + '<a class="btn btn--primary" data-need="email" data-href="mail" data-subject="Enquiry about surgical collaboration"><svg class="ic"><use href="#i-mail"/></svg> Enquire About Surgical Collaboration</a></div>'
 )
 collab_main = """<main id="main">
-<section class="svc-banner svc-banner--plain">
+<section class="svc-banner svc-banner--plain svc-banner--collab">
   <div class="container svc-banner__in">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><span aria-current="page">%s</span></nav>
+    <span class="svc-banner__tag">For surgeons</span>
     <h1>%s</h1>
     <p class="lead">%s</p>
   </div>
