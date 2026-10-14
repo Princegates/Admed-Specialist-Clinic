@@ -11,21 +11,24 @@
 SERVICES = [
  {
   "slug": "cardiac", "name": "Cardiac", "select": "Cardiac", "icon": "pulse",
-  "photo": "cardiac-care.jpg", "tile": "Cardiac clinic and cardiology consultation for heart conditions.",
-  "banner": "Cardiac clinic and cardiology consultation",
+  "photo": "cardiac-care.jpg", "tile": "Cardiac clinic (cardiologist), thoracic conditions, pacemaker implantation and IVC filter placement.",
+  "banner": "Cardiac clinic, thoracic care, pacemaker implantation and IVC filters",
   "intro": [
-   "The cardiac clinic at ADMed Specialist Clinic offers cardiology consultation for people with heart and blood pressure concerns. A specialist listens to your symptoms, reviews your history and any earlier results, and explains what is happening and what the next step is.",
+   "The cardiac service at ADMed Specialist Clinic offers a cardiac clinic with a cardiologist, care for thoracic conditions, pacemaker implantation and IVC filter placement. It supports people with heart, chest and blood pressure concerns. A specialist listens to your symptoms, reviews your history and any earlier results, and explains what is happening and what the next step is.",
    "Heart conditions are common, and many develop quietly. Seeing a specialist early gives you the best chance of keeping a problem under control.",
   ],
-  "offers": ["Cardiac clinic", "Cardiology consultation"],
+  "offers": ["Cardiac Clinic (Cardiologist)", "Thoracic Conditions", "Pacemaker Implantation", "IVC Filter Placement"],
   "sections": [
    {"h": "What is cardiology?", "p": ["Cardiology is the branch of medicine that looks after the heart and the blood vessels. A cardiologist assesses how well your heart is working and treats conditions that affect it, including problems with blood pressure and heart rhythm."]},
    {"h": "High blood pressure: no pain, no warning", "p": [
      "High blood pressure (hypertension) often causes no pain and no obvious symptoms. Over time it puts extra pressure on the blood vessels and can harm the heart, the brain and the kidneys.",
      "Because it is usually silent, the only way to know is to have your blood pressure measured. If you have not had a check recently, or if high blood pressure, stroke or heart disease runs in your family, book a consultation. Get checked. Get treated. Live better."]},
+   {"h": "Thoracic conditions", "p": ["The thorax is the chest, which holds the heart and the lungs. Thoracic conditions are problems affecting the organs and structures in the chest. If you have chest symptoms that are persistent or unexplained, a specialist can examine you, arrange the tests you need and advise on treatment."]},
+   {"h": "Pacemaker implantation", "p": ["A pacemaker is a small device placed under the skin of the chest that helps the heart keep a steady rhythm when it beats too slowly or irregularly. Your specialist will assess whether a pacemaker is right for you, explain the procedure and talk through what follow-up you will need afterwards."]},
+   {"h": "IVC filter placement", "p": ["An IVC filter is a small device placed in the inferior vena cava, the large vein that carries blood from the lower body back to the heart. It is used to catch blood clots travelling from the legs towards the lungs, in people who cannot take or are not protected by blood-thinning medicines. Your specialist will explain whether it is needed and what to expect."]},
    {"h": "What to expect at your visit", "p": ["Your specialist will ask about your symptoms, your family history and the medicines you take, and will examine you and measure your blood pressure. If tests are needed they will explain which ones and why, and talk you through the results and your treatment options."]},
   ],
-  "see": ["Chest pain or tightness", "Shortness of breath, especially with light activity or when lying flat", "A racing, pounding or irregular heartbeat", "Dizziness or fainting", "Swollen ankles or legs", "High blood pressure readings, or a family history of heart disease, stroke or diabetes"],
+  "see": ["Chest pain or tightness, or chest symptoms that do not go away", "Shortness of breath, especially with light activity or when lying flat", "A racing, pounding or irregular heartbeat", "Dizziness or fainting", "Swollen ankles or legs", "High blood pressure readings, or a family history of heart disease, stroke or diabetes"],
   "emergency": "Severe chest pain, sudden breathlessness, fainting, or signs of a stroke are emergencies. Call your local emergency number or go to the nearest hospital or clinic. Do not wait for an appointment.",
  },
  {
