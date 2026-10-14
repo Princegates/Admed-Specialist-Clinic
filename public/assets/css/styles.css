@@ -610,3 +610,7 @@ body.promo-open{overflow:hidden}
 .ticker__src::before{content:"\00b7\00a0"}
 .tag{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.06em;line-height:1.4;text-transform:uppercase;padding:3px 10px;border-radius:999px;background:var(--amber-soft);color:var(--amber-600)}
 .tag.tag--new{background:var(--red);color:#fff}
+.svc-pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:28px 0;max-width:760px}
+.svc-pair figure{margin:0;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow)}
+.svc-pair img{display:block;width:100%;height:auto}
+.collab-cta .btn{max-width:100%;white-space:normal;text-align:center;line-height:1.3}

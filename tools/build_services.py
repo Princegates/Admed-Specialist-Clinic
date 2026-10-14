@@ -315,6 +315,7 @@ collab_cta = (
 )
 collab_main = """<main id="main">
 <section class="svc-banner svc-banner--plain svc-banner--collab">
+  <div class="svc-banner__img" style="background-image:url('assets/photos/surgery-banner.jpg');background-position:center 40%%" role="img" aria-label="The ADMed operating theatre, with a surgical team at work and a C-arm imaging unit"></div>
   <div class="container svc-banner__in">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><span aria-current="page">%s</span></nav>
     <span class="svc-banner__tag">For surgeons</span>
@@ -326,6 +327,10 @@ collab_main = """<main id="main">
   <div class="container">
     <article class="svc-article">
       %s
+      <div class="svc-pair">
+        <figure><img src="assets/photos/surgery-theatre-1.jpg" width="960" height="1280" loading="lazy" alt="A surgical team working at the operating table in the ADMed theatre, with a C-arm imaging unit beside them"></figure>
+        <figure><img src="assets/photos/surgery-theatre-2.jpg" width="960" height="1280" loading="lazy" alt="Theatre staff in scrubs preparing sterile drapes and instruments in the ADMed operating theatre"></figure>
+      </div>
       %s
     </article>
   </div>
