@@ -478,13 +478,6 @@ careers_main = """<main id="main">
     "Only shortlisted candidates may be contacted for further assessment or interview. Where necessary, the clinic may verify qualifications, professional registration, employment history, and references, subject to applicable requirements.",
     "Submission of an application does not constitute an offer of employment.",
 ) + """
-      <h2>Join Our Team</h2>
-""" + _p(
-    "If you are passionate about healthcare and would like to contribute to a professional environment dedicated to quality service delivery, we invite you to explore career opportunities at ADMed Specialist Clinic.",
-    "Whether your expertise lies in clinical care, specialist services, administration, or healthcare operations, we welcome qualified professionals who share our commitment to compassionate, ethical, and patient-centred healthcare.",
-    "Explore our current vacancies and take the next step in your professional journey.",
-) + """
-      <div class="collab-cta"><p><strong>ADMed Specialist Clinic \u2014 An Ease to Medical Care.</strong></p><p>Together, we can contribute to a more responsive, compassionate, and patient-centred healthcare experience.</p><a class="btn btn--primary" href="#apply">Apply Now</a></div>
     </article>
   </div>
 </section>
