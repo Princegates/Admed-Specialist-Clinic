@@ -33,21 +33,21 @@ SERVICES = [
  },
  {
   "slug": "nephrology", "name": "Nephrology", "select": "Nephrology", "icon": "kidney",
-  "photo": "dialysis-unit.jpg", "pos": "center 62%", "tile": "Kidney disease consultation, AV-fistula creation, tunnel line placement and kidney function tests.",
+  "photo": "dialysis-unit.jpg", "pos": "center 62%", "tile": "Kidney disease consultation, AV-Fistula Creation, Central Venous Catheter insertion, AV-Graft Creation and kidney function tests.",
   "banner": "Kidney care, dialysis and vascular access",
   "day": "Saturdays at 10:00 AM",
   "intro": [
-   "The nephrology service at ADMed Specialist Clinic provides specialist kidney care, from your first consultation to dialysis and the procedures that make dialysis possible. Our clinic runs on Saturdays at 10:00 AM, and weekend dialysis sessions are available on Saturday or Sunday.",
+   "The nephrology service at ADMed Specialist Clinic provides specialist kidney care, from your first consultation to dialysis and the procedures that make dialysis possible. Our clinic runs on Saturdays at 10:00 AM, and weekend dialysis sessions may be available on Saturday or Sunday, subject to scheduling and clinical assessment.",
    "Your kidneys matter. Early diagnosis can protect your kidneys and your life.",
   ],
-  "offers": ["Kidney disease consultation", "Chronic kidney disease (CKD) management", "Hypertension and kidney-related blood pressure care", "AV-fistula creation and tunnel line placement", "Dialysis referral and follow-up (see our Dialysis Treatment service)", "Kidney function tests"],
+  "offers": ["Kidney disease consultation", "Chronic kidney disease (CKD) management", "Hypertension and kidney-related blood pressure care", "AV-Fistula Creation, Central Venous Catheter insertion and AV-Graft Creation", "Dialysis follow-up (see our Dialysis Treatment service)", "Kidney function tests"],
   "sections": [
    {"h": "What is chronic kidney disease (CKD)?", "p": [
      "Chronic kidney disease is a long-term condition in which the kidneys slowly lose their ability to filter waste and extra fluid from the blood. It usually progresses in stages, and early on it often causes no symptoms at all.",
      "Fatigue, swelling and changes in urination tend to appear only when kidney function has already fallen. Finding the problem early, and managing it, helps slow its progress and prevent complications."]},
    {"h": "What causes kidney disease?", "p": ["Two of the most common causes are:"], "bullets": ["Diabetes, which over time can damage the small blood vessels in the kidneys", "High blood pressure (hypertension), which can damage and narrow the blood vessels that supply the kidneys"]},
    {"h": "Getting tested", "p": ["Because early kidney disease is often silent, testing matters, especially if you have diabetes, high blood pressure or a family history of kidney disease. Kidney function is checked with simple tests, usually a urine test and a blood test. Your specialist will tell you which tests you need."]},
-   {"h": "Dialysis and vascular access", "p": ["When the kidneys can no longer do their job, dialysis takes over part of that work. To receive dialysis, many patients need a vascular access, such as an AV fistula or a tunnel line. Our team can discuss which option suits you and arrange the procedure. Dialysis sessions are available on Saturday or Sunday; please call to arrange a time."], "link": ["Learn more about our Dialysis Treatment service", "dialysis.html"]},
+   {"h": "Dialysis and vascular access", "p": ["When the kidneys can no longer do their job, dialysis takes over part of that work. To receive dialysis, many patients need a vascular access, such as an AV fistula, an AV graft or a central venous catheter. Our team can discuss which option suits you and arrange the procedure. Weekend dialysis sessions may be available on Saturday or Sunday, subject to scheduling and clinical assessment; please call to arrange a time."], "link": ["Learn more about our Dialysis Treatment service", "dialysis.html"]},
   ],
   "see": ["Swelling of the legs, ankles or around the eyes", "Tiredness that does not improve", "Changes in how often you pass urine, or foamy or blood-stained urine", "High blood pressure that is hard to control", "Diabetes, or a family history of kidney disease", "Abnormal kidney test results from another clinic"],
  },
@@ -59,10 +59,10 @@ SERVICES = [
   "offers_h": "Our Dialysis Services Include:",
   "intro": [
    "At ADMed Specialist Clinic, we are committed to providing compassionate, patient-centred dialysis care in a professional and supportive environment. Our dialysis services are designed to support individuals living with kidney failure or other conditions requiring dialysis, in accordance with their clinical needs and the recommendations of their treating healthcare professionals.",
-   "Our dialysis unit is equipped with dialysis machines and reclining patient chairs to support patient comfort during treatment. We also provide guidance on vascular access and coordinate appropriate care based on each patient's individual clinical circumstances.",
+   "Our dialysis unit is equipped with dialysis machines and reclining patient chairs to support patient comfort during treatment. We also provide vascular access procedures for dialysis, including AV-Fistula Creation, Central Venous Catheter insertion and AV-Graft Creation, and arrange appropriate care based on each patient's individual clinical circumstances.",
    "Weekend dialysis appointments may be available, subject to scheduling and clinical assessment.",
   ],
-  "offers": ["Haemodialysis sessions, including scheduled weekend appointments where available.", "Assessment and guidance regarding dialysis vascular access.", "Coordination of referrals for vascular access procedures, where appropriate.", "Ongoing clinical support and patient education related to dialysis treatment."],
+  "offers": ["Haemodialysis sessions, including scheduled weekend appointments where available.", "Assessment and guidance regarding dialysis vascular access.", "AV-Fistula Creation (for dialysis access).", "Central Venous Catheter insertion.", "AV-Graft Creation.", "Ongoing clinical support and patient education related to dialysis treatment."],
   "sections": [
    {"h": "Understanding dialysis vascular access", "id": "access", "p": [
      "For haemodialysis, blood has to leave your body and return to it easily and in good volume. A vascular access is the route that makes this possible, and the right choice depends on your health, your blood vessels and how soon you need treatment. The main options are:"],
@@ -77,10 +77,10 @@ SERVICES = [
      "An AV graft works in a similar way to a fistula, but a soft artificial tube, called a graft, is used to connect the artery and the vein. The dialysis needles are placed into the graft.",
      "A graft may be considered when a patient's own blood vessels are not suitable for a fistula. Like a fistula, it needs time to heal before use and regular follow-up."]},
    {"h": "Planning your access with us", "p": [
-     "Our team can explain these options, help you understand which may suit you, and coordinate a referral for the procedure where appropriate. If you are starting dialysis, please bring your earlier test results, any referral letter from your doctor and a list of the medicines you take, and speak to us early, as planning ahead gives you more choice."]},
+     "Our team can explain these options, help you understand which may suit you, and arrange the procedure at the clinic, subject to clinical assessment. If you are starting dialysis, please bring your earlier test results, any referral letter from your doctor and a list of the medicines you take, and speak to us early, as planning ahead gives you more choice."]},
    {"h": "Your Care, Our Commitment", "p": [
      "We recognise that living with kidney disease can be challenging. Our team strives to treat every patient with dignity, respect, confidentiality and compassion while supporting informed decisions about their care.",
-     "To enquire about our dialysis services, appointment availability, or referral requirements, please contact our clinic. All treatment arrangements are subject to clinical assessment and the availability of appropriate services and resources."]},
+     "To enquire about our dialysis services, vascular access procedures, appointment availability, or referral requirements, please contact our clinic. All treatment arrangements are subject to clinical assessment and the availability of appropriate services and resources."]},
   ],
  },
  {
