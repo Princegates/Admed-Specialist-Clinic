@@ -93,7 +93,7 @@ SERVICES = [
    {"h": "What to expect at your visit", "p": ["Your specialist will ask how the problem started and how it affects you, and will examine the affected area. If an X-ray or other tests are needed, they will explain why and what the results mean. Please bring any earlier scans, reports or medicines you take."]},
   ],
   "see": ["Joint pain, swelling or stiffness", "Pain after a fall or injury, or a suspected broken bone", "Back or neck pain that does not settle", "Difficulty walking, or reduced movement in a joint", "Muscle or tendon pain that is not improving"],
-  "emergency": "A serious injury, a visibly deformed limb, or heavy bleeding needs emergency care. Go to the nearest emergency department.",
+  "emergency": "A serious injury, a visibly deformed limb, or heavy bleeding needs emergency care. Go to the nearest hospital or clinic.",
  },
  {
   "slug": "gynaecology", "name": "Gynaecology", "select": "Gynaecology", "icon": "woman",
