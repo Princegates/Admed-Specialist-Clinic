@@ -149,6 +149,7 @@
       var w = String(n || "").replace(/^(dr|prof|mr|mrs|ms)\.?\s+/i, "").split(/\s+/).filter(Boolean);
       return w.length ? (w[0][0] + (w.length > 1 ? w[w.length - 1][0] : "")).toUpperCase() : "";
     };
+    if (docs.length === 1) { var dh = $("#doctors h2"); if (dh) dh.textContent = "Meet our doctor"; var dl = $("#doctors .label"); if (dl) dl.textContent = "Our doctor"; }
     $("#teamGrid").innerHTML = docs.map(function (d) {
       var photo = d.photo
         ? '<div class="doc__photo" style="background-image:url(\'' + esc(d.photo) + '\')" role="img" aria-label="' + esc(d.name) + '"></div>'
