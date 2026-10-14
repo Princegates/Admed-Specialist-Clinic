@@ -422,9 +422,10 @@ textarea{resize:vertical}
 
 /* Service pages */
 .svc-banner{position:relative;overflow:hidden;background:var(--dark-bg);color:#fff}
-.svc-banner__img{position:absolute;inset:0 0 0 38%;background-size:cover;background-position:center top;opacity:.95}
-.svc-banner::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,var(--dark-bg) 0%,var(--dark-bg) 40%,rgba(0,0,79,.55) 62%,rgba(0,0,79,.1) 100%)}
+.svc-banner__img{position:absolute;inset:0;background-size:cover;background-position:center top}
+.svc-banner::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,var(--dark-bg) 0%,var(--dark-bg) 28%,rgba(0,0,79,.38) 52%,rgba(0,0,79,0) 100%)}
 .svc-banner__in{position:relative;z-index:2;padding-block:clamp(48px,7vw,92px)}
+.svc-banner h1,.svc-banner .lead,.svc-banner .crumbs{text-shadow:0 1px 14px rgba(0,0,40,.55)}
 .svc-banner h1{color:#fff;margin:.3em 0 .35em;max-width:640px}
 .svc-banner .lead{font-size:1.15rem;font-weight:300;color:#e8e8f4;max-width:560px;margin-bottom:1.6em}
 .svc-banner__cta{display:flex;flex-wrap:wrap;gap:12px}
@@ -463,10 +464,10 @@ textarea{resize:vertical}
 @media (max-width:1080px){
   .svc-layout{grid-template-columns:1fr}
   .svc-aside{position:static}
-  .svc-banner__img{inset:0 0 0 20%}
+  .svc-banner__img{inset:0}
 }
 @media (max-width:620px){
-  .svc-banner::before{background:linear-gradient(180deg,rgba(0,0,79,.9),rgba(0,0,79,.78))}
+  .svc-banner::before{background:linear-gradient(180deg,rgba(0,0,79,.62),rgba(0,0,79,.45))}
   .svc-banner__img{inset:0}
 }
 
