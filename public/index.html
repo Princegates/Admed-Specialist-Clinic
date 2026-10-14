@@ -96,6 +96,7 @@
           <a href="#contact">Opening hours &amp; location</a>
           <a href="#faq">Frequently asked questions</a>
           <a href="#reviews" data-need-section="reviews">Patient reviews</a>
+          <a href="#updates" data-need-section="updates">News &amp; health insights</a>
         </div>
       </div>
       <a href="#book">Book Appointment</a>
@@ -272,12 +273,14 @@
   </div>
 </section>
 
-<!-- Updates (hidden until config.news has entries) -->
+<!-- News, Updates & Health Insights (hidden until config.news has entries) -->
 <section class="section updates" id="updates" hidden>
   <div class="container">
-    <h2>Latest updates from ADMed</h2>
-    <p class="muted">News, health tips and notices from the clinic.</p>
+    <h2>News, Updates &amp; Health Insights</h2>
+    <p class="muted">Clinic notices, health advice from our team and local health news.</p>
+    <div class="news-filters" id="newsFilters" role="group" aria-label="Filter by type"></div>
     <div class="news" id="newsGrid"></div>
+    <div class="news-more" id="newsMoreWrap" hidden><button type="button" class="btn btn--outline" id="newsMore">Show more</button></div>
   </div>
 </section>
 
@@ -404,7 +407,7 @@
       <a class="btn btn--outline" data-need="email" data-href="mail"><svg class="ic"><use href="#i-mail"/></svg> Email Us</a>
     </div>
     <div class="footer__cols">
-      <div><h4>About ADMed</h4><ul><li><a href="#about">Who we are</a></li><li><a href="#founder">Our founder</a></li><li><a href="surgical-collaboration.html">General Surgery Collaboration</a></li><li><a href="#contact">Opening hours</a></li><li><a href="#reviews" data-need-section="reviews">Patient reviews</a></li><li><a href="#faq">FAQ</a></li></ul></div>
+      <div><h4>About ADMed</h4><ul><li><a href="#about">Who we are</a></li><li><a href="#founder">Our founder</a></li><li><a href="surgical-collaboration.html">General Surgery Collaboration</a></li><li><a href="#contact">Opening hours</a></li><li><a href="#reviews" data-need-section="reviews">Patient reviews</a></li><li><a href="#updates" data-need-section="updates">News &amp; health insights</a></li><li><a href="#faq">FAQ</a></li></ul></div>
       <div><h4>Service lines</h4><ul id="footerSpecs"></ul></div>
       <div><h4>Media</h4><ul id="footerMedia"></ul></div>
       <div class="footer__contact">

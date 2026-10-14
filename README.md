@@ -38,3 +38,7 @@ If you add or rename a service, also update its tile in `public/index.html`.
 The sun/moon button in the header switches themes. The choice is remembered, and first-time visitors get their device's light/dark setting.
 
 Brand colours (sampled from the logo): navy `#00007E`, amber `#FCA901`, red `#FE0000`.
+
+## News, Updates & Health Insights
+
+The home page section (`#updates`) is fed by the `news` list in `public/assets/js/config.js`. Each entry has a `type`: `clinic` (Clinic Updates), `insight` (Health Insights, opens its own article page `insight.html?id=...` from the entry's `body`) or `local` (Local Health News, a short summary with a link to the source). The comments above `news` in `config.js` explain every field. Newest dated entries show first, the first six are visible with a "Show more" button, and the filter buttons appear for the types that have entries. Save the file and push: the site redeploys by itself. No build step is needed for news.

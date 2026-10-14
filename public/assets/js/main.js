@@ -317,17 +317,96 @@
     track.addEventListener("scroll", sync, { passive: true }); window.addEventListener("resize", sync); sync();
   }
 
-  /* ---------- Latest updates (render only if provided) ---------- */
-  var news = Array.isArray(C.news) ? C.news : [];
-  if (news.length && $("#updates")) {
+  /* ---------- News, Updates & Health Insights (render only if provided) ---------- */
+  var TYPES = { clinic: "Clinic Updates", insight: "Health Insights", local: "Local Health News" };
+  var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  function niceDate(d) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(d || ""));
+    return m ? parseInt(m[3], 10) + " " + MONTHS[parseInt(m[2], 10) - 1] + " " + m[1] : String(d || "");
+  }
+  var newsAll = (Array.isArray(C.news) ? C.news : []).filter(function (n) { return n && n.title; }).map(function (n, i) {
+    n._i = i;
+    n._type = TYPES[n.type] ? n.type : "clinic";
+    return n;
+  });
+  // Newest dated first; undated entries keep their written order after the dated ones
+  newsAll.sort(function (a, b) {
+    if (a.date && b.date) return a.date < b.date ? 1 : a.date > b.date ? -1 : a._i - b._i;
+    if (a.date) return -1;
+    if (b.date) return 1;
+    return a._i - b._i;
+  });
+  if (newsAll.length && $("#updates")) {
+    var PAGE = 6, shown = PAGE, filter = "all";
     $("#updates").hidden = false;
-    $("#newsGrid").innerHTML = news.map(function (n) {
-      var link = n.url || n.image || "";
-      var open = link ? '<a class="news__item" href="' + esc(link) + '" target="_blank" rel="noopener">' : '<div class="news__item">';
-      var close = link ? "</a>" : "</div>";
+    var card = function (n) {
+      var href = "", label = "", ext = false;
+      if (n._type === "insight" && n.id) { href = "insight.html?id=" + encodeURIComponent(n.id); label = "Read the full article"; }
+      else if (n.link) { href = n.link; ext = true; label = n._type === "local" && n.source ? "Read at " + n.source : "Learn more"; }
+      else if (n.image) { href = n.image; ext = true; label = "View full size"; }
+      var attrs = href ? ' href="' + esc(href) + '"' + (ext ? ' target="_blank" rel="noopener"' : "") : "";
       var img = n.image ? '<img loading="lazy" src="' + esc(n.image) + '" alt="' + esc(n.title) + '">' : "";
-      return open + img + '<div class="news__body">' + (n.date ? "<small>" + esc(n.date) + "</small>" : "") + "<h3>" + esc(n.title) + "</h3>" + (n.tag ? '<span class="tag">' + esc(n.tag) + "</span>" : "") + "</div>" + close;
-    }).join("");
+      if (img && href) img = "<a" + attrs + ' tabindex="-1" aria-hidden="true">' + img + "</a>";
+      return '<article class="news__item" data-type="' + n._type + '">' + img + '<div class="news__body">' +
+        '<div class="news__meta"><span class="tag tag--' + n._type + '">' + TYPES[n._type] + "</span>" +
+        (n.date ? "<time>" + esc(niceDate(n.date)) + "</time>" : "") + "</div>" +
+        "<h3>" + esc(n.title) + "</h3>" +
+        (n.summary ? "<p>" + esc(n.summary) + "</p>" : "") +
+        (href ? '<a class="news__more"' + attrs + ">" + esc(label) + ' <span aria-hidden="true">&rarr;</span></a>' : "") +
+        "</div></article>";
+    };
+    var drawNews = function () {
+      var list = newsAll.filter(function (n) { return filter === "all" || n._type === filter; });
+      $("#newsGrid").innerHTML = list.slice(0, shown).map(card).join("");
+      var more = $("#newsMoreWrap");
+      if (more) more.hidden = list.length <= shown;
+    };
+    var present = Object.keys(TYPES).filter(function (t) { return newsAll.some(function (n) { return n._type === t; }); });
+    var fbox = $("#newsFilters");
+    if (present.length > 1 && fbox) {
+      fbox.innerHTML = ["all"].concat(present).map(function (t) {
+        return '<button type="button" class="chip' + (t === "all" ? " on" : "") + '" data-f="' + t + '" aria-pressed="' + (t === "all") + '">' + (t === "all" ? "All" : TYPES[t]) + "</button>";
+      }).join("");
+      fbox.addEventListener("click", function (ev) {
+        var b = ev.target.closest("[data-f]"); if (!b) return;
+        filter = b.getAttribute("data-f"); shown = PAGE;
+        $$("[data-f]", fbox).forEach(function (x) { var on = x === b; x.classList.toggle("on", on); x.setAttribute("aria-pressed", on); });
+        drawNews();
+      });
+    } else if (fbox) fbox.hidden = true;
+    var moreBtn = $("#newsMore");
+    if (moreBtn) moreBtn.addEventListener("click", function () { shown += PAGE; drawNews(); });
+    drawNews();
+  } else if (!newsAll.length) navHide("updates");
+
+  /* ---------- Health Insights article page ---------- */
+  var art = $("#insightBody");
+  if (art) {
+    var wanted = new URLSearchParams(location.search).get("id");
+    var item = newsAll.filter(function (n) { return n._type === "insight" && n.id === wanted && n.body; })[0];
+    if (!item) {
+      $("#insightTitle").textContent = "Article not found";
+      art.innerHTML = '<p>We could not find that article. It may have been moved or removed.</p><p><a class="more-link" href="' + esc(base) + '#updates">See all news and health insights &rarr;</a></p>';
+    } else {
+      document.title = item.title + " | ADMed Specialist Clinic";
+      $("#insightTitle").textContent = item.title;
+      $("#insightCrumb").textContent = item.title;
+      if (item.summary) $("#insightLead").textContent = item.summary; else $("#insightLead").hidden = true;
+      if (item.date) $("#insightDate").textContent = niceDate(item.date); else $("#insightDate").hidden = true;
+      var html = "", inList = false;
+      item.body.forEach(function (t) {
+        t = String(t);
+        var li = t.indexOf("- ") === 0;
+        if (inList && !li) { html += "</ul>"; inList = false; }
+        if (li) { if (!inList) { html += '<ul class="dots">'; inList = true; } html += "<li>" + esc(t.slice(2)) + "</li>"; }
+        else if (t.indexOf("## ") === 0) html += "<h2>" + esc(t.slice(3)) + "</h2>";
+        else html += "<p>" + esc(t) + "</p>";
+      });
+      if (inList) html += "</ul>";
+      if (item.service) html += '<p><a class="more-link" href="services/' + esc(item.service) + '.html">Learn more about this service &rarr;</a></p>';
+      html += '<p class="small-print">This article gives general information and does not replace advice from a doctor. To discuss your own situation, please book a consultation.</p>';
+      art.innerHTML = html;
+    }
   }
 
   /* ---------- Booking forms ---------- */

@@ -85,16 +85,82 @@ window.ADMED = {
   // Founder photo (optional). Without one, the card shows initials.
   founderPhoto: "",
 
-  // Latest updates (section is hidden until you add at least one)
-  // { title: "Headline", tag: "Notice", image: "assets/photos/x.jpg", date: "12 Oct 2026", url: "https://optional-link" }
-  // date, tag and url are optional. Clicking a card opens url, or the full-size image.
+  // News, Updates & Health Insights --------------------------------------------
+  // The section is hidden until there is at least one entry. Newest dated entries show first;
+  // entries without a date follow in the order written here. Copy an entry, change it, save.
+  //
+  //   type    "clinic"   Clinic Updates     (notices, new services, clinic days, posters)
+  //           "insight"  Health Insights    (articles written by the clinic, opens its own page)
+  //           "local"    Local Health News  (a short summary in your own words + link to the source)
+  //   title   headline (required)
+  //   date    "2026-10-14" (year-month-day). Optional, but it keeps the section looking current.
+  //   summary one or two sentences shown on the card
+  //   image   optional, e.g. "assets/photos/my-poster.jpg"
+  //   link    "clinic" and "local" entries: where the card opens (optional for "clinic": defaults to the image)
+  //   source  "local" entries: the publisher, e.g. "Ghana Health Service"
+  //   id      "insight" entries: a short web-safe name, e.g. "blood-pressure-checks" (must be unique)
+  //   body    "insight" entries: the article. One text per paragraph. Start a text with
+  //           "## " for a sub-heading, or with "- " for a bullet point.
+  //   service optional, "insight" entries: a service page to point to, e.g. "nephrology"
+  //           (cardiac, nephrology, dialysis, orthopaedic, gynaecology, haematology, urology,
+  //            internal-medicine, physician-specialist, medical-laboratory)
+  //
+  // Local news tips: summarise in your own words, never paste the article, always name the source
+  // and link to it. Have a doctor check anything medical before it goes live.
   news: [
-    { title: "Hypertension: the silent killer", tag: "Health awareness", image: "assets/photos/news-hypertension.jpg" },
-    { title: "Nephrology service", tag: "Clinic days: Saturdays at 10:00 AM", image: "assets/photos/news-nephrology.jpg" },
-    { title: "Know when you need a gynecologist", tag: "Clinic days: Fridays", image: "assets/photos/news-gynecology.jpg" },
-    { title: "Hematology services", tag: "Specialist-led care", image: "assets/photos/news-hematology.jpg" },
-    { title: "Urology clinic", tag: "Urinary and men's health", image: "assets/photos/news-urology.jpg" },
-    { title: "Live a healthy lifestyle with your family", tag: "From the clinic", image: "assets/photos/news-family.jpg" }
+    {
+      type: "insight", id: "blood-pressure-checks", date: "2026-10-14", service: "cardiac",
+      title: "High blood pressure: why a regular check matters",
+      summary: "High blood pressure often has no symptoms. A quick check is the only way to know.",
+      body: [
+        "High blood pressure (hypertension) usually causes no pain and no obvious symptoms, which is why it is often called a silent condition. Over time it can strain the heart and damage the blood vessels, the brain and the kidneys.",
+        "## Who should get checked",
+        "- Adults who have never had their blood pressure measured, or have not had it measured in the last year",
+        "- Anyone with diabetes, kidney disease or a family history of high blood pressure, stroke or heart disease",
+        "- Anyone who has been told before that their reading was high",
+        "## What you can do",
+        "Have your blood pressure measured regularly, take any medicines exactly as prescribed, and speak to a doctor before stopping or changing them. Reducing salt, staying active and avoiding tobacco all help.",
+        "If you have chest pain, sudden breathlessness, fainting or signs of a stroke, go to the nearest hospital or clinic immediately."
+      ]
+    },
+    {
+      type: "insight", id: "kidney-health-basics", date: "2026-10-13", service: "nephrology",
+      title: "Kidney health: who should be tested and why",
+      summary: "Early kidney disease is often silent. Simple urine and blood tests can find it sooner.",
+      body: [
+        "The kidneys filter waste and extra fluid from the blood. Chronic kidney disease develops slowly and often causes no symptoms until the kidneys are already badly affected, so testing matters.",
+        "## Who should be tested",
+        "- People with diabetes or high blood pressure, the two most common causes of kidney disease",
+        "- People with a family history of kidney disease",
+        "- Anyone with swelling of the legs or around the eyes, foamy or blood-stained urine, or changes in how often they pass urine",
+        "## How it is checked",
+        "Kidney function is usually checked with a urine test and a blood test. Your specialist will explain the results and what to do next.",
+        "Finding kidney disease early gives you the best chance of slowing it down and avoiding complications."
+      ]
+    },
+    {
+      type: "insight", id: "when-to-see-a-specialist", date: "2026-10-12", service: "physician-specialist",
+      title: "When to see a specialist, not only your general doctor",
+      summary: "A specialist can help when a condition is complex, long-standing or has not improved.",
+      body: [
+        "A specialist is a doctor with extra training in one area of medicine. Many health concerns are well managed by a general doctor, but a specialist can help in some situations.",
+        "## Consider a specialist if",
+        "- Your doctor has referred you",
+        "- A condition is long-standing or has not improved with treatment",
+        "- You would like a second opinion",
+        "- You need a clear explanation of test results or a diagnosis",
+        "## What to bring",
+        "Bring any referral letter, your earlier records, test results and imaging, and a list of the medicines you take. This helps your specialist see the full picture and avoids repeating tests."
+      ]
+    },
+    { type: "clinic", title: "Hypertension: the silent killer", summary: "Health awareness from the clinic.", image: "assets/photos/news-hypertension.jpg" },
+    { type: "clinic", title: "Nephrology service", summary: "Clinic days: Saturdays at 10:00 AM.", image: "assets/photos/news-nephrology.jpg" },
+    { type: "clinic", title: "Know when you need a gynaecologist", summary: "Clinic days: Fridays.", image: "assets/photos/news-gynecology.jpg" },
+    { type: "clinic", title: "Haematology services", summary: "Specialist-led care.", image: "assets/photos/news-hematology.jpg" },
+    { type: "clinic", title: "Urology clinic", summary: "Urinary and men's health.", image: "assets/photos/news-urology.jpg" },
+    { type: "clinic", title: "Live a healthy lifestyle with your family", summary: "From the clinic.", image: "assets/photos/news-family.jpg" }
+    // Local news example (remove the // to use):
+    // { type: "local", date: "2026-10-14", title: "Short headline in your own words", summary: "One or two sentences summarising the story.", source: "Ghana Health Service", link: "https://example.com/the-article" }
   ],
 
   // Specialists (section is hidden until you add at least one) --------------

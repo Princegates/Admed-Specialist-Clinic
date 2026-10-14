@@ -337,3 +337,29 @@ collab_page = collab_head + collab_main + "\n</main>\n\n" + foot_r + "\n" + chat
 with open(os.path.join(PUBLIC, "surgical-collaboration.html"), "w", encoding="utf-8") as f:
     f.write(collab_page)
 print("wrote surgical-collaboration.html")
+
+
+# ---------------------------------------------------------------- Health Insights article page (site root)
+# One page serves every article: it reads ?id=... and the entry in assets/js/config.js (news).
+insight_main = """<main id="main">
+<section class="svc-banner svc-banner--plain">
+  <div class="container svc-banner__in">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="index.html#updates">News, Updates &amp; Health Insights</a><span aria-hidden="true">/</span><span aria-current="page" id="insightCrumb">Article</span></nav>
+    <p class="svc-banner__tag">Health Insights</p>
+    <h1 id="insightTitle">Health Insights</h1>
+    <p class="lead" id="insightLead"></p>
+    <p class="insight-date" id="insightDate"></p>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <article class="svc-article" id="insightBody"><p>Loading&hellip;</p></article>
+    <div class="collab-cta" style="max-width:760px"><p><strong>Have a question about your own health?</strong></p><p>Book a consultation and a specialist will help.</p><a class="btn btn--primary" href="index.html#book">Book an Appointment</a></div>
+  </div>
+</section>
+"""
+insight_head = head_t % {"title": "Health Insights", "desc": "Health advice from the ADMed Specialist Clinic team.", "sprite": sprite_r, "header": header_r}
+insight_page = insight_head + insight_main + "\n</main>\n\n" + foot_r + "\n" + chat_r + '\n<script src="assets/js/config.js"></script>\n<script src="assets/js/main.js"></script>\n</body>\n</html>\n'
+with open(os.path.join(PUBLIC, "insight.html"), "w", encoding="utf-8") as f:
+    f.write(insight_page)
+print("wrote insight.html")
