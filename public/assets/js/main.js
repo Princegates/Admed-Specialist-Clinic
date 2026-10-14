@@ -615,7 +615,7 @@
     root.setAttribute("data-theme", t);
     tt.setAttribute("aria-label", t === "dark" ? "Switch to day mode" : "Switch to night mode");
     tt.setAttribute("aria-pressed", t === "dark");
-    if (metaTheme) metaTheme.setAttribute("content", t === "dark" ? "#0a0c1f" : "#FCA901");
+    if (metaTheme) metaTheme.setAttribute("content", t === "dark" ? "#171c4a" : "#FCA901");
   }
   var stored = null;
   try { stored = localStorage.getItem("admed-theme"); } catch (e) {}
