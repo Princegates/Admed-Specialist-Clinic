@@ -82,6 +82,8 @@ def article(s):
             out.append(bullets(sec["bullets"], "dots"))
         if sec.get("link"):
             out.append('<p><a class="more-link" href="%s">%s &rarr;</a></p>' % (e(sec["link"][1]), e(sec["link"][0])))
+        for lk in sec.get("links", []):
+            out.append('<p><a class="more-link" href="%s">%s &rarr;</a></p>' % (e(lk[1]), e(lk[0])))
     if s.get("see"):
         out.append("<h2>When should I book?</h2><p>Consider booking a consultation if you have:</p>" + bullets(s["see"], "dots"))
     if s.get("emergency"):
