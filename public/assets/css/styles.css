@@ -526,9 +526,6 @@ body.promo-open{overflow:hidden}
 @media (prefers-reduced-motion:reduce){.promo{animation:none}}
 .svc-fig{margin:28px 0;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow)}
 .svc-fig img{display:block;width:100%;height:auto}
-.svc-collab{grid-column:1/-1;margin:0;padding:0;color:var(--on-dark);font-size:1rem}
-.svc-collab a{color:#fff;font-weight:700;text-decoration:underline;text-decoration-color:var(--amber);text-decoration-thickness:2px;text-underline-offset:4px}
-.svc-collab a:hover{color:var(--amber)}
 .collab-cta{margin-top:1.6em;padding:22px 24px;background:var(--amber-soft);border-left:4px solid var(--amber);border-radius:var(--radius-sm)}
 .collab-cta p{margin:0 0 .8em}
 .collab-cta .btn{margin-top:.4em}
