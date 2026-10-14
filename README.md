@@ -13,7 +13,7 @@ Edit **`public/assets/js/config.js`** — the only file you need to touch:
 - `photos` — put images in `public/assets/photos/` and list them (`hero`, `about`, `services` tiles, `gallery`). The gallery appears once photos exist.
 - `doctors`, `reviews` — the Team and Reviews sections appear once you add entries.
 
-The ten services (Cardiac, Nephrology, Dialysis, Orthopedic, Gynecological, Hematology, Urology, Internal Medicine, Physician Specialist, Medical Laboratory) are in `public/index.html` under `#specialties`; the booking dropdowns update automatically.
+The eleven services (Cardiac, Nephrology, Dialysis, Dialysis Access Procedures, Orthopedic, Gynecological, Hematology, Urology, Internal Medicine, Physician Specialist, Medical Laboratory) are in `public/index.html` under `#specialties`; the booking dropdowns update automatically.
 
 ## Automatic deploys (GitHub Actions)
 `.github/workflows/deploy.yml` deploys the site to Cloudflare on every push. Add two repository secrets in GitHub (Settings, Secrets and variables, Actions): `CLOUDFLARE_API_TOKEN` (a token from the "Edit Cloudflare Workers" template) and `CLOUDFLARE_ACCOUNT_ID`. You can also run it by hand from the Actions tab.
@@ -23,7 +23,7 @@ The ten services (Cardiac, Nephrology, Dialysis, Orthopedic, Gynecological, Hema
 - **Chat button:** `chat.routes` in the same file lists what visitors can pick (appointment/clinic, specialist) and which number each goes to. Each opens WhatsApp with their message, or lets them call.
 
 ## Service pages
-Each service tile on the home page opens its own page (`public/services/<name>.html`), for example `public/services/nephrology.html`. The ten pages are generated from one template so they always match the home page:
+Each service tile on the home page opens its own page (`public/services/<name>.html`), for example `public/services/nephrology.html`. The eleven pages are generated from one template so they always match the home page:
 
 1. Edit the text in `tools/services_content.py` (offers, explanations, when to book, clinic days).
 2. Run `python3 tools/build_services.py`.

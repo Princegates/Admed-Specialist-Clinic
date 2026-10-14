@@ -209,7 +209,8 @@
   var keywords = {
     "Cardiac": ["cardiac", "heart", "chest", "blood pressure", "palpitation", "cardiology"],
     "Nephrology": ["nephrology", "kidney", "renal", "urine test"],
-    "Dialysis Treatment": ["dialysis", "dialyse", "haemodialysis", "hemodialysis", "kidney failure", "renal failure", "fistula", "graft", "catheter", "venous"],
+    "Dialysis Treatment": ["dialysis", "dialyse", "haemodialysis", "hemodialysis", "kidney failure", "renal failure"],
+    "Dialysis Access Procedures": ["fistula", "graft", "catheter", "venous", "vascular access", "access"],
     "Orthopaedic": ["orthopedic", "orthopaedic", "bone", "joint", "fracture", "knee", "back pain", "spine", "muscle"],
     "Gynaecology": ["gynecolog", "gynaecolog", "women", "pregnan", "antenatal", "period", "pap", "uterus"],
     "Haematology": ["hematolog", "haematolog", "blood", "anemia", "anaemia", "sickle", "clot"],

@@ -64,24 +64,39 @@ SERVICES = [
   ],
   "offers": ["Haemodialysis sessions, including scheduled weekend appointments where available.", "Assessment and guidance regarding dialysis vascular access.", "AV-Fistula Creation (for dialysis access).", "Central Venous Catheter insertion.", "AV-Graft Creation.", "Ongoing clinical support and patient education related to dialysis treatment."],
   "sections": [
-   {"h": "Understanding dialysis vascular access", "id": "access", "p": [
-     "For haemodialysis, blood has to leave your body and return to it easily and in good volume. A vascular access is the route that makes this possible, and the right choice depends on your health, your blood vessels and how soon you need treatment. The main options are:"],
-    "jump": [["Central Venous Catheter (CVC)", "cvc"], ["AV Fistula (AVF)", "avf"], ["AV Graft (AVG)", "avg"]]},
-   {"h": "Central Venous Catheter (CVC)", "id": "cvc", "p": [
-     "A central venous catheter is a soft tube placed into a large vein, usually in the neck, so that blood can be taken to the dialysis machine and returned. It can be used for dialysis straight away, which makes it useful when treatment is needed urgently.",
-     "Catheters are generally used for a limited time, for example while a fistula or graft is healing, or when other forms of access are not possible. Because the tube sits in a large vein, it needs to be kept clean and dry and checked regularly to lower the risk of infection."]},
-   {"h": "AV Fistula (AVF)", "id": "avf", "p": [
-     "An AV fistula is made by a small operation that joins an artery to a vein, usually in the arm. The extra blood flow makes the vein larger and stronger, so that dialysis needles can be placed in it regularly and blood can flow fast enough for effective treatment.",
-     "A fistula needs several weeks to mature before it can be used, so it is best planned well before dialysis is due to start. Compared with a catheter or a graft, a fistula generally lasts longer and carries a lower risk of infection and clotting. Once it is in use, it should be reviewed regularly."]},
-   {"h": "AV Graft (AVG)", "id": "avg", "p": [
-     "An AV graft works in a similar way to a fistula, but a soft artificial tube, called a graft, is used to connect the artery and the vein. The dialysis needles are placed into the graft.",
-     "A graft may be considered when a patient's own blood vessels are not suitable for a fistula. Like a fistula, it needs time to heal before use and regular follow-up."]},
-   {"h": "Planning your access with us", "p": [
-     "Our team can explain these options, help you understand which may suit you, and arrange the procedure at the clinic, subject to clinical assessment. If you are starting dialysis, please bring your earlier test results, any referral letter from your doctor and a list of the medicines you take, and speak to us early, as planning ahead gives you more choice."]},
+   {"h": "Dialysis access procedures", "p": ["A vascular access is the route that lets blood leave your body and return to it during haemodialysis. Our team provides AV-Fistula Creation, Central Venous Catheter insertion and AV-Graft Creation, and can help you choose the option that suits you."], "link": ["Learn more about our Dialysis Access Procedures", "dialysis-access.html"]},
    {"h": "Your Care, Our Commitment", "p": [
      "We recognise that living with kidney disease can be challenging. Our team strives to treat every patient with dignity, respect, confidentiality and compassion while supporting informed decisions about their care.",
      "To enquire about our dialysis services, vascular access procedures, appointment availability, or referral requirements, please contact our clinic. All treatment arrangements are subject to clinical assessment and the availability of appropriate services and resources."]},
   ],
+ },
+ {
+  "slug": "dialysis-access", "name": "Dialysis Access Procedures", "select": "Dialysis Access Procedures", "icon": "drop",
+  "photo": "surgery-banner.jpg", "pos": "center 40%", "tile": "AV-Fistula Creation, Central Venous Catheter insertion and AV-Graft Creation for patients who need dialysis.",
+  "banner": "Vascular access for dialysis: fistula, graft and catheter",
+  "intro": [
+   "ADMed Specialist Clinic provides the following access services for patients who need or receive haemodialysis.",
+   "A vascular access is the route that lets blood leave your body and return to it during dialysis. The right choice depends on your health, your blood vessels and how soon you need treatment. Our team can explain your options and arrange the procedure at the clinic, subject to clinical assessment.",
+  ],
+  "offers_h": "Our access procedures include:",
+  "offers": ["Central Venous Catheter (CVC) insertion", "AV Fistula (AVF) creation", "AV Graft (AVG) creation"],
+  "offers_ids": ["cvc", "avf", "avg"],
+  "sections": [
+   {"h": "Central Venous Catheter (CVC) insertion", "id": "cvc", "p": [
+     "A central venous catheter is a soft tube placed into a large vein, usually in the neck, so that blood can be taken to the dialysis machine and returned. It can be used for dialysis straight away, which makes it useful when treatment is needed urgently.",
+     "Catheters are generally used for a limited time, for example while a fistula or graft is healing, or when other forms of access are not possible. Because the tube sits in a large vein, it needs to be kept clean and dry and checked regularly to lower the risk of infection."]},
+   {"h": "AV Fistula (AVF) creation", "id": "avf", "p": [
+     "An AV fistula is made by a small operation that joins an artery to a vein, usually in the arm. The extra blood flow makes the vein larger and stronger, so that dialysis needles can be placed in it regularly and blood can flow fast enough for effective treatment.",
+     "A fistula needs several weeks to mature before it can be used, so it is best planned well before dialysis is due to start. Compared with a catheter or a graft, a fistula generally lasts longer and carries a lower risk of infection and clotting, which is why it is often called the lifeline of a dialysis patient.",
+     "After the operation, a fistula should be reviewed regularly to make sure it keeps working well."]},
+   {"h": "AV Graft (AVG) creation", "id": "avg", "p": [
+     "An AV graft works in a similar way to a fistula, but a soft artificial tube, called a graft, is used to connect the artery and the vein. The dialysis needles are placed into the graft.",
+     "A graft may be considered when a patient's own blood vessels are not suitable for a fistula. Like a fistula, it needs time to heal before use and regular follow-up."]},
+   {"h": "Planning your access with us", "p": [
+     "If you are starting dialysis, please bring your earlier test results, any referral letter from your doctor and a list of the medicines you take, and speak to us early, as planning ahead gives you more choice."], "link": ["Learn more about our Dialysis Treatment service", "dialysis.html"]},
+  ],
+  "see": ["Your doctor has said you may need dialysis", "You are already on dialysis and need a new or better access", "Your current access is not working well", "You would like to understand the difference between a catheter, a fistula and a graft"],
+  "emergency": "Fever, redness, swelling, severe pain or bleeding at a catheter, fistula or graft site needs urgent attention. Go to the nearest hospital or clinic.",
  },
  {
   "slug": "orthopaedic", "name": "Orthopaedic", "select": "Orthopaedic", "icon": "bone",
