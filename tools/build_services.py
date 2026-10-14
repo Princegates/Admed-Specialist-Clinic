@@ -63,7 +63,7 @@ def article(s):
         out.append('<p class="lead-p">%s</p>' % e(p))
     if s.get("day"):
         out.append('<p class="day"><svg class="ic"><use href="#i-calendar"/></svg> <strong>Clinic day:</strong> %s</p>' % e(s["day"]))
-    out.append("<h2>What we offer</h2>" + bullets(s["offers"]))
+    out.append("<h2>%s</h2>" % e(s.get("offers_h", "What we offer")) + bullets(s["offers"]))
     for sec in s["sections"]:
         out.append('<h2%s>%s</h2>' % (' id="%s"' % sec["id"] if sec.get("id") else "", e(sec["h"])))
         for p in sec.get("p", []):
@@ -74,7 +74,8 @@ def article(s):
             out.append(bullets(sec["bullets"], "dots"))
         if sec.get("link"):
             out.append('<p><a class="more-link" href="%s">%s &rarr;</a></p>' % (e(sec["link"][1]), e(sec["link"][0])))
-    out.append("<h2>When should I book?</h2><p>Consider booking a consultation if you have:</p>" + bullets(s["see"], "dots"))
+    if s.get("see"):
+        out.append("<h2>When should I book?</h2><p>Consider booking a consultation if you have:</p>" + bullets(s["see"], "dots"))
     if s.get("emergency"):
         out.append('<div class="emergency-note"><svg class="ic"><use href="#i-alert"/></svg><p><strong>Emergency?</strong> %s</p></div>' % e(s["emergency"]))
     out.append(
