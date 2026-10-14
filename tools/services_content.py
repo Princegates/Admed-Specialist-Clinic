@@ -93,7 +93,7 @@ SERVICES = [
   "sections": [
    {"h": "Central Venous Catheter (CVC) insertion", "id": "cvc", "p": [
      "A central venous catheter is a soft tube placed into a large vein, usually in the neck, so that blood can be taken to the dialysis machine and returned. It can be used for dialysis straight away, which makes it useful when treatment is needed urgently.",
-     "Catheters are generally used for a limited time, for example while a fistula or graft is healing, or when other forms of access are not possible. Because the tube sits in a large vein, it needs to be kept clean and dry and checked regularly to lower the risk of infection."]},
+     "Catheters are generally used for a limited time, for example while a fistula or graft is healing, or when other forms of access are not possible. Because the tube sits in a large vein, it needs to be kept clean and dry and checked regularly to lower the risk of infection."], "link": ["Read our patient guide to the dialysis catheter", "../insight.html?id=dialysis-catheter-guide"]},
    {"h": "AV Fistula (AVF) creation", "id": "avf", "p": [
      "An AV fistula is made by a small operation that joins an artery to a vein, usually in the arm. The extra blood flow makes the vein larger and stronger, so that dialysis needles can be placed in it regularly and blood can flow fast enough for effective treatment.",
      "A fistula needs several weeks to mature before it can be used, so it is best planned well before dialysis is due to start. Compared with a catheter or a graft, a fistula generally lasts longer and carries a lower risk of infection and clotting, which is why it is often called the lifeline of a dialysis patient.",
