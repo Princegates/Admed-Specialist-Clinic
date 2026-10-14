@@ -501,3 +501,9 @@ textarea{resize:vertical}
 .consent{display:flex;gap:10px;align-items:flex-start;font:400 .88rem var(--font);color:var(--ink);margin:4px 0 16px}
 .consent input{width:auto;margin:4px 0 0;flex:none;accent-color:var(--amber)}
 .map__fallback .btn{margin-top:6px}
+
+/* Find us photo */
+.find-us{margin:0;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow)}
+.find-us img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover}
+.find-us figcaption{padding:14px 18px;font-size:.92rem;color:var(--muted)}
+.find-us figcaption strong{color:var(--head)}
