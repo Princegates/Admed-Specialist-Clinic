@@ -74,8 +74,8 @@ function json(body, seconds) {
 
 async function whoNews(ctx) {
   const cache = caches.default;
-  const freshKey = new Request("https://cache.admed.internal/who-news");
-  const staleKey = new Request("https://cache.admed.internal/who-news-stale");
+  const freshKey = new Request("https://cache.admed.internal/v2/who-news");
+  const staleKey = new Request("https://cache.admed.internal/v2/who-news-stale");
 
   const hit = await cache.match(freshKey);
   if (hit) return hit;
