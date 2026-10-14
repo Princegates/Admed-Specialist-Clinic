@@ -605,3 +605,4 @@ body.promo-open{overflow:hidden}
   .ticker__in{gap:10px}
   .ticker__label small{display:none}
 }
+.tag--new{background:var(--red);color:#fff;margin-right:6px;vertical-align:middle}

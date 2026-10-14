@@ -408,14 +408,30 @@
       }) : [];
       if (!items.length) return;
 
+      var now = Date.now();
+      var ageH = function (n) {
+        var t = Date.parse(n.published || "");
+        return isNaN(t) ? null : (now - t) / 3600000;
+      };
+      var isNew = function (n) { var h = ageH(n); return h !== null && h >= -1 && h <= 24; };
+      var ago = function (n) {
+        var h = ageH(n);
+        if (h === null) return "";
+        if (h < 1) return "Just now";
+        return Math.floor(h) + "h ago";
+      };
+
+      // Ticker: only headlines published within the last whoTickerHours (24 by default)
       var tk = $("#whoTicker");
-      if (tk) {
-        var one = items.slice(0, 8).map(function (n) {
-          return '<a href="' + esc(n.link) + '" target="_blank" rel="noopener">' + (n.date ? "<time>" + esc(niceDate(n.date)) + "</time> " : "") + esc(n.title) + "</a>";
+      var limit = Number(C.whoTickerHours) > 0 ? Number(C.whoTickerHours) : 24;
+      var fresh = items.filter(function (n) { var h = ageH(n); return h !== null && h >= -1 && h <= limit; });
+      if (tk && fresh.length) {
+        var one = fresh.slice(0, 8).map(function (n) {
+          return '<a href="' + esc(n.link) + '" target="_blank" rel="noopener"><time>' + esc(ago(n)) + "</time> " + esc(n.title) + "</a>";
         }).join("");
         var run = $("#whoRun");
         run.innerHTML = one + '<span class="ticker__dup" aria-hidden="true">' + one.replace(/<a /g, '<a tabindex="-1" ') + "</span>";
-        run.style.animationDuration = Math.max(40, Math.min(items.length, 8) * 14) + "s";
+        run.style.animationDuration = Math.max(40, Math.min(fresh.length, 8) * 14) + "s";
         tk.hidden = false;
         var pb = $("#whoPause");
         if (pb) pb.addEventListener("click", function () {
@@ -431,8 +447,8 @@
         var shown = 5;
         var draw = function () {
           $("#nxWhoBody").innerHTML = items.slice(0, shown).map(function (n) {
-            return '<li class="nx__row"><div class="nx__when">' + (n.date ? esc(niceDate(n.date)) : "") + "</div><div><h4>" + esc(n.title) +
-              '</h4><a class="news__more" href="' + esc(n.link) + '" target="_blank" rel="noopener">Read at WHO <span aria-hidden="true">&rarr;</span></a></div></li>';
+            return '<li class="nx__row"><div class="nx__when">' + (n.date ? esc(niceDate(n.date)) : "") + "</div><div><h4>" + (isNew(n) ? '<span class="tag tag--new">New</span> ' : "") + esc(n.title) +
+              '</h4><a class="news__more" href="' + esc(n.link) + '" target="_blank" rel="noopener">Read the story <span aria-hidden="true">&rarr;</span></a></div></li>';
           }).join("");
           var more = $(".nx__more", box); if (more) more.hidden = items.length <= shown;
         };

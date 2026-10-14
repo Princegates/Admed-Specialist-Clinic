@@ -85,9 +85,11 @@ window.ADMED = {
   // Founder photo (optional). Without one, the card shows initials.
   founderPhoto: "",
 
-  // Live WHO health news (ticker under the banner and a list in the news section).
+  // Live health news (ticker under the banner and a Health News list in the news section).
   // It is read by the site's server from the World Health Organization's public feed. Set to false to switch it off.
   whoNews: true,
+  // The ticker under the header only shows WHO headlines published within this many hours.
+  whoTickerHours: 24,
 
   // News, Updates & Health Insights --------------------------------------------
   // The section is hidden until there is at least one entry. Newest dated entries show first;

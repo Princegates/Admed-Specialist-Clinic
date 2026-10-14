@@ -33,6 +33,12 @@ function isoDate(s) {
   return m[3] + "-" + String(mon).padStart(2, "0") + "-" + String(parseInt(m[1], 10)).padStart(2, "0");
 }
 
+// Full publication time as an ISO string ("" if it cannot be read)
+function isoTime(s) {
+  const t = Date.parse(String(s || "").replace(/\s+Z$/i, " GMT"));
+  return isNaN(t) ? "" : new Date(t).toISOString();
+}
+
 function safeWhoLink(link) {
   try {
     const u = new URL(link);
@@ -49,7 +55,8 @@ export function parseFeed(xml) {
     const title = tag(part, "title");
     const link = safeWhoLink(tag(part, "link"));
     if (!title || !link) continue;
-    items.push({ title, link, date: isoDate(tag(part, "pubDate")) });
+    const pub = tag(part, "pubDate");
+    items.push({ title, link, date: isoDate(pub), published: isoTime(pub) });
     if (items.length >= MAX_ITEMS) break;
   }
   return items;
