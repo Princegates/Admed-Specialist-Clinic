@@ -97,6 +97,7 @@ p{margin:0 0 1em}
 .menu-btn[aria-expanded="true"] .ic{transform:rotate(180deg)}
 .menu{position:absolute;left:-14px;top:calc(100% + 12px);min-width:260px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);box-shadow:var(--shadow-lg);padding:8px;display:none;z-index:20}
 .has-menu.open .menu{display:block}
+.menu::before{content:"";position:absolute;left:0;right:0;top:-16px;height:16px}
 .menu a{display:block;padding:11px 14px;border-radius:8px;font-size:.95rem;color:var(--ink)}
 .menu a:hover{background:var(--soft);color:var(--head)}
 .header__actions{display:flex;align-items:center;gap:10px}

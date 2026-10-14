@@ -289,8 +289,9 @@
       var desk = window.matchMedia("(min-width:901px)").matches;
       setMenu(desk ? true : !hm.classList.contains("open"));
     });
-    hm.addEventListener("mouseenter", function () { if (window.matchMedia("(min-width:901px)").matches) setMenu(true); });
-    hm.addEventListener("mouseleave", function () { if (window.matchMedia("(min-width:901px)").matches) setMenu(false); });
+    var closeTimer = null, desktop = function () { return window.matchMedia("(min-width:901px)").matches; };
+    hm.addEventListener("mouseenter", function () { if (desktop()) { clearTimeout(closeTimer); setMenu(true); } });
+    hm.addEventListener("mouseleave", function () { if (desktop()) { clearTimeout(closeTimer); closeTimer = setTimeout(function () { setMenu(false); }, 250); } });
     document.addEventListener("click", function (e) { if (!hm.contains(e.target)) setMenu(false); });
     document.addEventListener("keydown", function (e) { if (e.key === "Escape") setMenu(false); });
     $$(".menu a", hm).forEach(function (a) { a.addEventListener("click", function () { setMenu(false); }); });
