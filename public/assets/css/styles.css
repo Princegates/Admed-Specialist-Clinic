@@ -606,3 +606,7 @@ body.promo-open{overflow:hidden}
   .ticker__label small{display:none}
 }
 .tag--new{background:var(--red);color:#fff;margin-right:6px;vertical-align:middle}
+.ticker__src{color:var(--muted);font-size:.8rem;margin-left:4px}
+.ticker__src::before{content:"\00b7\00a0"}
+.tag{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.06em;line-height:1.4;text-transform:uppercase;padding:3px 10px;border-radius:999px;background:var(--amber-soft);color:var(--amber-600)}
+.tag.tag--new{background:var(--red);color:#fff}

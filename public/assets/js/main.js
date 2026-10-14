@@ -400,11 +400,11 @@
     });
   } else if (!newsAll.length) navHide("updates");
 
-  /* ---------- Live WHO health news: ticker under the banner + list in the news section ---------- */
+  /* ---------- Live health news: ticker under the banner + list in the news section ---------- */
   if (C.whoNews !== false && (location.protocol === "https:" || location.protocol === "http:") && ($("#whoTicker") || $("#nxWho"))) {
-    fetch("/api/who-news", { headers: { accept: "application/json" } }).then(function (r) { return r.ok ? r.json() : null; }).then(function (data) {
+    fetch("/api/health-news", { headers: { accept: "application/json" } }).then(function (r) { return r.ok ? r.json() : null; }).then(function (data) {
       var items = data && Array.isArray(data.items) ? data.items.filter(function (n) {
-        return n && n.title && /^https:\/\/([a-z0-9-]+\.)*who\.int\//i.test(n.link || "");
+        return n && n.title && /^https:\/\//i.test(n.link || "");
       }) : [];
       if (!items.length) return;
 
@@ -426,12 +426,12 @@
       var limit = Number(C.whoTickerHours) > 0 ? Number(C.whoTickerHours) : 24;
       var fresh = items.filter(function (n) { var h = ageH(n); return h !== null && h >= -1 && h <= limit; });
       if (tk && fresh.length) {
-        var one = fresh.slice(0, 8).map(function (n) {
-          return '<a href="' + esc(n.link) + '" target="_blank" rel="noopener"><time>' + esc(ago(n)) + "</time> " + esc(n.title) + "</a>";
+        var one = fresh.slice(0, 10).map(function (n) {
+          return '<a href="' + esc(n.link) + '" target="_blank" rel="noopener"><time>' + esc(ago(n)) + "</time> " + esc(n.title) + (n.source ? ' <span class="ticker__src">' + esc(n.source) + "</span>" : "") + "</a>";
         }).join("");
         var run = $("#whoRun");
         run.innerHTML = one + '<span class="ticker__dup" aria-hidden="true">' + one.replace(/<a /g, '<a tabindex="-1" ') + "</span>";
-        run.style.animationDuration = Math.max(40, Math.min(fresh.length, 8) * 14) + "s";
+        run.style.animationDuration = Math.max(40, Math.min(fresh.length, 10) * 12) + "s";
         tk.hidden = false;
         var pb = $("#whoPause");
         if (pb) pb.addEventListener("click", function () {
@@ -448,7 +448,7 @@
         var draw = function () {
           $("#nxWhoBody").innerHTML = items.slice(0, shown).map(function (n) {
             return '<li class="nx__row"><div class="nx__when">' + (n.date ? esc(niceDate(n.date)) : "") + "</div><div><h4>" + (isNew(n) ? '<span class="tag tag--new">New</span> ' : "") + esc(n.title) +
-              '</h4><a class="news__more" href="' + esc(n.link) + '" target="_blank" rel="noopener">Read the story <span aria-hidden="true">&rarr;</span></a></div></li>';
+              '</h4><a class="news__more" href="' + esc(n.link) + '" target="_blank" rel="noopener">' + (n.source ? "Read at " + esc(n.source) : "Read the story") + ' <span aria-hidden="true">&rarr;</span></a></div></li>';
           }).join("");
           var more = $(".nx__more", box); if (more) more.hidden = items.length <= shown;
         };
