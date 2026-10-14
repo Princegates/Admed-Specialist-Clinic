@@ -63,6 +63,7 @@ window.ADMED = {
     services: {
       cardiac: "assets/photos/cardiac-care.jpg",
       nephrology: "assets/photos/dialysis-unit.jpg",
+      dialysis: "assets/photos/dialysis-machine.jpg",
       orthopedic: "assets/photos/orthopedic-care.jpg",
       gynecological: "assets/photos/gynecological-care.jpg",
       hematology: "assets/photos/hematology-care.jpg",

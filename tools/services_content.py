@@ -29,24 +29,46 @@ SERVICES = [
   "emergency": "Severe chest pain, sudden breathlessness, fainting, or signs of a stroke are emergencies. Call your local emergency number or go to the nearest emergency department. Do not wait for an appointment.",
  },
  {
-  "slug": "nephrology", "name": "Nephrology", "select": "Nephrology (incl. dialysis)", "icon": "kidney",
-  "photo": "dialysis-unit.jpg", "pos": "center 62%", "tile": "Kidney disease consultation, dialysis service, AV-fistula creation, tunnel line placement and kidney function tests.",
+  "slug": "nephrology", "name": "Nephrology", "select": "Nephrology", "icon": "kidney",
+  "photo": "dialysis-unit.jpg", "pos": "center 62%", "tile": "Kidney disease consultation, AV-fistula creation, tunnel line placement and kidney function tests.",
   "banner": "Kidney care, dialysis and vascular access",
   "day": "Saturdays at 10:00 AM",
   "intro": [
    "The nephrology service at ADMed Specialist Clinic provides specialist kidney care, from your first consultation to dialysis and the procedures that make dialysis possible. Our clinic runs on Saturdays at 10:00 AM, and weekend dialysis sessions are available on Saturday or Sunday.",
    "Your kidneys matter. Early diagnosis can protect your kidneys and your life.",
   ],
-  "offers": ["Kidney disease consultation", "Chronic kidney disease (CKD) management", "Hypertension and kidney-related blood pressure care", "Dialysis service, including weekend sessions", "AV-fistula creation and tunnel line placement", "Dialysis referral and follow-up", "Kidney function tests"],
+  "offers": ["Kidney disease consultation", "Chronic kidney disease (CKD) management", "Hypertension and kidney-related blood pressure care", "AV-fistula creation and tunnel line placement", "Dialysis referral and follow-up (see our Dialysis service)", "Kidney function tests"],
   "sections": [
    {"h": "What is chronic kidney disease (CKD)?", "p": [
      "Chronic kidney disease is a long-term condition in which the kidneys slowly lose their ability to filter waste and extra fluid from the blood. It usually progresses in stages, and early on it often causes no symptoms at all.",
      "Fatigue, swelling and changes in urination tend to appear only when kidney function has already fallen. Finding the problem early, and managing it, helps slow its progress and prevent complications."]},
    {"h": "What causes kidney disease?", "p": ["Two of the most common causes are:"], "bullets": ["Diabetes, which over time can damage the small blood vessels in the kidneys", "High blood pressure (hypertension), which can damage and narrow the blood vessels that supply the kidneys"]},
    {"h": "Getting tested", "p": ["Because early kidney disease is often silent, testing matters, especially if you have diabetes, high blood pressure or a family history of kidney disease. Kidney function is checked with simple tests, usually a urine test and a blood test. Your specialist will tell you which tests you need."]},
-   {"h": "Dialysis and vascular access", "p": ["When the kidneys can no longer do their job, dialysis takes over part of that work. To receive dialysis, many patients need a vascular access, such as an AV fistula or a tunnel line. Our team can discuss which option suits you and arrange the procedure. Dialysis sessions are available on Saturday or Sunday; please call to arrange a time."]},
+   {"h": "Dialysis and vascular access", "p": ["When the kidneys can no longer do their job, dialysis takes over part of that work. To receive dialysis, many patients need a vascular access, such as an AV fistula or a tunnel line. Our team can discuss which option suits you and arrange the procedure. Dialysis sessions are available on Saturday or Sunday; please call to arrange a time."], "link": ["Learn more about our Dialysis service", "dialysis.html"]},
   ],
   "see": ["Swelling of the legs, ankles or around the eyes", "Tiredness that does not improve", "Changes in how often you pass urine, or foamy or blood-stained urine", "High blood pressure that is hard to control", "Diabetes, or a family history of kidney disease", "Abnormal kidney test results from another clinic"],
+ },
+ {
+  "slug": "dialysis", "name": "Dialysis", "select": "Dialysis", "icon": "kidney",
+  "photo": "dialysis-machine.jpg", "pos": "center 40%", "tile": "Dialysis sessions for patients whose kidneys can no longer clear waste and extra fluid, including weekend sessions.",
+  "banner": "Dialysis sessions, including weekends",
+  "intro": [
+   "The dialysis service at ADMed Specialist Clinic supports patients whose kidneys can no longer filter the blood well enough on their own. Sessions take place in our dialysis unit, with dialysis machines and reclining patient chairs, and are available on Saturday or Sunday.",
+   "Please call us to arrange a time for your session.",
+  ],
+  "offers": ["Dialysis sessions, including weekend sessions", "Dialysis referral and follow-up", "AV-fistula creation and tunnel line placement for dialysis access", "Kidney consultation before and during dialysis", "Kidney function tests"],
+  "sections": [
+   {"h": "What is dialysis?", "p": [
+     "Dialysis is a treatment that does part of the work of the kidneys. A dialysis machine passes your blood through a filter that removes waste and extra fluid, and then returns the cleaned blood to your body.",
+     "It is used when the kidneys have stopped working well enough to do this on their own. Your specialist will tell you whether dialysis is right for you and how often you will need it."]},
+   {"h": "Getting ready for dialysis", "p": [
+     "To receive dialysis, many patients need a vascular access, such as an AV fistula or a tunnel line. Our team can discuss which option suits you and arrange the procedure.",
+     "If you are starting dialysis, bring your earlier test results, any referral letter from your doctor and a list of the medicines you take."]},
+   {"h": "Weekend sessions", "p": ["Dialysis is available on Saturday or Sunday. Sessions are arranged in advance, so please call us to agree a day and time."]},
+   {"h": "Kidney care around dialysis", "p": ["Dialysis is one part of looking after your kidneys. Our nephrology clinic runs on Saturdays at 10:00 AM for consultations, kidney function tests and follow-up."], "link": ["Learn more about our Nephrology service", "nephrology.html"]},
+  ],
+  "see": ["Your doctor has said your kidneys may need dialysis", "You are on dialysis and need a place for your sessions", "You need an AV fistula or tunnel line for dialysis", "Abnormal kidney test results from another clinic", "Swelling, tiredness or changes in urine that have not improved"],
+  "emergency": "Severe shortness of breath, chest pain, or confusion in a patient with kidney disease is an emergency. Call your local emergency number or go to the nearest emergency department.",
  },
  {
   "slug": "orthopaedic", "name": "Orthopaedic", "select": "Orthopaedic", "icon": "bone",

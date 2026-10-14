@@ -70,6 +70,8 @@ def article(s):
             out.append("<p>%s</p>" % e(p))
         if sec.get("bullets"):
             out.append(bullets(sec["bullets"], "dots"))
+        if sec.get("link"):
+            out.append('<p><a class="more-link" href="%s">%s &rarr;</a></p>' % (e(sec["link"][1]), e(sec["link"][0])))
     out.append("<h2>When should I book?</h2><p>Consider booking a consultation if you have:</p>" + bullets(s["see"], "dots"))
     if s.get("emergency"):
         out.append('<div class="emergency-note"><svg class="ic"><use href="#i-alert"/></svg><p><strong>Emergency?</strong> %s</p></div>' % e(s["emergency"]))

@@ -506,3 +506,5 @@ textarea{resize:vertical}
 
 .svc-links a{color:var(--head);text-decoration:underline;text-decoration-color:var(--amber);text-decoration-thickness:2px;text-underline-offset:3px;transition:color .2s,text-decoration-color .2s}
 .svc-links a:hover{color:var(--amber-600);text-decoration-color:currentColor}
+.more-link{font-weight:700;color:var(--head);text-decoration:underline;text-decoration-color:var(--amber);text-decoration-thickness:2px;text-underline-offset:3px}
+.more-link:hover{color:var(--amber-600)}
