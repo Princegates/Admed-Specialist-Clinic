@@ -33,7 +33,7 @@ SERVICES = [
  },
  {
   "slug": "nephrology", "name": "Nephrology", "select": "Nephrology", "icon": "kidney",
-  "photo": "dialysis-unit.jpg", "pos": "center 62%", "tile": "Kidney disease consultation, AV-Fistula Creation, Central Venous Catheter insertion, AV-Graft Creation and kidney function tests.",
+  "photo": "nephrology-care.jpg", "pos": "center 45%", "tile": "Kidney disease consultation, AV-Fistula Creation, Central Venous Catheter insertion, AV-Graft Creation and kidney function tests.",
   "banner": "Kidney care, dialysis and vascular access",
   "day": "Saturdays at 10:00 AM",
   "intro": [
@@ -160,7 +160,7 @@ SERVICES = [
  },
  {
   "slug": "physician-specialist", "name": "Physician Specialist", "select": "Physician Specialist", "icon": "users",
-  "photo": "physician-care.jpg", "tile": "Consultation with a physician specialist.",
+  "photo": "physician-consult.jpg", "pos": "center 45%", "tile": "Consultation with a physician specialist.",
   "banner": "Consultation with a physician specialist",
   "intro": [
    "The physician specialist service at ADMed Specialist Clinic gives you a consultation with a physician who has specialist training. It suits complex or long-standing conditions, referrals from another doctor, and second opinions.",

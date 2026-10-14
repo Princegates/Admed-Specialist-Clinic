@@ -62,14 +62,14 @@ window.ADMED = {
     // Photo tiles in the Specialties section (optional)
     services: {
       cardiac: "assets/photos/cardiac-care.jpg",
-      nephrology: "assets/photos/dialysis-unit.jpg",
+      nephrology: "assets/photos/nephrology-care.jpg",
       dialysis: "assets/photos/dialysis-machine.jpg",
       orthopedic: "assets/photos/orthopedic-care.jpg",
       gynecological: "assets/photos/gynecological-care.jpg",
       hematology: "assets/photos/hematology-care.jpg",
       urology: "assets/photos/urology-care.jpg",
       internal: "assets/photos/internal-care.jpg",
-      physician: "assets/photos/physician-care.jpg",
+      physician: "assets/photos/physician-consult.jpg",
       laboratory: "assets/photos/laboratory-care.jpg"
     },
     // Each entry: a file path, or { src, alt } to describe the photo
