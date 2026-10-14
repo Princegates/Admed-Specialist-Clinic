@@ -253,6 +253,9 @@ a.news__item:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
 .gallery a:hover img{transform:scale(1.06)}
 
 /* FAQ */
+.collab__in{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(32px,6vw,80px);align-items:start}
+.collab__intro{position:sticky;top:130px}
+.collab__lead{font-size:1.15rem;color:var(--amber-600);font-weight:600}
 .faq{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(32px,6vw,80px);align-items:start}
 .faq__intro{border-radius:var(--radius);overflow:hidden;background:var(--dark-bg);color:var(--on-dark);box-shadow:var(--shadow-lg);position:relative;border:1px solid var(--line)}
 .faq__intro img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:cover;object-position:center 20%}
@@ -372,9 +375,9 @@ textarea{resize:vertical}
   .brand img{width:46px;height:46px}
 }
 @media (max-width:1080px){
-  .welcome__in,.faq,.book__in,.contact,.services__in,.founder__in{grid-template-columns:1fr}
+  .welcome__in,.faq,.collab__in,.book__in,.contact,.services__in,.founder__in{grid-template-columns:1fr}
   .founder__card{position:static;max-width:420px}
-  .services__intro{position:static}
+  .services__intro,.collab__intro{position:static}
   .welcome__media{max-width:560px}
   .footer__pills{grid-template-columns:repeat(2,1fr)}
   .footer__cols{grid-template-columns:1fr 1fr}
