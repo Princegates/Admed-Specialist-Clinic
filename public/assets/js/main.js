@@ -36,7 +36,11 @@
   });
   $$("[data-href]").forEach(function (el) {
     var h = hrefs[el.getAttribute("data-href")];
-    if (h) { el.setAttribute("href", h); }
+    if (h) {
+      var subj = el.getAttribute("data-subject");
+      if (subj && el.getAttribute("data-href") === "mail") h += "?subject=" + encodeURIComponent(subj);
+      el.setAttribute("href", h);
+    }
     else if (!el.hasAttribute("href")) { el.hidden = true; }
   });
   $$("[data-bind]").forEach(function (el) {

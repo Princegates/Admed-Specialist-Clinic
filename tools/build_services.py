@@ -33,6 +33,7 @@ def to_sub(fragment):
     fragment = fragment.replace('src="assets/', 'src="../assets/')
     fragment = fragment.replace('<use href="../index.html#', '<use href="#')   # icon references stay local
     fragment = fragment.replace('href="cookies.html"', 'href="../cookies.html"')
+    fragment = fragment.replace('href="surgical-collaboration.html"', 'href="../surgical-collaboration.html"')
     return fragment
 
 
@@ -293,3 +294,45 @@ page = head_filled + (main_t % {"updated": updated, "body": "\n      ".join(body
 with open(os.path.join(PUBLIC, "cookies.html"), "w", encoding="utf-8") as f:
     f.write(page)
 print("wrote cookies.html")
+
+
+# ---------------------------------------------------------------- General Surgery Collaboration (site root)
+COLLAB_TITLE = "General Surgery Collaboration"
+COLLAB_LEAD = "Partnering with Independent General Surgeons"
+COLLAB_BODY = [
+    "ADMed Specialist Clinic welcomes professional collaboration with qualified private general surgeons seeking a suitable clinical environment to provide surgical care to their patients.",
+    "We aim to foster partnerships built on mutual respect, professional integrity, patient safety, and a shared commitment to quality healthcare. Through these partnerships, surgeons may explore opportunities to utilise the clinic\u2019s available facilities and support services for appropriate surgical procedures, subject to prior assessment, agreed arrangements, and the clinic\u2019s operational and regulatory requirements.",
+    "At ADMed Specialist Clinic, we recognise the importance of maintaining high professional standards, protecting patient confidentiality, ensuring informed consent, and respecting the clinical independence of collaborating surgeons. All partnerships will be guided by applicable professional and ethical standards, relevant regulatory requirements, and appropriate patient-care standards.",
+]
+COLLAB_CLOSE = [
+    "Partner with ADMed Specialist Clinic to support accessible, coordinated, and patient-centred surgical care.",
+    "For professional enquiries and collaboration opportunities, please contact our management team.",
+]
+collab_body = "\n      ".join("<p>%s</p>" % e(p) for p in COLLAB_BODY)
+collab_cta = (
+    '<div class="collab-cta">' + "".join("<p>%s</p>" % (("<strong>%s</strong>" % e(p)) if i == 0 else e(p)) for i, p in enumerate(COLLAB_CLOSE))
+    + '<a class="btn btn--primary" data-need="email" data-href="mail" data-subject="Enquiry about surgical collaboration"><svg class="ic"><use href="#i-mail"/></svg> Enquire About Surgical Collaboration</a></div>'
+)
+collab_main = """<main id="main">
+<section class="svc-banner svc-banner--plain">
+  <div class="container svc-banner__in">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><span aria-current="page">%s</span></nav>
+    <h1>%s</h1>
+    <p class="lead">%s</p>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <article class="svc-article">
+      %s
+      %s
+    </article>
+  </div>
+</section>
+""" % (e(COLLAB_TITLE), e(COLLAB_TITLE), e(COLLAB_LEAD), collab_body, collab_cta)
+collab_desc = "ADMed Specialist Clinic welcomes collaboration with qualified private general surgeons, subject to prior assessment and agreed arrangements."
+collab_head = head_t % {"title": COLLAB_TITLE, "desc": collab_desc, "sprite": sprite_r, "header": header_r}
+collab_page = collab_head + collab_main + "\n</main>\n\n" + foot_r + "\n" + chat_r + '\n<script src="assets/js/config.js"></script>\n<script src="assets/js/main.js"></script>\n</body>\n</html>\n'
+with open(os.path.join(PUBLIC, "surgical-collaboration.html"), "w", encoding="utf-8") as f:
+    f.write(collab_page)
+print("wrote surgical-collaboration.html")
