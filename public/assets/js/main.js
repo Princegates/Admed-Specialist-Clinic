@@ -205,7 +205,7 @@
     "Cardiac": ["cardiac", "heart", "chest", "blood pressure", "palpitation", "cardiology"],
     "Nephrology (incl. dialysis)": ["nephrology", "kidney", "renal", "dialysis", "fistula", "urine test"],
     "Orthopaedic": ["orthopedic", "orthopaedic", "bone", "joint", "fracture", "knee", "back pain", "spine", "muscle"],
-    "Gynaecological": ["gynecolog", "gynaecolog", "women", "pregnan", "antenatal", "period", "pap", "uterus"],
+    "Gynaecology": ["gynecolog", "gynaecolog", "women", "pregnan", "antenatal", "period", "pap", "uterus"],
     "Haematology": ["hematolog", "haematolog", "blood", "anemia", "anaemia", "sickle", "clot"],
     "Urology": ["urolog", "urinary", "bladder", "prostate", "urine", "stone"],
     "Internal Medicine": ["internal", "medicine", "diabet", "fever", "general", "check-up", "checkup", "hypertension", "malaria"],

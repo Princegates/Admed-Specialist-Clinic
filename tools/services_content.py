@@ -64,7 +64,7 @@ SERVICES = [
   "emergency": "A serious injury, a visibly deformed limb, or heavy bleeding needs emergency care. Go to the nearest emergency department.",
  },
  {
-  "slug": "gynaecological", "name": "Gynaecological", "select": "Gynaecological", "icon": "woman",
+  "slug": "gynaecology", "name": "Gynaecology", "select": "Gynaecology", "icon": "woman",
   "photo": "gynecological-care.jpg", "tile": "Gynaecology consultation: breast lumps, irregular or heavy periods, abnormal discharge, pelvic pain and painful intercourse.",
   "banner": "Know when you need a gynaecologist",
   "day": "Fridays",
