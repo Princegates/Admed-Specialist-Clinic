@@ -472,5 +472,46 @@
   function observe(el) { if (io) io.observe(el); else el.classList.add("in"); }
   $$(".reveal").forEach(observe);
 
+  /* ---------- Announcement pop-up: once per visit, with a close button ---------- */
+  (function () {
+    var box = $("#promo");
+    if (!box) return;
+    var seen = false;
+    try { seen = sessionStorage.getItem("admed-promo") === "1"; } catch (e) {}
+    if (seen) return;
+    var opener = null;
+    function close() {
+      box.hidden = true;
+      document.body.classList.remove("promo-open");
+      document.removeEventListener("keydown", onKey);
+      try { sessionStorage.setItem("admed-promo", "1"); } catch (e) {}
+      if (opener && opener.focus) opener.focus();
+    }
+    function onKey(ev) {
+      if (ev.key === "Escape") { close(); return; }
+      if (ev.key !== "Tab") return;
+      var f = $$("a[href], button", box).filter(function (x) { return !x.disabled && x.offsetParent !== null; });
+      if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (ev.shiftKey && document.activeElement === first) { ev.preventDefault(); last.focus(); }
+      else if (!ev.shiftKey && document.activeElement === last) { ev.preventDefault(); first.focus(); }
+    }
+    function open() {
+      opener = document.activeElement;
+      box.hidden = false;
+      document.body.classList.add("promo-open");
+      document.addEventListener("keydown", onKey);
+      var x = $(".promo__x", box); if (x) x.focus();
+    }
+    $$("[data-promo-close]", box).forEach(function (b) { b.addEventListener("click", close); });
+    box.addEventListener("click", function (ev) { if (ev.target === box) close(); });
+    var book = $("[data-promo-book]", box);
+    if (book) book.addEventListener("click", function () {
+      $$("[data-specialty-select]").forEach(function (sel) { sel.value = "Dialysis Treatment"; });
+      opener = null; close();
+    });
+    setTimeout(open, 800);
+  })();
+
   $("#year").textContent = new Date().getFullYear();
 })();
