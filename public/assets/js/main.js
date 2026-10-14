@@ -400,6 +400,52 @@
     });
   } else if (!newsAll.length) navHide("updates");
 
+  /* ---------- Live WHO health news: ticker under the banner + list in the news section ---------- */
+  if (C.whoNews !== false && (location.protocol === "https:" || location.protocol === "http:") && ($("#whoTicker") || $("#nxWho"))) {
+    fetch("/api/who-news", { headers: { accept: "application/json" } }).then(function (r) { return r.ok ? r.json() : null; }).then(function (data) {
+      var items = data && Array.isArray(data.items) ? data.items.filter(function (n) {
+        return n && n.title && /^https:\/\/([a-z0-9-]+\.)*who\.int\//i.test(n.link || "");
+      }) : [];
+      if (!items.length) return;
+
+      var tk = $("#whoTicker");
+      if (tk) {
+        var one = items.slice(0, 8).map(function (n) {
+          return '<a href="' + esc(n.link) + '" target="_blank" rel="noopener">' + (n.date ? "<time>" + esc(niceDate(n.date)) + "</time> " : "") + esc(n.title) + "</a>";
+        }).join("");
+        var run = $("#whoRun");
+        run.innerHTML = one + '<span class="ticker__dup" aria-hidden="true">' + one.replace(/<a /g, '<a tabindex="-1" ') + "</span>";
+        run.style.animationDuration = Math.max(40, Math.min(items.length, 8) * 14) + "s";
+        tk.hidden = false;
+        var pb = $("#whoPause");
+        if (pb) pb.addEventListener("click", function () {
+          var on = tk.classList.toggle("paused");
+          pb.setAttribute("aria-pressed", on);
+          pb.setAttribute("aria-label", on ? "Play the news ticker" : "Pause the news ticker");
+          pb.innerHTML = '<svg class="ic"><use href="#' + (on ? "i-arrow" : "i-pause") + '"/></svg>';
+        });
+      }
+
+      var box = $("#nxWho");
+      if (box) {
+        var shown = 5;
+        var draw = function () {
+          $("#nxWhoBody").innerHTML = items.slice(0, shown).map(function (n) {
+            return '<li class="nx__row"><div class="nx__when">' + (n.date ? esc(niceDate(n.date)) : "") + "</div><div><h4>" + esc(n.title) +
+              '</h4><a class="news__more" href="' + esc(n.link) + '" target="_blank" rel="noopener">Read at WHO <span aria-hidden="true">&rarr;</span></a></div></li>';
+          }).join("");
+          var more = $(".nx__more", box); if (more) more.hidden = items.length <= shown;
+        };
+        draw();
+        box.hidden = false;
+        $("#updates").hidden = false;
+        $$('[data-need-section="updates"]').forEach(function (a) { a.hidden = false; });
+        var mb = $("[data-more=who]", box);
+        if (mb) mb.addEventListener("click", function () { shown += 5; draw(); });
+      }
+    }).catch(function () { /* feed unavailable: the ticker and block simply stay hidden */ });
+  }
+
   /* ---------- Health Insights article page ---------- */
   var art = $("#insightBody");
   if (art) {

@@ -42,3 +42,9 @@ Brand colours (sampled from the logo): navy `#00007E`, amber `#FCA901`, red `#FE
 ## News, Updates & Health Insights
 
 The home page section (`#updates`) is fed by the `news` list in `public/assets/js/config.js`. Each entry has a `type`: `clinic` (Clinic Updates), `insight` (Health Insights, opens its own article page `insight.html?id=...` from the entry's `body`) or `local` (Local Health News, a short summary with a link to the source). The comments above `news` in `config.js` explain every field. The section shows three blocks: Health Insights (newest article featured, the next ones listed beside it), Clinic Updates (poster cards) and Local Health News (dated rows with the source). A block is hidden until it has an entry, newest dated entries come first, and each block has a "More" button once it holds more than it shows. Save the file and push: the site redeploys by itself. No build step is needed for news.
+
+## Live WHO health news
+
+`src/worker.js` is a small Cloudflare Worker that serves the site and one extra address, `/api/who-news`. It reads the World Health Organization's public news feed on the server, keeps the headlines for three hours and returns them to the page, which shows them in the scrolling "Health news" ticker under the header and in the "From the World Health Organization" list in the news section. Visitors' browsers never contact WHO, and no keys are needed. Links are limited to who.int addresses. If the feed is unavailable the ticker and list simply stay hidden. Set `whoNews: false` in `public/assets/js/config.js` to switch it off.
+
+The deploy command is unchanged (`wrangler deploy`); `wrangler.jsonc` now names `src/worker.js` as the Worker and `public/` as its assets.

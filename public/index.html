@@ -59,6 +59,7 @@
     <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.300 3.900 1.800 18a2 2 0 0 0 1.700 3h17a2 2 0 0 0 1.700-3L13.700 3.900a2 2 0 0 0-3.400 0zM12 9v4M12 17h.01"/></symbol>
     <symbol id="i-facebook" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></symbol>
     <symbol id="i-instagram" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.500 6.500h.01"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
     <symbol id="i-x" viewBox="0 0 24 24"><path d="M4 4l16 16M20 4 4 20"/></symbol>
     <symbol id="i-youtube" viewBox="0 0 24 24"><path d="M22.500 7.200a2.700 2.700 0 0 0-1.900-1.900C19 5 12 5 12 5s-7 0-8.600.3A2.700 2.700 0 0 0 1.500 7.200C1.200 8.800 1.200 12 1.200 12s0 3.200.3 4.800a2.700 2.700 0 0 0 1.900 1.900C5 19 12 19 12 19s7 0 8.600-.3a2.700 2.700 0 0 0 1.900-1.900c.3-1.600.3-4.800.3-4.800s0-3.200-.3-4.800z"/><path d="m10 15 5-3-5-3z"/></symbol>
     <symbol id="i-tiktok" viewBox="0 0 24 24"><path d="M9 12a4 4 0 1 0 4 4V3a5 5 0 0 0 5 5"/></symbol>
@@ -111,6 +112,15 @@
 </header>
 
 <main id="main">
+
+<!-- Live health news ticker (filled from /api/who-news; stays hidden if the feed is unavailable) -->
+<div class="ticker" id="whoTicker" hidden>
+  <div class="container ticker__in">
+    <span class="ticker__label">Health news <small>WHO</small></span>
+    <div class="ticker__track" role="region" aria-label="Latest health news from the World Health Organization"><div class="ticker__run" id="whoRun"></div></div>
+    <button type="button" class="ticker__pause" id="whoPause" aria-pressed="false" aria-label="Pause the news ticker"><svg class="ic"><use href="#i-pause"/></svg></button>
+  </div>
+</div>
 
 <!-- Hero -->
 <section class="hero" id="hero">
@@ -295,6 +305,12 @@
       <div class="nx__head"><h3>Local Health News</h3><p>What is happening in health in Ghana, with links to the source.</p></div>
       <ul class="nx__list" id="nxLocalBody"></ul>
       <div class="nx__more" hidden><button type="button" class="btn btn--outline" data-more="local">More news</button></div>
+    </div>
+
+    <div class="nx nx--who" id="nxWho" hidden>
+      <div class="nx__head"><h3>From the World Health Organization</h3><p>Latest global health news. Headlines link to who.int.</p></div>
+      <ul class="nx__list" id="nxWhoBody"></ul>
+      <div class="nx__more" hidden><button type="button" class="btn btn--outline" data-more="who">More from the WHO</button></div>
     </div>
   </div>
 </section>
