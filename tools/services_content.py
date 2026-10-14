@@ -139,7 +139,7 @@ SERVICES = [
    {"h": "What to expect at your visit", "p": ["Your specialist will ask about your symptoms and health history and may ask for a urine test or other investigations. They will explain the results and the treatment options in plain language."]},
   ],
   "see": ["Pain or burning when passing urine", "Passing urine very often, or a weak flow", "Blood in the urine", "Pain in the side or lower back that may be a kidney stone", "Prostate concerns", "Concerns about male sexual health"],
-  "emergency": "If you cannot pass urine at all, or you have severe pain with fever, go to the nearest emergency department.",
+  "emergency": "If you cannot pass urine at all, or you have severe pain with fever, go to the nearest hospital or clinic.",
  },
  {
   "slug": "internal-medicine", "name": "Internal Medicine", "select": "Internal Medicine", "icon": "clip",
