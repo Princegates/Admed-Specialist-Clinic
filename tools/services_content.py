@@ -26,7 +26,7 @@ SERVICES = [
    {"h": "What to expect at your visit", "p": ["Your specialist will ask about your symptoms, your family history and the medicines you take, and will examine you and measure your blood pressure. If tests are needed they will explain which ones and why, and talk you through the results and your treatment options."]},
   ],
   "see": ["Chest pain or tightness", "Shortness of breath, especially with light activity or when lying flat", "A racing, pounding or irregular heartbeat", "Dizziness or fainting", "Swollen ankles or legs", "High blood pressure readings, or a family history of heart disease, stroke or diabetes"],
-  "emergency": "Severe chest pain, sudden breathlessness, fainting, or signs of a stroke are emergencies. Call your local emergency number or go to the nearest emergency department. Do not wait for an appointment.",
+  "emergency": "Severe chest pain, sudden breathlessness, fainting, or signs of a stroke are emergencies. Call your local emergency number or go to the nearest hospital or clinic. Do not wait for an appointment.",
  },
  {
   "slug": "nephrology", "name": "Nephrology", "select": "Nephrology", "icon": "kidney",
