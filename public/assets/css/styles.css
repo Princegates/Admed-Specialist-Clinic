@@ -254,6 +254,12 @@ a.news__item:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
 
 /* FAQ */
 .faq{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(32px,6vw,80px);align-items:start}
+.faq__intro{border-radius:var(--radius);overflow:hidden;background:var(--dark-bg);color:var(--on-dark);box-shadow:var(--shadow-lg);position:relative;border:1px solid var(--line)}
+.faq__intro img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:cover;object-position:center 20%}
+.faq__panel{padding:0 26px 28px;text-align:center}
+.faq__pill{display:inline-block;transform:translateY(-50%);margin-bottom:-6px;background:var(--red);color:#fff;font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;padding:9px 20px;border-radius:999px;box-shadow:0 6px 16px rgba(0,0,0,.3)}
+.faq__panel h2{color:#fff;font-size:1.35rem;line-height:1.25;text-transform:uppercase;letter-spacing:.04em;margin:0 0 10px}
+.faq__panel p{color:rgba(255,255,255,.82);margin:0 0 20px}
 .faq__list{display:grid;gap:12px}
 details{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:0 22px;transition:border-color .25s}
 details[open]{border-color:var(--amber)}
