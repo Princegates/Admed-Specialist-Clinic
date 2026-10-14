@@ -492,6 +492,91 @@
     }
   }
 
+  /* ---------- Careers page: vacancies list and application form ---------- */
+  var vList = $("#vacancyList");
+  if (vList) {
+    var today = new Date().toISOString().slice(0, 10);
+    var vacs = (Array.isArray(C.vacancies) ? C.vacancies : []).filter(function (v) { return v && v.title && (!v.deadline || v.deadline >= today); });
+    if (vacs.length) {
+      vList.innerHTML = vacs.map(function (v) {
+        var meta = [v.department, v.type, v.deadline ? "Apply by " + niceDate(v.deadline) : ""].filter(Boolean).map(esc).join(" · ");
+        return '<article class="vacancy"><h3>' + esc(v.title) + "</h3>" + (meta ? '<p class="vacancy__meta">' + meta + "</p>" : "") +
+          (v.summary ? "<p>" + esc(v.summary) + "</p>" : "") +
+          '<p><a class="btn btn--primary btn--sm" href="#apply" data-vacancy="' + esc(v.title) + '">Apply for this role</a>' +
+          (v.link ? ' <a class="news__more" href="' + esc(v.link) + '" target="_blank" rel="noopener">Full advert <span aria-hidden="true">&rarr;</span></a>' : "") + "</p></article>";
+      }).join("");
+      var sel = $("#careerPosition");
+      if (sel) vacs.slice().reverse().forEach(function (v) {
+        var o = document.createElement("option"); o.textContent = v.title;
+        sel.insertBefore(o, sel.options[1] || null);
+      });
+      $$("[data-vacancy]", vList).forEach(function (a) {
+        a.addEventListener("click", function () { if (sel) sel.value = a.getAttribute("data-vacancy"); });
+      });
+    } else {
+      vList.innerHTML = '<p class="vacancy vacancy--none"><strong>There are no published vacancies at the moment.</strong> You are welcome to send an expression of interest using the form below.</p>';
+    }
+  }
+
+  $$("form[data-careers]").forEach(function (form) {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var note = $(".form-note", form);
+      var set = function (msg, ok) { note.textContent = msg; note.className = "form-note " + (ok ? "ok" : "bad"); };
+      var f = form.elements, bad = false;
+      ["name", "email", "phone", "position"].forEach(function (k) {
+        var empty = !f[k].value.trim();
+        f[k].classList.toggle("err", empty); if (empty) bad = true;
+      });
+      if (bad) return set("Please fill in your name, email address, phone number and the position.", false);
+      if (!/^\S+@\S+\.\S+$/.test(f.email.value.trim())) { f.email.classList.add("err"); return set("Please enter a valid email address.", false); }
+      if (f.consent && !f.consent.checked) return set("Please tick the box to confirm before sending.", false);
+      var cv = f.cv_link ? f.cv_link.value.trim() : "";
+      if (cv && !/^https?:\/\//i.test(cv)) { f.cv_link.classList.add("err"); return set("The CV link should start with https://", false); }
+
+      var lines = ["Job application: ADMed Specialist Clinic",
+        "Position: " + f.position.value, "Name: " + f.name.value.trim(), "Email: " + f.email.value.trim(), "Phone: " + f.phone.value.trim()];
+      if (f.registration.value.trim()) lines.push("Registration or licence number: " + f.registration.value.trim());
+      if (cv) lines.push("CV and documents: " + cv);
+      if (f.message.value.trim()) lines.push("Message: " + f.message.value.trim());
+
+      if (C.formAccessKey) {
+        if (f.botcheck && f.botcheck.checked) return;
+        var btn = $('button[type="submit"]', form), label = btn.innerHTML;
+        btn.disabled = true; btn.textContent = "Sending...";
+        set("", true);
+        fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({
+            access_key: C.formAccessKey,
+            subject: "Job application: " + f.position.value,
+            from_name: "ADMed Specialist Clinic website",
+            replyto: f.email.value.trim(),
+            name: f.name.value.trim(), email: f.email.value.trim(), phone: f.phone.value.trim(),
+            position: f.position.value,
+            registration_number: f.registration.value.trim(),
+            cv_link: cv,
+            message: f.message.value.trim(),
+            botcheck: false
+          })
+        }).then(function (r) { return r.json(); }).then(function (res) {
+          if (!res.success) throw new Error(res.message || "failed");
+          form.reset();
+          set("Thank you. Your application has been sent. Only shortlisted candidates will be contacted.", true);
+        }).catch(function () {
+          note.className = "form-note bad";
+          note.innerHTML = "Your application could not be sent. Please email " + (hrefs.mail ? '<a href="' + esc(hrefs.mail) + '"><strong>' + esc(C.email) + "</strong></a>" : "the clinic") + " instead.";
+        }).then(function () { btn.disabled = false; btn.innerHTML = label; });
+      } else if (hrefs.mail) {
+        window.location.href = hrefs.mail + "?subject=" + encodeURIComponent("Job application: " + f.position.value) + "&body=" + encodeURIComponent(lines.join("\n"));
+        set("Your application is ready to send by email.", true);
+      } else {
+        set("Online applications are not available yet. Please contact the clinic.", false);
+      }
+    });
+  });
+
   /* ---------- Booking forms ---------- */
   $$("form[data-booking]").forEach(function (form) {
     form.addEventListener("submit", function (e) {

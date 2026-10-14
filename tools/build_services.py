@@ -34,6 +34,7 @@ def to_sub(fragment):
     fragment = fragment.replace('<use href="../index.html#', '<use href="#')   # icon references stay local
     fragment = fragment.replace('href="cookies.html"', 'href="../cookies.html"')
     fragment = fragment.replace('href="surgical-collaboration.html"', 'href="../surgical-collaboration.html"')
+    fragment = fragment.replace('href="careers.html"', 'href="../careers.html"')
     return fragment
 
 
@@ -208,7 +209,7 @@ COOKIE_TABLE = [
     ("Google Fonts", "Fonts loaded from Google servers", "Displays the site's typeface. Google receives your IP address and browser details when the font files load.", "Set by Google", "Google"),
     ("Your cookie choice", "Local storage in your browser (admed-consent)", "Remembers whether you accepted third-party content or chose necessary only, so we do not ask on every visit.", "Until you clear your browser data", "Our site"),
     ("Google Maps", "Embedded map on the Contact section", "Shows our location. The map only loads after you accept. Google may then set cookies and receive data about your visit.", "Set by Google", "Google"),
-    ("Appointment request form", "Form data sent when you press Send Request", "Delivers your request to the clinic by email. The details you type are passed to our form service, Web3Forms, for that purpose only.", "Not stored in your browser", "Web3Forms"),
+    ("Appointment and job application forms", "Form data sent when you press Send Request or Submit Application", "Delivers your request or application to the clinic by email. The details you type are passed to our form service, Web3Forms, for that purpose only.", "Not stored in your browser", "Web3Forms"),
 ]
 COOKIE_SECTIONS = [
     ("What are cookies?", [
@@ -368,3 +369,128 @@ insight_page = insight_head + insight_main + "\n</main>\n\n" + foot_r + "\n" + c
 with open(os.path.join(PUBLIC, "insight.html"), "w", encoding="utf-8") as f:
     f.write(insight_page)
 print("wrote insight.html")
+
+
+# ---------------------------------------------------------------- Careers page (site root)
+CAREERS_VALUES = [
+    ("Patient-Centred Care", "We prioritise the dignity, safety, rights, and well-being of every patient, recognising the importance of compassionate and respectful care."),
+    ("Professional Excellence", "We encourage high standards of practice, accountability, competence, and continuous improvement across all areas of our operations."),
+    ("Teamwork and Collaboration", "We believe that effective healthcare delivery depends on collaboration among clinical professionals, administrative personnel, and other support teams."),
+    ("Integrity and Ethical Practice", "We uphold honesty, confidentiality, respect, professional accountability, and ethical conduct in our relationships with patients, colleagues, and partners."),
+    ("Learning and Development", "We value knowledge sharing, skills development, and opportunities for professional growth, subject to available programmes and resources."),
+]
+CAREERS_AREAS = [
+    "Medical specialists and visiting consultants",
+    "Registered nurses and other qualified clinical professionals",
+    "Dialysis and renal care professionals",
+    "Medical laboratory professionals",
+    "Healthcare administration and patient services",
+    "Finance, operations, and other administrative support functions",
+]
+CAREERS_CANDIDATES = [
+    "Professional competence and a commitment to quality service delivery.",
+    "Compassion, empathy, and respect for patients and colleagues.",
+    "Integrity, confidentiality, and sound ethical judgement.",
+    "Effective communication and a willingness to work collaboratively.",
+    "Commitment to patient safety and continuous professional improvement.",
+    "The qualifications, experience, and professional registration required for the relevant position.",
+]
+CAREERS_DOCS = [
+    "An updated curriculum vitae (CV).",
+    "A cover letter indicating the position being applied for.",
+    "Copies of relevant academic and professional certificates.",
+    "Evidence of current professional registration or licensing, where applicable.",
+    "Details of relevant work experience and professional references, where requested.",
+]
+
+
+def _ul(items, cls="checks"):
+    return '<ul class="%s">%s</ul>' % (cls, "".join("<li>%s</li>" % e(i) for i in items))
+
+
+def _ol(items):
+    return '<ol class="steps">%s</ol>' % "".join("<li>%s</li>" % e(i) for i in items)
+
+
+def _p(*paras):
+    return "".join("<p>%s</p>" % e(x) for x in paras)
+
+
+careers_values_html = "".join('<div class="value"><h3>%s</h3><p>%s</p></div>' % (e(h), e(b)) for h, b in CAREERS_VALUES)
+position_opts = "".join("<option>%s</option>" % e(a) for a in CAREERS_AREAS)
+
+careers_form = (
+    '<form class="card form careers-form" id="apply" data-careers novalidate aria-labelledby="ctitle">'
+    '<h3 id="ctitle">Apply or express your interest</h3>'
+    '<input class="hp" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">'
+    '<div class="form__row"><label>Full name<input name="name" type="text" autocomplete="name" required></label>'
+    '<label>Email address<input name="email" type="email" autocomplete="email" required></label></div>'
+    '<div class="form__row"><label>Phone number<input name="phone" type="tel" autocomplete="tel" required></label>'
+    '<label>Position or area<select name="position" id="careerPosition" required><option value="">Select a position</option>'
+    + position_opts +
+    '<option>Expression of interest (no current vacancy)</option></select></label></div>'
+    '<label>Professional registration or licence number <span class="opt">(if applicable)</span><input name="registration" type="text"></label>'
+    '<label>Link to your CV and documents <span class="opt">(optional)</span><input name="cv_link" type="url" inputmode="url" placeholder="https://"></label>'
+    '<p class="form-hint">Upload your CV and certificates to Google Drive, Dropbox or similar, set the link to be viewable by anyone with it, and paste it above. You can also email them to <a data-href="mail" data-bind="email"></a> after you submit.</p>'
+    '<label>Cover letter or message<textarea name="message" rows="5" placeholder="Tell us about yourself and the position you are applying for."></textarea></label>'
+    '<label class="consent"><input type="checkbox" name="consent" required> <span>I confirm the information I have provided is accurate, and I agree that ADMed Specialist Clinic may use it to consider my application and to contact me about it.</span></label>'
+    '<button class="btn btn--primary btn--block" type="submit">Submit Application</button>'
+    '<p class="form-note" role="status" aria-live="polite"></p>'
+    '</form>'
+)
+
+careers_main = """<main id="main">
+<section class="svc-banner svc-banner--plain svc-banner--collab">
+  <div class="container svc-banner__in">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><span aria-current="page">Careers</span></nav>
+    <span class="svc-banner__tag">Careers</span>
+    <h1>Careers at ADMed Specialist Clinic</h1>
+    <p class="lead">Build Your Career. Make a Difference in Healthcare.</p>
+    <div class="svc-banner__cta"><a class="btn btn--primary" href="#apply">Apply Now</a><a class="btn btn--light" href="#vacancies">Current Vacancies</a></div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <article class="svc-article careers">
+""" + _p(
+    "At ADMed Specialist Clinic, we believe that quality healthcare begins with dedicated, compassionate, and skilled professionals who are committed to making a meaningful difference in the lives of patients.",
+    "We are committed to fostering a professional and supportive working environment where teamwork, integrity, respect, continuous learning, and patient safety are valued. Our approach recognises that every member of our team plays an important role in delivering coordinated, ethical, and patient-centred healthcare services.",
+) + """
+      <h2>Why Join ADMed Specialist Clinic?</h2>
+""" + _p("We seek individuals who share our commitment to professional excellence and responsible healthcare delivery. At ADMed, we value:") + '<div class="values">' + careers_values_html + """</div>
+      <h2>Career Opportunities</h2>
+""" + _p("ADMed Specialist Clinic welcomes applications from qualified, appropriately licensed, and motivated professionals across relevant healthcare and support disciplines.", "Potential areas of employment include:") + _ul(CAREERS_AREAS) + _p("Available positions will be advertised as vacancies arise, based on the clinic\u2019s operational requirements and staffing needs.") + """
+      <h2 id="vacancies">Current Vacancies</h2>
+""" + _p("We invite prospective applicants to review our published vacancies for details of available positions, responsibilities, qualifications, experience requirements, employment arrangements, and application deadlines.", "Each vacancy will include specific instructions on how to apply and the documents required.") + """
+      <div class="vacancies" id="vacancyList"></div>
+      <h3>No suitable vacancy available?</h3>
+""" + _p("Qualified professionals may submit an expression of interest for consideration when relevant opportunities arise. Submission of an expression of interest does not guarantee an interview or employment.") + """
+      <h2>Our Ideal Candidates</h2>
+""" + _p("We seek individuals who demonstrate:") + _ul(CAREERS_CANDIDATES) + _p("All clinical appointments are subject to verification of the applicable qualifications, registration, licensing, and other professional requirements.") + """
+      <h2>How to Apply</h2>
+""" + _p("Interested candidates should follow the application instructions provided in the relevant vacancy announcement.", "Unless otherwise stated, applicants should prepare the following documents:") + _ol(CAREERS_DOCS) + _p("Applications should be submitted through the application channel specified in the vacancy announcement. Applicants are encouraged to ensure that all information provided is accurate and complete.", "For general recruitment enquiries or expressions of interest, you can use the form below or contact the clinic through its designated recruitment contact.") + """
+      """ + careers_form + """
+      <h2>Fair and Confidential Recruitment</h2>
+""" + _p(
+    "ADMed Specialist Clinic is committed to a professional, fair, and transparent recruitment process. Applications are assessed against relevant qualifications, experience, competencies, and the requirements of the position.",
+    "We seek to provide equal consideration to qualified applicants without unfair discrimination and in accordance with applicable Ghanaian employment laws and regulations.",
+    "Information submitted by applicants will be handled confidentially and processed for legitimate recruitment purposes in accordance with applicable data protection requirements. Access to applicant information will be restricted to authorised persons involved in the recruitment process.",
+    "Only shortlisted candidates may be contacted for further assessment or interview. Where necessary, the clinic may verify qualifications, professional registration, employment history, and references, subject to applicable requirements.",
+    "Submission of an application does not constitute an offer of employment.",
+) + """
+      <h2>Join Our Team</h2>
+""" + _p(
+    "If you are passionate about healthcare and would like to contribute to a professional environment dedicated to quality service delivery, we invite you to explore career opportunities at ADMed Specialist Clinic.",
+    "Whether your expertise lies in clinical care, specialist services, administration, or healthcare operations, we welcome qualified professionals who share our commitment to compassionate, ethical, and patient-centred healthcare.",
+    "Explore our current vacancies and take the next step in your professional journey.",
+) + """
+      <div class="collab-cta"><p><strong>ADMed Specialist Clinic \u2014 An Ease to Medical Care.</strong></p><p>Together, we can contribute to a more responsive, compassionate, and patient-centred healthcare experience.</p><a class="btn btn--primary" href="#apply">Apply Now</a></div>
+    </article>
+  </div>
+</section>
+"""
+careers_head = head_t % {"title": "Careers at ADMed Specialist Clinic", "desc": "Build your career with ADMed Specialist Clinic in Spintex, Accra. See how to apply or send an expression of interest.", "sprite": sprite_r, "header": header_r}
+careers_page = careers_head + careers_main + "\n</main>\n\n" + foot_r + "\n" + chat_r + '\n<script src="assets/js/config.js"></script>\n<script src="assets/js/main.js"></script>\n</body>\n</html>\n'
+with open(os.path.join(PUBLIC, "careers.html"), "w", encoding="utf-8") as f:
+    f.write(careers_page)
+print("wrote careers.html")

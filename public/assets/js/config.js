@@ -85,6 +85,14 @@ window.ADMED = {
   // Founder photo (optional). Without one, the card shows initials.
   founderPhoto: "",
 
+  // Vacancies shown on the Careers page. Leave the list empty when there are none: the page then
+  // invites expressions of interest. Each vacancy:
+  // { title: "Registered Nurse (Dialysis)", department: "Dialysis unit", type: "Full-time",
+  //   deadline: "2026-11-30", summary: "Two or three sentences about the role and requirements.",
+  //   link: "https://optional-link-to-the-full-advert" }
+  // deadline, type, department, summary and link are optional. Vacancies past their deadline are hidden.
+  vacancies: [],
+
   // Live health news (ticker under the banner and a Health News list in the news section).
   // It is read by the site's server from the World Health Organization's public feed. Set to false to switch it off.
   whoNews: true,
