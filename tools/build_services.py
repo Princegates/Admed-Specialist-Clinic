@@ -23,6 +23,8 @@ from services_content import SERVICES  # noqa: E402
 
 # The address the site is published at. Change it (or run with SITE_URL=https://yourdomain.com) when the clinic gets
 # its own domain, then run this script again: canonical links, social previews, structured data and the sitemap follow.
+# Planned address once the domain is registered and connected: https://www.admedspecialistclinic.com
+# (not live yet, so pages still point at the Cloudflare address; switch by replacing the default below).
 SITE_URL = os.environ.get("SITE_URL", "https://admed-specialist-clinic.princeankrah2008.workers.dev").rstrip("/")
 e = html.escape
 SITE_NAME = "ADMed Specialist Clinic"
