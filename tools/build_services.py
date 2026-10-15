@@ -6,9 +6,12 @@ so the service pages always match the home page. Run after changing either file:
 
     python3 tools/build_services.py
 """
+import datetime
 import html
+import json
 import os
 import re
+import subprocess
 import sys
 from urllib.parse import quote
 
@@ -18,7 +21,158 @@ PUBLIC = os.path.join(ROOT, "public")
 sys.path.insert(0, HERE)
 from services_content import SERVICES  # noqa: E402
 
-home = open(os.path.join(PUBLIC, "index.html"), encoding="utf-8").read()
+# The address the site is published at. Change it (or run with SITE_URL=https://yourdomain.com) when the clinic gets
+# its own domain, then run this script again: canonical links, social previews, structured data and the sitemap follow.
+SITE_URL = os.environ.get("SITE_URL", "https://admed-specialist-clinic.princeankrah2008.workers.dev").rstrip("/")
+e = html.escape
+SITE_NAME = "ADMed Specialist Clinic"
+TITLE_SUFFIX = " | " + SITE_NAME
+OG_IMAGE = SITE_URL + "/assets/img/og.jpg"
+CLINIC_ID = SITE_URL + "/#clinic"
+
+# What each service is called in search results (the page heading keeps the short name)
+SEO_NAMES = {
+    "cardiac": "Cardiac Clinic & Cardiology",
+    "nephrology": "Nephrology & Kidney Care",
+    "dialysis": "Dialysis Treatment",
+    "dialysis-access": "Dialysis Access Procedures",
+    "orthopaedic": "Orthopaedic Care",
+    "gynaecology": "Gynaecology Clinic",
+    "haematology": "Haematology Services",
+    "urology": "Urology Clinic",
+    "internal-medicine": "Internal Medicine",
+    "physician-specialist": "Physician Specialist Consultation",
+    "medical-laboratory": "Medical Laboratory Services",
+}
+
+
+def site_data():
+    """Reads the settings and news entries from public/assets/js/config.js (needs Node.js)."""
+    js = ("const w={};new Function('window',require('fs').readFileSync(process.argv[1],'utf8'))(w);"
+          "process.stdout.write(JSON.stringify(w.ADMED))")
+    try:
+        out = subprocess.run(["node", "-e", js, os.path.join(PUBLIC, "assets", "js", "config.js")],
+                             capture_output=True, text=True, check=True).stdout
+        return json.loads(out)
+    except Exception as ex:  # pragma: no cover
+        print("warning: could not read config.js with Node (%s); articles and sitemap entries skipped" % ex)
+        return {"news": [], "hours": [], "social": {}}
+
+
+CFG = site_data()
+
+
+def url(path):
+    return SITE_URL + "/" + path.lstrip("/")
+
+
+def full_title(base):
+    """Page title for search results: add the clinic name when it fits."""
+    for suffix in (TITLE_SUFFIX, " | ADMed"):
+        if len(base + suffix) <= 64:
+            return base + suffix
+    return base
+
+
+def trim(text, limit=155):
+    text = re.sub(r"\s+", " ", text).strip()
+    if len(text) <= limit:
+        return text
+    cut = text[:limit].rsplit(" ", 1)[0].rstrip(" ,;:.")
+    return cut + "\u2026"
+
+
+def ld_script(data):
+    return '<script type="application/ld+json">%s</script>' % json.dumps(data, ensure_ascii=False, separators=(",", ":"))
+
+
+def breadcrumbs(items):
+    return {"@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": i + 1, "name": n, "item": url(p)} for i, (n, p) in enumerate(items)]}
+
+
+def seo_block(path, title, desc, kind="website", graph=None, noindex=False, extra=""):
+    """Canonical link, robots, social-preview tags and structured data for one page."""
+    u = url(path)
+    robots = "noindex,follow" if noindex else "index,follow,max-image-preview:large,max-snippet:-1"
+    parts = [
+        '<link rel="canonical" href="%s">' % e(u),
+        '<meta name="robots" content="%s">' % robots,
+        '<meta property="og:type" content="%s">' % kind,
+        '<meta property="og:site_name" content="%s">' % SITE_NAME,
+        '<meta property="og:locale" content="en_GB">',
+        '<meta property="og:title" content="%s">' % e(title),
+        '<meta property="og:description" content="%s">' % e(desc),
+        '<meta property="og:url" content="%s">' % e(u),
+        '<meta property="og:image" content="%s">' % OG_IMAGE,
+        '<meta property="og:image:width" content="1200">',
+        '<meta property="og:image:height" content="630">',
+        '<meta property="og:image:alt" content="ADMed Specialist Clinic, Spintex, Accra: a white clinic building with a red tiled roof and a yellow door">',
+        '<meta name="twitter:card" content="summary_large_image">',
+        '<meta name="twitter:title" content="%s">' % e(title),
+        '<meta name="twitter:description" content="%s">' % e(desc),
+        '<meta name="twitter:image" content="%s">' % OG_IMAGE,
+    ]
+    if extra:
+        parts.append(extra)
+    if graph:
+        parts.append(ld_script({"@context": "https://schema.org", "@graph": graph}))
+    return "\n  ".join(parts)
+
+
+def clinic_graph():
+    soc = [v for v in (CFG.get("social") or {}).values() if v]
+    days = {"Monday": "Mon", "Saturday": "Sat"}
+    return [
+        {"@type": "WebSite", "@id": SITE_URL + "/#website", "url": url(""), "name": SITE_NAME, "inLanguage": "en-GB",
+         "publisher": {"@id": CLINIC_ID}},
+        {
+            "@type": "MedicalClinic", "@id": CLINIC_ID, "name": SITE_NAME, "alternateName": "ADMed Specialist Hospital",
+            "slogan": "An Ease to Medical Care", "url": url(""),
+            "description": "Specialist clinic in Spintex, Accra, Ghana offering cardiac, nephrology, dialysis, orthopaedic, gynaecology, haematology, urology, internal medicine, physician specialist and laboratory services.",
+            "logo": SITE_URL + "/assets/img/logo.png", "image": OG_IMAGE,
+            "telephone": "+233243560080", "email": "medspecialistsconnect@gmail.com",
+            "address": {"@type": "PostalAddress", "streetAddress": "Spintex Road, Worship Curve (Off Coca Cola Roundabout)",
+                        "addressLocality": "Spintex, Accra", "addressRegion": "Greater Accra", "addressCountry": "GH"},
+            "geo": {"@type": "GeoCoordinates", "latitude": 5.6402194, "longitude": -0.1061823},
+            "hasMap": CFG.get("mapsUrl") or "",
+            "areaServed": [{"@type": "City", "name": "Accra"}, {"@type": "AdministrativeArea", "name": "Greater Accra Region"}],
+            "openingHoursSpecification": [{"@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "opens": "06:00", "closes": "18:00"}],
+            "isAcceptingNewPatients": True,
+            "medicalSpecialty": ["Cardiovascular", "Nephrology", "Musculoskeletal", "Gynecologic", "Hematologic", "Urologic", "InternalMedicine", "LaboratoryScience"],
+            "availableService": [
+                {"@type": "MedicalTherapy", "name": "Haemodialysis (dialysis treatment)"},
+                {"@type": "MedicalProcedure", "name": "AV fistula creation"},
+                {"@type": "MedicalProcedure", "name": "AV graft creation"},
+                {"@type": "MedicalProcedure", "name": "Central venous catheter insertion"},
+                {"@type": "MedicalProcedure", "name": "Pacemaker implantation"},
+                {"@type": "MedicalProcedure", "name": "IVC filter placement"},
+                {"@type": "MedicalTest", "name": "Medical laboratory investigations"},
+            ],
+            "sameAs": soc,
+        },
+    ]
+
+
+# ---- the home page's own head block (between the seo markers) is rebuilt here
+HOME_TITLE = "ADMed Specialist Clinic Accra | Dialysis & Specialist Care"
+HOME_DESC = "Specialist clinic in Spintex, Accra: cardiac, kidney and dialysis care, orthopaedic, gynaecology, haematology, urology and lab services. Call 024 356 0080."
+_home_path = os.path.join(PUBLIC, "index.html")
+_home = open(_home_path, encoding="utf-8").read()
+_block = "\n  ".join([
+    "<!-- seo:start (generated by tools/build_services.py: do not edit by hand) -->",
+    "<title>%s</title>" % e(HOME_TITLE),
+    '<meta name="description" content="%s">' % e(HOME_DESC),
+    '<link rel="preload" as="image" href="assets/photos/clinic-building-full.jpg" fetchpriority="high">',
+    seo_block("", HOME_TITLE, HOME_DESC, graph=clinic_graph()),
+    "<!-- seo:end -->",
+])
+_home = re.sub(r"<!-- seo:start.*?<!-- seo:end -->", lambda m: _block, _home, flags=re.S)
+open(_home_path, "w", encoding="utf-8").write(_home)
+
+home = open(_home_path, encoding="utf-8").read()
+SEO_REG = {}   # generated page (path inside public/) -> how to build its head tags
 
 
 def between(start, end):
@@ -35,6 +189,7 @@ def to_sub(fragment):
     fragment = fragment.replace('href="cookies.html"', 'href="../cookies.html"')
     fragment = fragment.replace('href="surgical-collaboration.html"', 'href="../surgical-collaboration.html"')
     fragment = fragment.replace('href="careers.html"', 'href="../careers.html"')
+    fragment = fragment.replace('href="insights/"', 'href="../insights/"')
     return fragment
 
 
@@ -46,10 +201,10 @@ e = html.escape
 SELECT_QS = {s["slug"]: "../index.html?service=" + quote(s["select"]) + "#book" for s in SERVICES}
 
 
-def footer(current):
+def footer(current, prefix=""):
     foot = to_sub(between("<!-- Footer -->", "<!-- Chat -->"))
     items = "".join(
-        '<li><a href="%s.html">%s</a></li>' % (s["slug"], e(s["name"])) for s in SERVICES
+        '<li><a href="%s%s.html">%s</a></li>' % (prefix, s["slug"], e(s["name"])) for s in SERVICES
     )
     foot = re.sub(r'<ul id="footerSpecs"></ul>', '<ul id="footerSpecs">%s</ul>' % items, foot)
     return foot
@@ -132,7 +287,7 @@ PAGE = """<!doctype html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>%(title)s | ADMed Specialist Clinic</title>
+  <title>%(seo_title)s</title>
   <meta name="description" content="%(desc)s">
   <meta name="theme-color" content="#FCA901">
   <script>
@@ -140,10 +295,7 @@ PAGE = """<!doctype html>
   </script>
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="%(title)s | ADMed Specialist Clinic">
-  <meta property="og:description" content="%(desc)s">
-  <meta property="og:image" content="../assets/img/og.jpg">
+  @@SEO@@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -192,12 +344,18 @@ PAGE = """<!doctype html>
 out_dir = os.path.join(PUBLIC, "services")
 os.makedirs(out_dir, exist_ok=True)
 for s in SERVICES:
-    title = s["name"] + (" Service" if s["slug"] in ("nephrology",) else "")
     title = s["name"]
-    desc = re.sub(r"\s+", " ", s["intro"][0])[:155].rstrip(" ,.") + "."
+    seo_name = SEO_NAMES.get(s["slug"], s["name"])
+    seo_title = "%s in Spintex, Accra" % seo_name
+    desc = trim("%s at ADMed Specialist Clinic, Spintex, Accra. %s" % (seo_name, s["tile"]))
+    SEO_REG["services/%s.html" % s["slug"]] = {
+        "path": "services/%s" % s["slug"], "kind": "website",
+        "crumbs": [("Home", ""), ("Services", "#services"), (s["name"], "services/%s" % s["slug"])],
+        "page": "MedicalWebPage", "name": seo_name}
     book = SELECT_QS[s["slug"]]
     page = PAGE % {
         "title": e(title),
+        "seo_title": e(full_title(seo_title)),
         "name": e(s["name"]),
         "desc": e(desc),
         "sprite": sprite,
@@ -298,6 +456,17 @@ def cookie_page():
 
 
 head_t, tail_t, main_t, body_t, to_root = cookie_page()
+
+
+class _Head(str):
+    """Head template that falls back to the page title for the search-result title."""
+    def __mod__(self, d):
+        d = dict(d)
+        d.setdefault("seo_title", full_title(d.get("title", "")))
+        return str.__mod__(self, d)
+
+
+head_t = _Head(head_t)
 import datetime
 updated = datetime.date.today().strftime("%d %B %Y").lstrip("0")
 sprite_r, header_r, chat_r = sprite, to_root(between("<!-- Top bar -->", '<main id="main">')), to_root(between("<!-- Chat -->", '<script src="assets/js/config.js">'))
@@ -495,8 +664,178 @@ careers_main = """<main id="main">
   </div>
 </section>
 """
-careers_head = head_t % {"title": "Careers at ADMed Specialist Clinic", "desc": "Build your career with ADMed Specialist Clinic in Spintex, Accra. See how to apply or send an expression of interest.", "sprite": sprite_r, "header": header_r}
+careers_head = head_t % {"title": "Careers & Jobs in Spintex, Accra", "desc": "Build your career with ADMed Specialist Clinic in Spintex, Accra. See how to apply or send an expression of interest.", "sprite": sprite_r, "header": header_r}
 careers_page = careers_head + careers_main + "\n</main>\n\n" + foot_r + "\n" + chat_r + '\n<script src="assets/js/config.js"></script>\n<script src="assets/js/main.js"></script>\n</body>\n</html>\n'
 with open(os.path.join(PUBLIC, "careers.html"), "w", encoding="utf-8") as f:
     f.write(careers_page)
 print("wrote careers.html")
+
+
+# ---------------------------------------------------------------- Health Insights: one real page per article + a hub
+MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+
+def nice_date(d):
+    m = re.match(r"^(\d{4})-(\d{2})-(\d{2})$", d or "")
+    return "%d %s %s" % (int(m.group(3)), MONTHS[int(m.group(2)) - 1], m.group(1)) if m else (d or "")
+
+
+def render_body(items):
+    out, in_list = [], False
+    for raw in items:
+        s = str(raw)
+        li = s.startswith("- ")
+        if in_list and not li:
+            out.append("</ul>")
+            in_list = False
+        if li:
+            if not in_list:
+                out.append('<ul class="dots">')
+                in_list = True
+            out.append("<li>%s</li>" % e(s[2:]))
+        elif s.startswith("## "):
+            out.append("<h2>%s</h2>" % e(s[3:]))
+        else:
+            out.append("<p>%s</p>" % e(s))
+    if in_list:
+        out.append("</ul>")
+    return "\n        ".join(out)
+
+
+INSIGHTS = sorted([n for n in CFG.get("news", []) if n.get("type") == "insight" and n.get("id") and n.get("body")],
+                  key=lambda n: n.get("date", ""), reverse=True)
+SERVICE_NAMES = {s["slug"]: s["name"] for s in SERVICES}
+sub_head_t = PAGE[: PAGE.index('<main id="main">')]
+sub_tail = "\n</main>\n\n%(footer)s\n%(chat)s\n<script src=\"../assets/js/config.js\"></script>\n<script src=\"../assets/js/main.js\"></script>\n</body>\n</html>\n"
+os.makedirs(os.path.join(PUBLIC, "insights"), exist_ok=True)
+_stale = set(f for f in os.listdir(os.path.join(PUBLIC, "insights")) if f.endswith(".html")) - {"index.html"}
+
+
+def write_sub(rel, head, main):
+    with open(os.path.join(PUBLIC, rel), "w", encoding="utf-8") as f:
+        f.write(head + main + sub_tail % {"footer": footer("insights", "../services/"), "chat": chat})
+    print("wrote", rel)
+
+
+for n in INSIGHTS:
+    rel = "insights/%s.html" % n["id"]
+    _stale.discard(n["id"] + ".html")
+    title = n["title"]
+    desc = trim(n.get("summary") or title)
+    others = [o for o in INSIGHTS if o["id"] != n["id"]][:3]
+    more = ""
+    if others:
+        more = '<h2>More health insights</h2><ul class="dots">%s</ul>' % "".join(
+            '<li><a class="more-link" href="%s.html">%s</a></li>' % (o["id"], e(o["title"])) for o in others)
+    svc = ""
+    if n.get("service") in SERVICE_NAMES:
+        svc = '<p><a class="more-link" href="../services/%s.html">Learn more about our %s service &rarr;</a></p>' % (n["service"], e(SERVICE_NAMES[n["service"]]))
+    main = """<main id="main">
+<section class="svc-banner svc-banner--plain">
+  <div class="container svc-banner__in">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Home</a><span aria-hidden="true">/</span><a href="./">Health Insights</a><span aria-hidden="true">/</span><span aria-current="page">%(crumb)s</span></nav>
+    <p class="svc-banner__tag">Health Insights</p>
+    <h1>%(title)s</h1>
+    <p class="lead">%(lead)s</p>
+    <p class="insight-date">%(date)s</p>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <article class="svc-article" id="articleBody">
+        %(body)s
+        %(svc)s
+        <p class="small-print">This article gives general information and does not replace advice from a doctor. To discuss your own situation, please book a consultation.</p>
+        %(more)s
+    </article>
+    <div class="collab-cta" style="max-width:760px"><p><strong>Have a question about your own health?</strong></p><p>Book a consultation and a specialist will help.</p><a class="btn btn--primary" href="../index.html#book">Book an Appointment</a></div>
+  </div>
+</section>
+""" % {"crumb": e(title), "title": e(title), "lead": e(n.get("summary", "")), "date": e(nice_date(n.get("date"))),
+       "body": render_body(n["body"]), "svc": svc, "more": more}
+    head = sub_head_t % {"title": e(title), "seo_title": e(full_title(title)), "desc": e(desc), "sprite": sprite, "header": header}
+    write_sub(rel, head, main)
+    SEO_REG[rel] = {"path": "insights/%s" % n["id"], "kind": "article", "article": n,
+                    "crumbs": [("Home", ""), ("Health Insights", "insights/"), (title, "insights/%s" % n["id"])]}
+
+# hub
+hub_items = "".join(
+    '<li class="insight-list__item"><p class="insight-list__date">%s</p><h2><a href="%s.html">%s</a></h2><p>%s</p><a class="news__more" href="%s.html">Read the full article <span aria-hidden="true">&rarr;</span></a></li>'
+    % (e(nice_date(n.get("date"))), n["id"], e(n["title"]), e(n.get("summary", "")), n["id"]) for n in INSIGHTS)
+hub_main = """<main id="main">
+<section class="svc-banner svc-banner--plain">
+  <div class="container svc-banner__in">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Home</a><span aria-hidden="true">/</span><span aria-current="page">Health Insights</span></nav>
+    <p class="svc-banner__tag">Health Insights</p>
+    <h1>Health Insights</h1>
+    <p class="lead">Plain-language advice from the ADMed Specialist Clinic team on kidney health, dialysis, blood pressure and more.</p>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <ul class="insight-list">%s</ul>
+    <p class="small-print">These articles give general information and do not replace advice from a doctor.</p>
+  </div>
+</section>
+""" % hub_items
+hub_head = sub_head_t % {"title": "Health Insights", "seo_title": "Health Insights: Kidney, Dialysis & Heart Advice | ADMed",
+                         "desc": "Patient guides from ADMed Specialist Clinic, Accra: kidney failure, dialysis, AV fistula, dialysis catheter, blood pressure and seeing a specialist.",
+                         "sprite": sprite, "header": header}
+write_sub("insights/index.html", hub_head, hub_main)
+SEO_REG["insights/index.html"] = {"path": "insights/", "kind": "website", "page": "CollectionPage",
+                                  "crumbs": [("Home", ""), ("Health Insights", "insights/")]}
+for f in _stale:   # articles removed from config.js
+    os.remove(os.path.join(PUBLIC, "insights", f))
+    print("removed insights/" + f)
+
+# other pages
+SEO_REG["cookies.html"] = {"path": "cookies", "kind": "website", "page": "WebPage", "crumbs": [("Home", ""), ("Cookie Policy", "cookies")]}
+SEO_REG["careers.html"] = {"path": "careers", "kind": "website", "page": "WebPage", "crumbs": [("Home", ""), ("Careers", "careers")]}
+SEO_REG["surgical-collaboration.html"] = {"path": "surgical-collaboration", "kind": "website", "page": "WebPage",
+                                         "crumbs": [("Home", ""), ("General Surgery Collaboration", "surgical-collaboration")]}
+SEO_REG["insight.html"] = {"path": "insight", "kind": "website", "noindex": True, "crumbs": []}
+
+
+# ---------------------------------------------------------------- finish: put the SEO tags into every generated page
+def finish(rel, info):
+    fp = os.path.join(PUBLIC, rel)
+    page = open(fp, encoding="utf-8").read()
+    title = html.unescape(re.search(r"<title>(.*?)</title>", page, re.S).group(1))
+    desc = html.unescape(re.search(r'<meta name="description" content="([^"]*)"', page).group(1))
+    u = url(info["path"])
+    graph = []
+    if info.get("crumbs"):
+        bc = breadcrumbs(info["crumbs"])
+        bc["@id"] = u + "#breadcrumb"
+        if info["kind"] == "article":
+            n = info["article"]
+            graph.append({"@type": "Article", "@id": u + "#article", "headline": n["title"], "description": desc,
+                          "datePublished": n.get("date"), "dateModified": n.get("date"), "inLanguage": "en-GB",
+                          "mainEntityOfPage": {"@type": "WebPage", "@id": u}, "url": u,
+                          "image": OG_IMAGE, "author": {"@id": CLINIC_ID}, "publisher": {"@id": CLINIC_ID},
+                          "isPartOf": {"@id": SITE_URL + "/#website"}, "breadcrumb": {"@id": bc["@id"]}})
+        else:
+            graph.append({"@type": info.get("page", "WebPage"), "@id": u + "#webpage", "url": u, "name": title,
+                          "description": desc, "inLanguage": "en-GB", "isPartOf": {"@id": SITE_URL + "/#website"},
+                          "about": {"@id": CLINIC_ID}, "publisher": {"@id": CLINIC_ID}, "breadcrumb": {"@id": bc["@id"]}})
+        graph.append(bc)
+    block = seo_block(info["path"], title, desc, kind=info["kind"], graph=graph or None, noindex=info.get("noindex", False))
+    open(fp, "w", encoding="utf-8").write(page.replace("@@SEO@@", block))
+
+
+for rel, info in SEO_REG.items():
+    finish(rel, info)
+
+# ---------------------------------------------------------------- sitemap.xml and robots.txt
+entries = [("", None)]
+entries += [("services/%s" % s["slug"], None) for s in SERVICES]
+entries += [("insights/", None)] + [("insights/%s" % n["id"], n.get("date")) for n in INSIGHTS]
+entries += [("surgical-collaboration", None), ("careers", None), ("cookies", None)]
+xml = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+for path, last in entries:
+    xml.append("  <url><loc>%s</loc>%s</url>" % (url(path), "<lastmod>%s</lastmod>" % last if last else ""))
+xml.append("</urlset>")
+open(os.path.join(PUBLIC, "sitemap.xml"), "w", encoding="utf-8").write("\n".join(xml) + "\n")
+open(os.path.join(PUBLIC, "robots.txt"), "w", encoding="utf-8").write(
+    "User-agent: *\nAllow: /\nDisallow: /api/\n\nSitemap: %s\n" % url("sitemap.xml"))
+print("wrote sitemap.xml (%d urls) and robots.txt" % len(entries))

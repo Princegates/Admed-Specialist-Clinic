@@ -341,7 +341,7 @@
   if (newsAll.length && $("#updates")) {
     $("#updates").hidden = false;
     var linkOf = function (n) {
-      if (n._type === "insight" && n.id) return { href: "insight.html?id=" + encodeURIComponent(n.id), ext: false, label: "Read the full article" };
+      if (n._type === "insight" && n.id) return { href: "insights/" + encodeURIComponent(n.id) + ".html", ext: false, label: "Read the full article" };
       if (n.link) return { href: n.link, ext: true, label: n._type === "local" && n.source ? "Read at " + n.source : "Learn more" };
       if (n.image) return { href: n.image, ext: true, label: "View full size" };
       return null;
@@ -469,6 +469,7 @@
   if (art) {
     var wanted = new URLSearchParams(location.search).get("id");
     var item = newsAll.filter(function (n) { return n._type === "insight" && n.id === wanted && n.body; })[0];
+    if (item) { location.replace("insights/" + encodeURIComponent(item.id) + ".html"); return; }
     if (!item) {
       $("#insightTitle").textContent = "Article not found";
       art.innerHTML = '<p>We could not find that article. It may have been moved or removed.</p><p><a class="more-link" href="' + esc(base) + '#updates">See all news and health insights &rarr;</a></p>';

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://admed-specialist-clinic.princeankrah2008.workers.dev/sitemap.xml
