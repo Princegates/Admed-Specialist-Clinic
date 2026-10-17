@@ -635,3 +635,4 @@ body.promo-open{overflow:hidden}
 .svc-poster{margin:28px 0;max-width:420px}
 .svc-poster img{display:block;width:100%;height:auto;border-radius:var(--radius);border:1px solid var(--line);box-shadow:var(--shadow)}
 .svc-article .values{margin:16px 0 8px}
+.founder__tagline{margin:.6em 0;padding-left:18px;border-left:4px solid var(--amber);font-size:1.35rem;font-weight:600;color:var(--head)}
