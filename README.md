@@ -55,4 +55,4 @@ Search-engine tags are generated, not hand-written. `python3 tools/build_service
 
 When the clinic gets its own domain, set `SITE_URL` at the top of `tools/build_services.py` (or run `SITE_URL=https://yourdomain.com python3 tools/build_services.py`) and run it again, so canonical links, previews and the sitemap use the new address.
 
-Planned domain: `https://www.admedspecialistclinic.com`. Do not switch `SITE_URL` to it until the domain is registered and serving the site, because search engines would be told that pages live at an address that does not exist yet.
+The site is published at `https://www.admedspecialistclinic.com` (Cloudflare Worker custom domain). The old `admed-specialist-clinic.princeankrah2008.workers.dev` address still works.
