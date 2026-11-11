@@ -738,13 +738,13 @@
     var stage = $("#promoStage"), dots = $("#promoDots"), prev = $("#promoPrev"), next = $("#promoNext");
     var cur = 0, opener = null, timer = null, touchX = null;
     stage.innerHTML = slides.map(function (s, i) {
-      return '<figure class="promo__slide" role="group" aria-roledescription="slide" aria-label="Announcement ' + (i + 1) + " of " + slides.length + '"' + (i ? " hidden" : "") + '><img src="' + esc(s.src) + '" alt="' + esc(s.alt || "") + '"' + (i ? ' loading="lazy"' : "") + "></figure>";
+      return '<figure class="promo__slide" role="group" aria-roledescription="slide" aria-label="Announcement ' + (i + 1) + " of " + slides.length + '"' + (i ? " hidden" : "") + '><a href="' + esc(s.src) + '" target="_blank" rel="noopener" title="Open full size" aria-label="Open this announcement full size in a new tab"><img src="' + esc(s.src) + '" alt="' + esc(s.alt || "") + '"' + (i ? ' loading="lazy"' : "") + "></a></figure>";
     }).join("");
     var figs = $$(".promo__slide", stage);
     if (slides.length > 1) {
       dots.innerHTML = slides.map(function (s, i) {
         return '<button type="button" data-i="' + i + '" aria-label="Show announcement ' + (i + 1) + '"' + (i ? "" : ' aria-current="true"') + "></button>";
-      }).join("");
+      }).join("") + '<span class="promo__tip">Tap a flyer to enlarge</span>';
     } else { dots.hidden = true; prev.hidden = true; next.hidden = true; }
 
     function show(i) {
