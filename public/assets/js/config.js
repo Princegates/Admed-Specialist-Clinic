@@ -11,7 +11,7 @@ window.ADMED = {
   phone: "+233 24 356 0080",     // main number for calls
   phone2: { label: "Booking & WhatsApp", number: "+233 55 699 6422" },  // optional second number
   whatsapp: "233556996422",  // digits only with country code (used when the form key is not set)
-  email: "medspecialistsconnect@gmail.com",  // booking form sends requests here when WhatsApp is not set
+  email: "info@admedspecialistclinic.com",  // booking form sends requests here when WhatsApp is not set
   address: "Spintex Road, Worship Curve (Off Coca Cola Roundabout), Accra",
   plusCode: "JVRV+3G Accra, Ghana",
 
@@ -21,7 +21,7 @@ window.ADMED = {
 
   // Appointment forms ------------------------------------------------------
   // Requests are emailed to the address above through Web3Forms (free).
-  // 1) Go to https://web3forms.com, enter medspecialistsconnect@gmail.com
+  // 1) Go to https://web3forms.com, enter the clinic email (the key below delivers to medspecialistsconnect@gmail.com)
   // 2) Copy the access key they email you and paste it here.
   // Until a key is added, the form opens the visitor's email app instead.
   formAccessKey: "854b631a-56b3-4f7e-8823-79fc038c3daa",

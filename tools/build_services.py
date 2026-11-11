@@ -132,7 +132,7 @@ def clinic_graph():
             "slogan": "An Ease to Medical Care", "url": url(""),
             "description": "Specialist clinic in Spintex, Accra, Ghana offering cardiac, nephrology, dialysis, orthopaedic, gynaecology, haematology, urology, internal medicine, physician specialist and laboratory services.",
             "logo": SITE_URL + "/assets/img/logo.png", "image": OG_IMAGE,
-            "telephone": "+233243560080", "email": "medspecialistsconnect@gmail.com",
+            "telephone": "+233243560080", "email": "info@admedspecialistclinic.com",
             "address": {"@type": "PostalAddress", "streetAddress": "Spintex Road, Worship Curve (Off Coca Cola Roundabout)",
                         "addressLocality": "Spintex, Accra", "addressRegion": "Greater Accra", "addressCountry": "GH"},
             "geo": {"@type": "GeoCoordinates", "latitude": 5.6402194, "longitude": -0.1061823},
