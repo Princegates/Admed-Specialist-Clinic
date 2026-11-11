@@ -93,6 +93,21 @@ window.ADMED = {
   // deadline, type, department, summary and link are optional. Vacancies past their deadline are hidden.
   vacancies: [],
 
+  // Pop-up announcements, shown once per visit as slides (the first one shows first).
+  // Each: { src: "assets/photos/flyer.jpg", alt: "Describe the flyer for screen readers",
+  //         service: "Dialysis Treatment" }   // service pre-selects the booking form (optional)
+  // Leave the list empty to switch the pop-up off.
+  popups: [
+    { src: "assets/photos/promo-dialysis-travel.jpg", service: "Dialysis Treatment",
+      alt: "Travelling to Ghana? Keep up with your dialysis treatment at ADMed Specialist Clinic. Whether you are visiting for a holiday, family visit or business trip, we provide reliable and high-quality dialysis care in a safe and comfortable environment. Dialysis treatment fee: 100 US dollars per session. Call 024 356 0080." },
+    { src: "assets/photos/promo-nephrology.jpg", service: "Nephrology",
+      alt: "Nephrology service: specialist kidney care for your health and well-being. Clinic days: Saturdays at 10:00 AM. Call 024 356 0080 to book an appointment." },
+    { src: "assets/photos/promo-urology.jpg", service: "Urology",
+      alt: "Urology services: expert care for better urinary health. Conditions treated include prostate care, urinary tract infections, kidney and bladder disorders, male infertility evaluation, urinary incontinence, bed wetting in children and testicular disorders. Every Tuesday at 10:00 AM. 6 Worship Curve, Spintex Road. Call 024 356 0080." },
+    { src: "assets/photos/promo-physician.jpg", service: "Physician Specialist",
+      alt: "Physician Specialist Clinic: comprehensive adult medical care, including general consultation, hypertension, diabetes, heart disease risk assessment, respiratory, gastrointestinal, thyroid and endocrine conditions, blood disorders and anaemia, chronic disease management and preventive check-ups. Clinic days: Fridays, 10:00 AM to 12:00 PM. Call 024 356 0080." }
+  ],
+
   // Live health news (ticker under the banner and a Health News list in the news section).
   // It is read by the site's server from the World Health Organization's public feed. Set to false to switch it off.
   whoNews: true,

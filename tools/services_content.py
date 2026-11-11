@@ -156,6 +156,7 @@ SERVICES = [
   "slug": "urology", "name": "Urology", "select": "Urology", "icon": "stetho",
   "photo": "urology-care.jpg", "tile": "Urology consultation: prostate conditions, urinary tract infections, kidney stones, painful or frequent urination, blood in urine and male sexual health.",
   "banner": "Expert care for urinary and men's health",
+  "day": "Tuesdays at 10:00 AM",
   "intro": [
    "The urology service at ADMed Specialist Clinic provides expert care for urinary and men's health. Many urinary problems are uncomfortable to talk about, but they are common and treatable, and our specialist consultation is private and respectful.",
   ],
@@ -186,6 +187,7 @@ SERVICES = [
   "slug": "physician-specialist", "name": "Physician Specialist", "select": "Physician Specialist", "icon": "users",
   "photo": "physician-consult.jpg", "pos": "center 45%", "tile": "Consultation with a physician specialist.",
   "banner": "Consultation with a physician specialist",
+  "day": "Fridays, 10:00 AM to 12:00 PM",
   "intro": [
    "The physician specialist service at ADMed Specialist Clinic gives you a consultation with a physician who has specialist training. It suits complex or long-standing conditions, referrals from another doctor, and second opinions.",
   ],

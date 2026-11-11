@@ -726,15 +726,35 @@
   function observe(el) { if (io) io.observe(el); else el.classList.add("in"); }
   $$(".reveal").forEach(observe);
 
-  /* ---------- Announcement pop-up: once per visit, with a close button ---------- */
+  /* ---------- Announcement pop-up: slides from config.popups, once per visit ---------- */
   (function () {
     var box = $("#promo");
-    if (!box) return;
+    var slides = (Array.isArray(C.popups) ? C.popups : []).filter(function (s) { return s && s.src; });
+    if (!box || !slides.length) return;
     var seen = false;
     try { seen = sessionStorage.getItem("admed-promo") === "1"; } catch (e) {}
     if (seen) return;
-    var opener = null;
+
+    var stage = $("#promoStage"), dots = $("#promoDots"), prev = $("#promoPrev"), next = $("#promoNext");
+    var cur = 0, opener = null, timer = null, touchX = null;
+    stage.innerHTML = slides.map(function (s, i) {
+      return '<figure class="promo__slide" role="group" aria-roledescription="slide" aria-label="Announcement ' + (i + 1) + " of " + slides.length + '"' + (i ? " hidden" : "") + '><img src="' + esc(s.src) + '" alt="' + esc(s.alt || "") + '"' + (i ? ' loading="lazy"' : "") + "></figure>";
+    }).join("");
+    var figs = $$(".promo__slide", stage);
+    if (slides.length > 1) {
+      dots.innerHTML = slides.map(function (s, i) {
+        return '<button type="button" data-i="' + i + '" aria-label="Show announcement ' + (i + 1) + '"' + (i ? "" : ' aria-current="true"') + "></button>";
+      }).join("");
+    } else { dots.hidden = true; prev.hidden = true; next.hidden = true; }
+
+    function show(i) {
+      cur = (i + slides.length) % slides.length;
+      figs.forEach(function (f, k) { f.hidden = k !== cur; });
+      $$("button", dots).forEach(function (d, k) { if (k === cur) d.setAttribute("aria-current", "true"); else d.removeAttribute("aria-current"); });
+    }
+    function stop() { if (timer) { clearInterval(timer); timer = null; } }
     function close() {
+      stop();
       box.hidden = true;
       document.body.classList.remove("promo-open");
       document.removeEventListener("keydown", onKey);
@@ -743,6 +763,8 @@
     }
     function onKey(ev) {
       if (ev.key === "Escape") { close(); return; }
+      if (ev.key === "ArrowRight" && slides.length > 1) { stop(); show(cur + 1); return; }
+      if (ev.key === "ArrowLeft" && slides.length > 1) { stop(); show(cur - 1); return; }
       if (ev.key !== "Tab") return;
       var f = $$("a[href], button", box).filter(function (x) { return !x.disabled && x.offsetParent !== null; });
       if (!f.length) return;
@@ -756,12 +778,24 @@
       document.body.classList.add("promo-open");
       document.addEventListener("keydown", onKey);
       var x = $(".promo__x", box); if (x) x.focus();
+      var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (slides.length > 1 && !reduce) timer = setInterval(function () { show(cur + 1); }, 7000);
     }
     $$("[data-promo-close]", box).forEach(function (b) { b.addEventListener("click", close); });
     box.addEventListener("click", function (ev) { if (ev.target === box) close(); });
+    prev.addEventListener("click", function () { stop(); show(cur - 1); });
+    next.addEventListener("click", function () { stop(); show(cur + 1); });
+    dots.addEventListener("click", function (ev) { var b = ev.target.closest("[data-i]"); if (b) { stop(); show(parseInt(b.getAttribute("data-i"), 10)); } });
+    stage.addEventListener("touchstart", function (ev) { touchX = ev.touches[0].clientX; stop(); }, { passive: true });
+    stage.addEventListener("touchend", function (ev) {
+      if (touchX === null) return;
+      var dx = ev.changedTouches[0].clientX - touchX; touchX = null;
+      if (Math.abs(dx) > 40) show(cur + (dx < 0 ? 1 : -1));
+    });
     var book = $("[data-promo-book]", box);
     if (book) book.addEventListener("click", function () {
-      $$("[data-specialty-select]").forEach(function (sel) { sel.value = "Dialysis Treatment"; });
+      var svc = slides[cur].service;
+      if (svc) $$("[data-specialty-select]").forEach(function (sel) { sel.value = svc; });
       opener = null; close();
     });
     setTimeout(open, 800);

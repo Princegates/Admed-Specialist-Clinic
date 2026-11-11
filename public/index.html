@@ -221,9 +221,9 @@
       <a class="tile reveal" href="services/orthopaedic.html" data-specialty="Orthopaedic" data-photo="orthopedic"><span class="tile__ic"><svg class="ic"><use href="#i-bone"/></svg></span><span class="tile__body"><h3>Orthopaedic</h3><p>Orthopaedic consultation for bones, joints and muscles.</p><span class="pill">Learn More</span></span></a>
       <a class="tile reveal" href="services/gynaecology.html" data-specialty="Gynaecology" data-photo="gynecological"><span class="tile__ic"><svg class="ic"><use href="#i-woman"/></svg></span><span class="tile__body"><h3>Gynaecology</h3><p>Gynaecology consultation: breast lumps, irregular or heavy periods, abnormal discharge, pelvic pain and painful intercourse.</p><span class="tile__day">Clinic day: Fridays</span><span class="pill">Learn More</span></span></a>
       <a class="tile reveal" href="services/haematology.html" data-specialty="Haematology" data-photo="hematology"><span class="tile__ic"><svg class="ic"><use href="#i-drop"/></svg></span><span class="tile__body"><h3>Haematology</h3><p>Haematologist service: anaemia, sickle cell disease, bleeding and clotting disorders, blood cancers, transfusions and iron infusions.</p><span class="pill">Learn More</span></span></a>
-      <a class="tile reveal" href="services/urology.html" data-specialty="Urology" data-photo="urology"><span class="tile__ic"><svg class="ic"><use href="#i-stetho"/></svg></span><span class="tile__body"><h3>Urology</h3><p>Urology consultation: prostate conditions, urinary tract infections, kidney stones, painful or frequent urination, blood in urine and male sexual health.</p><span class="pill">Learn More</span></span></a>
+      <a class="tile reveal" href="services/urology.html" data-specialty="Urology" data-photo="urology"><span class="tile__ic"><svg class="ic"><use href="#i-stetho"/></svg></span><span class="tile__body"><h3>Urology</h3><p>Urology consultation: prostate conditions, urinary tract infections, kidney stones, painful or frequent urination, blood in urine and male sexual health.</p><span class="tile__day">Clinic day: Tuesdays, 10 AM</span><span class="pill">Learn More</span></span></a>
       <a class="tile reveal" href="services/internal-medicine.html" data-specialty="Internal Medicine" data-photo="internal"><span class="tile__ic"><svg class="ic"><use href="#i-clip"/></svg></span><span class="tile__body"><h3>Internal Medicine</h3><p>Internal medicine consultation for adults.</p><span class="pill">Learn More</span></span></a>
-      <a class="tile reveal" href="services/physician-specialist.html" data-specialty="Physician Specialist" data-photo="physician"><span class="tile__ic"><svg class="ic"><use href="#i-users"/></svg></span><span class="tile__body"><h3>Physician Specialist</h3><p>Consultation with a physician specialist.</p><span class="pill">Learn More</span></span></a>
+      <a class="tile reveal" href="services/physician-specialist.html" data-specialty="Physician Specialist" data-photo="physician"><span class="tile__ic"><svg class="ic"><use href="#i-users"/></svg></span><span class="tile__body"><h3>Physician Specialist</h3><p>Consultation with a physician specialist.</p><span class="tile__day">Clinic day: Fridays, 10 AM to 12 noon</span><span class="pill">Learn More</span></span></a>
       <a class="tile reveal" href="services/medical-laboratory.html" data-specialty="Medical Laboratory" data-photo="laboratory"><span class="tile__ic"><svg class="ic"><use href="#i-flask"/></svg></span><span class="tile__body"><h3>Medical Laboratory</h3><p>Medical laboratory services to support your consultation.</p><span class="pill">Learn More</span></span></a>
     </div>
     <p class="svc-empty" id="svcEmpty" hidden></p>
@@ -436,11 +436,13 @@
 </main>
 
 <!-- Announcement pop-up -->
-<div class="promo" id="promo" role="dialog" aria-modal="true" aria-labelledby="promoTitle" hidden>
+<div class="promo" id="promo" role="dialog" aria-modal="true" aria-roledescription="carousel" aria-label="Announcements from ADMed Specialist Clinic" hidden>
   <div class="promo__box">
     <button type="button" class="promo__x" data-promo-close aria-label="Close this message"><svg class="ic"><use href="#i-x"/></svg></button>
-    <h2 class="sr" id="promoTitle">Travelling to Ghana? Keep up with your dialysis treatment at ADMed Specialist Clinic</h2>
-    <img src="assets/photos/promo-dialysis-travel.jpg" width="900" height="1080" alt="Travelling to Ghana? Keep up with your dialysis treatment at ADMed Specialist Clinic. Whether you are visiting for a holiday, family visit or business trip, we provide reliable and high-quality dialysis care in a safe and comfortable environment. Dialysis treatment fee: 100 US dollars per session. Call 024 356 0080 or email info@admedspecialistclinic.com.">
+    <div class="promo__stage" id="promoStage" aria-live="polite"></div>
+    <button type="button" class="promo__nav promo__nav--prev" id="promoPrev" aria-label="Previous announcement"><svg class="ic"><use href="#i-chev"/></svg></button>
+    <button type="button" class="promo__nav promo__nav--next" id="promoNext" aria-label="Next announcement"><svg class="ic"><use href="#i-chev"/></svg></button>
+    <div class="promo__dots" id="promoDots" role="group" aria-label="Choose an announcement"></div>
     <div class="promo__bar">
       <a class="btn btn--primary" href="#book" data-promo-book>Book an Appointment</a>
       <button type="button" class="btn btn--outline" data-promo-close>Close</button>
