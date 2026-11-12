@@ -32,10 +32,13 @@ OG_IMAGE = SITE_URL + "/assets/img/og.jpg"
 CLINIC_ID = SITE_URL + "/#clinic"
 
 # What each service is called in search results (the page heading keeps the short name)
+SEO_DESCRIPTIONS = {
+    "dialysis": "Hemodialysis (haemodialysis) in Spintex, Accra: dialysis machines, a doctor during treatment, monthly nephrologist consult, renal nutrition and lab monitoring. Call 024 356 0080.",
+}
 SEO_NAMES = {
     "cardiac": "Cardiac Clinic & Cardiology",
     "nephrology": "Nephrology & Kidney Care",
-    "dialysis": "Dialysis Treatment",
+    "dialysis": "Hemodialysis & Dialysis Treatment",
     "dialysis-access": "Dialysis Access Procedures",
     "orthopaedic": "Orthopaedic Care",
     "gynaecology": "Gynaecology Clinic",
@@ -265,6 +268,8 @@ def article(s):
             out.append('<p><a class="more-link" href="%s">%s &rarr;</a></p>' % (e(sec["link"][1]), e(sec["link"][0])))
         for lk in sec.get("links", []):
             out.append('<p><a class="more-link" href="%s">%s &rarr;</a></p>' % (e(lk[1]), e(lk[0])))
+    if s.get("faq"):
+        out.append("<h2>Frequently asked questions</h2>" + "".join("<details><summary>%s</summary><p>%s</p></details>" % (e(q), e(a)) for q, a in s["faq"]))
     if s.get("see"):
         out.append("<h2>When should I book?</h2><p>Consider booking a consultation if you have:</p>" + bullets(s["see"], "dots"))
     if s.get("emergency"):
@@ -366,10 +371,11 @@ for s in SERVICES:
     title = s["name"]
     seo_name = SEO_NAMES.get(s["slug"], s["name"])
     seo_title = "%s in Spintex, Accra" % seo_name
-    desc = trim("%s at ADMed Specialist Clinic, Spintex, Accra. %s" % (seo_name, s["tile"]))
+    desc = SEO_DESCRIPTIONS.get(s["slug"]) or trim("%s at ADMed Specialist Clinic, Spintex, Accra. %s" % (seo_name, s["tile"]))
     SEO_REG["services/%s.html" % s["slug"]] = {
         "path": "services/%s" % s["slug"], "kind": "website",
         "crumbs": [("Home", ""), ("Services", "#services"), (s["name"], "services/%s" % s["slug"])],
+        "faq": s.get("faq"),
         "page": "MedicalWebPage", "name": seo_name}
     book = SELECT_QS[s["slug"]]
     page = PAGE % {
@@ -838,6 +844,9 @@ def finish(rel, info):
                           "description": desc, "inLanguage": "en-GB", "isPartOf": {"@id": SITE_URL + "/#website"},
                           "about": {"@id": CLINIC_ID}, "publisher": {"@id": CLINIC_ID}, "breadcrumb": {"@id": bc["@id"]}})
         graph.append(bc)
+        if info.get("faq"):
+            graph.append({"@type": "FAQPage", "@id": u + "#faq", "isPartOf": {"@id": u + "#webpage"},
+                          "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in info["faq"]]})
     block = seo_block(info["path"], title, desc, kind=info["kind"], graph=graph or None, noindex=info.get("noindex", False))
     open(fp, "w", encoding="utf-8").write(page.replace("@@SEO@@", block))
 

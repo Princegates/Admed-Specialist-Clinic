@@ -69,6 +69,15 @@ SERVICES = [
    ["Transparent Patient Monitoring", "Your monthly laboratory investigations are performed by our independent partner, Lancet Laboratories Ghana, providing objective results that help guide your treatment and monitor your progress."],
   ],
   "poster": ["dialysis-flyer.jpg", "ADMed Specialist Clinic dialysis services flyer: monthly specialist consult, a medical doctor available during treatment, renal nutrition, iron sucrose therapy when appropriate and transparent patient monitoring. Call 024 356 0080 to book."],
+  "faq": [
+   ["What is haemodialysis (hemodialysis)?", "Haemodialysis, also spelt hemodialysis, is a treatment that does part of the work of failed kidneys. A dialysis machine takes blood from the body, filters out waste products and extra fluid, and returns the cleaned blood. A session usually lasts about 3 hours, and two to three sessions a week are usually needed."],
+   ["Where is the ADMed dialysis unit?", "Our dialysis unit is at ADMed Specialist Clinic on Spintex Road, Worship Curve (off Coca Cola Roundabout), Accra, Ghana. The unit has dialysis machines and reclining patient chairs."],
+   ["Is weekend dialysis available?", "Weekend dialysis appointments may be available, subject to scheduling and clinical assessment. Please call 024 356 0080 to arrange a session."],
+   ["What does your dialysis service include?", "Our comprehensive service package includes a monthly specialist consult with a nephrologist, a medical doctor available during treatment, renal nutrition guidance, iron sucrose therapy when it is prescribed, and monthly laboratory monitoring with our independent partner, Lancet Laboratories Ghana."],
+   ["Do I need a fistula or catheter before I start dialysis?", "Haemodialysis needs a vascular access, which is a way to reach the blood. Most patients use an AV fistula, an AV graft or a central venous catheter. Our team can explain the options and arrange the procedure. See our Dialysis Access Procedures page for details."],
+   ["Can visitors to Ghana have dialysis at ADMed?", "Yes. We welcome patients who are visiting Ghana. Please contact us before you travel so that we can plan your sessions."],
+   ["How do I book dialysis?", "Call 024 356 0080, or send an appointment request through the form on our website. All treatment arrangements are subject to clinical assessment and the availability of appropriate services."],
+  ],
   "sections": [
    {"h": "More Than Dialysis. We Care for the Whole You.", "p": [
      "Dialysis is one part of looking after your kidneys. Our team strives to treat every patient with dignity, respect, confidentiality and compassion while supporting informed decisions about their care."],
