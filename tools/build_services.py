@@ -177,7 +177,7 @@ def clinic_graph():
 
 
 # ---- the home page's own head block (between the seo markers) is rebuilt here
-HOME_TITLE = "ADMed Specialist Clinic Accra | Dialysis & Specialist Care"
+HOME_TITLE = "ADMed Specialist Clinic, Accra | Dialysis, Kidney & Heart Care"
 HOME_DESC = "Specialist clinic in Spintex, Accra: cardiac, kidney and dialysis care, orthopaedic, gynaecology, haematology, urology and lab services. Call 024 356 0080."
 _home_path = os.path.join(PUBLIC, "index.html")
 _home = open(_home_path, encoding="utf-8").read()
