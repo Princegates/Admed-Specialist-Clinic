@@ -7,6 +7,7 @@
   "preview_urls": true,
   "assets": {
     "directory": "./public",
-    "binding": "ASSETS"
+    "binding": "ASSETS",
+    "not_found_handling": "404-page"
   }
 }

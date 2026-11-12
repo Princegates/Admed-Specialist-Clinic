@@ -121,6 +121,22 @@ def seo_block(path, title, desc, kind="website", graph=None, noindex=False, extr
     return "\n  ".join(parts)
 
 
+GOOGLE_VERIFICATION = os.environ.get("GOOGLE_SITE_VERIFICATION", "")   # optional Search Console HTML-tag token
+
+
+def faq_items():
+    """Question and answer pairs from the FAQ section of public/index.html (plain text)."""
+    raw = open(os.path.join(PUBLIC, "index.html"), encoding="utf-8").read()
+    phone = CFG.get("phone", "")
+    out = []
+    for q, a in re.findall(r"<details[^>]*><summary>(.*?)</summary><p>(.*?)</p></details>", raw, re.S):
+        a = re.sub(r'<a data-href="tel" data-bind="phone"></a>', phone, a)
+        a = re.sub(r"<[^>]+>", "", a)
+        out.append({"@type": "Question", "name": html.unescape(q).strip(),
+                    "acceptedAnswer": {"@type": "Answer", "text": html.unescape(re.sub(r"\s+", " ", a)).strip()}})
+    return out
+
+
 def clinic_graph():
     soc = [v for v in (CFG.get("social") or {}).values() if v]
     days = {"Monday": "Mon", "Saturday": "Sat"}
@@ -153,6 +169,7 @@ def clinic_graph():
             ],
             "sameAs": soc,
         },
+        {"@type": "FAQPage", "@id": SITE_URL + "/#faq", "mainEntity": faq_items(), "isPartOf": {"@id": SITE_URL + "/#website"}},
     ]
 
 
@@ -166,7 +183,8 @@ _block = "\n  ".join([
     "<title>%s</title>" % e(HOME_TITLE),
     '<meta name="description" content="%s">' % e(HOME_DESC),
     '<link rel="preload" as="image" href="assets/photos/clinic-building-full.jpg" fetchpriority="high">',
-    seo_block("", HOME_TITLE, HOME_DESC, graph=clinic_graph()),
+    seo_block("", HOME_TITLE, HOME_DESC, graph=clinic_graph(),
+              extra=('<meta name="google-site-verification" content="%s">' % e(GOOGLE_VERIFICATION)) if GOOGLE_VERIFICATION else ""),
     "<!-- seo:end -->",
 ])
 _home = re.sub(r"<!-- seo:start.*?<!-- seo:end -->", lambda m: _block, _home, flags=re.S)
@@ -840,3 +858,60 @@ open(os.path.join(PUBLIC, "sitemap.xml"), "w", encoding="utf-8").write("\n".join
 open(os.path.join(PUBLIC, "robots.txt"), "w", encoding="utf-8").write(
     "User-agent: *\nAllow: /\nDisallow: /api/\n\nSitemap: %s\n" % url("sitemap.xml"))
 print("wrote sitemap.xml (%d urls) and robots.txt" % len(entries))
+
+
+# ---------------------------------------------------------------- 404 page and cache / security headers
+notfound_main = """<main id="main">
+<section class="svc-banner svc-banner--plain">
+  <div class="container svc-banner__in">
+    <p class="svc-banner__tag">Page not found</p>
+    <h1>We could not find that page</h1>
+    <p class="lead">The address may have changed or been typed wrongly. These links will help you find what you need.</p>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <article class="svc-article">
+      <ul class="checks">
+        <li><a class="more-link" href="/">ADMed Specialist Clinic home page</a></li>
+        <li><a class="more-link" href="/#services">Our services</a></li>
+        <li><a class="more-link" href="/#book">Book an appointment</a></li>
+        <li><a class="more-link" href="/insights/">Health insights</a></li>
+        <li><a class="more-link" href="/#contact">Opening hours and location</a></li>
+      </ul>
+      <p>You can also call us on <a data-href="tel" data-bind="phone"></a>.</p>
+    </article>
+  </div>
+</section>
+"""
+nf_head = head_t % {"title": "Page not found", "seo_title": "Page not found | ADMed Specialist Clinic", "desc": "This page could not be found.", "sprite": sprite_r, "header": header_r}
+nf_page = nf_head + notfound_main + "\n</main>\n\n" + foot_r + "\n" + chat_r + '\n<script src="/assets/js/config.js"></script>\n<script src="/assets/js/main.js"></script>\n</body>\n</html>\n'
+# a 404 can be served for any address, so every link and file must be absolute
+nf_page = re.sub(r'(href|src)="(?!https?:|mailto:|tel:|/|#|data:)([^"]*)"', lambda m: '%s="/%s"' % (m.group(1), m.group(2)), nf_page)
+nf_page = nf_page.replace('href="/index.html#', 'href="/#').replace('href="#', 'href="/#')
+nf_page = nf_page.replace('<use href="/#', '<use href="#')
+nf_page = nf_page.replace('<body>', '<body data-base="/">', 1) if '<body data-base' not in nf_page else nf_page
+nf_page = nf_page.replace('<meta name="theme-color"', '<meta name="robots" content="noindex"><meta name="theme-color"', 1)
+with open(os.path.join(PUBLIC, "404.html"), "w", encoding="utf-8") as f:
+    f.write(nf_page)
+print("wrote 404.html")
+
+open(os.path.join(PUBLIC, "_headers"), "w", encoding="utf-8").write("""/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+/assets/photos/*
+  Cache-Control: public, max-age=604800
+
+/assets/img/*
+  Cache-Control: public, max-age=604800
+
+/assets/css/*
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/assets/js/*
+  Cache-Control: public, max-age=3600, must-revalidate
+""")
+print("wrote _headers")
