@@ -915,3 +915,45 @@ open(os.path.join(PUBLIC, "_headers"), "w", encoding="utf-8").write("""/*
   Cache-Control: public, max-age=3600, must-revalidate
 """)
 print("wrote _headers")
+
+
+# ---------------------------------------------------------------- clean internal links
+# Point every internal page link straight at its final address (no .html, no index.html), so visitors and
+# search engines are not sent through a redirect first. Runs over every page, including index.html.
+_HREF = re.compile(r'(?<![\w-])href="([^"#?][^"]*?)([#?][^"]*)?"')
+
+
+def _clean_links(rel, text):
+    here = os.path.dirname(rel)
+
+    def fix(m):
+        path, tail = m.group(1), m.group(2) or ""
+        if re.match(r"(https?:|mailto:|tel:|data:|javascript:|/)", path):
+            return m.group(0)
+        target = os.path.normpath(os.path.join(here, path)).replace("\\", "/")
+        if path.endswith("/"):
+            new = "/" + (target + "/" if target != "." else "")
+        elif target.endswith("index.html"):
+            new = "/" + target[: -len("index.html")]
+        elif target.endswith(".html"):
+            new = "/" + target[:-5]
+        else:
+            return m.group(0)
+        return 'href="%s%s"' % (new, tail)
+
+    return _HREF.sub(fix, text)
+
+
+_changed = 0
+for _root, _dirs, _files in os.walk(PUBLIC):
+    for _f in _files:
+        if not _f.endswith(".html"):
+            continue
+        _fp = os.path.join(_root, _f)
+        _rel = os.path.relpath(_fp, PUBLIC).replace("\\", "/")
+        _old = open(_fp, encoding="utf-8").read()
+        _new = _clean_links(_rel, _old)
+        if _new != _old:
+            open(_fp, "w", encoding="utf-8").write(_new)
+            _changed += 1
+print("cleaned internal links in %d pages" % _changed)

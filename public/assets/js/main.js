@@ -11,7 +11,7 @@
   };
 
   document.documentElement.classList.remove("no-js");
-  var base = document.body.getAttribute("data-base") || "";   // "../index.html" on service pages
+  var base = document.body.getAttribute("data-base") ? "/" : "";   // "/" on every page except the home page
 
   /* ---------- Contact details: bind, link and hide anything empty ---------- */
   var hours = Array.isArray(C.hours) ? C.hours : [];
@@ -77,7 +77,7 @@
   var CONSENT_KEY = "admed-consent";
   var getConsent = function () { try { return localStorage.getItem(CONSENT_KEY); } catch (e) { return null; } };
   var setConsent = function (v) { try { localStorage.setItem(CONSENT_KEY, v); } catch (e) {} };
-  var cookiePage = (base ? base.replace("index.html", "") : "") + "cookies.html";
+  var cookiePage = "/cookies";
   function loadMap() {
     if (!C.mapEmbedUrl || !$("#mapFrame")) return;
     var f = $("#mapFrame");
@@ -341,7 +341,7 @@
   if (newsAll.length && $("#updates")) {
     $("#updates").hidden = false;
     var linkOf = function (n) {
-      if (n._type === "insight" && n.id) return { href: "insights/" + encodeURIComponent(n.id) + ".html", ext: false, label: "Read the full article" };
+      if (n._type === "insight" && n.id) return { href: "/insights/" + encodeURIComponent(n.id), ext: false, label: "Read the full article" };
       if (n.link) return { href: n.link, ext: true, label: n._type === "local" && n.source ? "Read at " + n.source : "Learn more" };
       if (n.image) return { href: n.image, ext: true, label: "View full size" };
       return null;
@@ -469,7 +469,7 @@
   if (art) {
     var wanted = new URLSearchParams(location.search).get("id");
     var item = newsAll.filter(function (n) { return n._type === "insight" && n.id === wanted && n.body; })[0];
-    if (item) { location.replace("insights/" + encodeURIComponent(item.id) + ".html"); return; }
+    if (item) { location.replace("/insights/" + encodeURIComponent(item.id)); return; }
     if (!item) {
       $("#insightTitle").textContent = "Article not found";
       art.innerHTML = '<p>We could not find that article. It may have been moved or removed.</p><p><a class="more-link" href="' + esc(base) + '#updates">See all news and health insights &rarr;</a></p>';
@@ -489,7 +489,7 @@
         else html += "<p>" + esc(t) + "</p>";
       });
       if (inList) html += "</ul>";
-      if (item.service) html += '<p><a class="more-link" href="services/' + esc(item.service) + '.html">Learn more about this service &rarr;</a></p>';
+      if (item.service) html += '<p><a class="more-link" href="/services/' + esc(item.service) + '">Learn more about this service &rarr;</a></p>';
       html += '<p class="small-print">This article gives general information and does not replace advice from a doctor. To discuss your own situation, please book a consultation.</p>';
       art.innerHTML = html;
     }
