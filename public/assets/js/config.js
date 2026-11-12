@@ -98,8 +98,6 @@ window.ADMED = {
   //         service: "Dialysis Treatment" }   // service pre-selects the booking form (optional)
   // Leave the list empty to switch the pop-up off.
   popups: [
-    { src: "assets/photos/promo-dialysis-travel.jpg", service: "Dialysis Treatment",
-      alt: "Travelling to Ghana? Keep up with your dialysis treatment at ADMed Specialist Clinic. Whether you are visiting for a holiday, family visit or business trip, we provide reliable and high-quality dialysis care in a safe and comfortable environment. Dialysis treatment fee: 100 US dollars per session. Call 024 356 0080." },
     { src: "assets/photos/promo-nephrology.jpg", service: "Nephrology",
       alt: "Nephrology service: specialist kidney care for your health and well-being. Clinic days: Saturdays at 10:00 AM. Call 024 356 0080 to book an appointment." },
     { src: "assets/photos/promo-urology.jpg", service: "Urology",
