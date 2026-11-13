@@ -12,7 +12,7 @@ window.ADMED = {
   phone2: { label: "Booking & WhatsApp", number: "+233 55 699 6422" },  // optional second number
   whatsapp: "233556996422",  // digits only with country code (used when the form key is not set)
   email: "info@admedspecialistclinic.com",  // booking form sends requests here when WhatsApp is not set
-  address: "Spintex Road, Worship Curve (Off Coca Cola Roundabout), Accra",
+  address: "6 Worship Curve, Spintex Road (off Coca-Cola Roundabout), Accra",
   plusCode: "JVRV+3G Accra, Ghana",
 
   // Google Maps
