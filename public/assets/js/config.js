@@ -298,7 +298,7 @@ window.ADMED = {
         "Dialysis does part of the work of the failed kidneys, filtering waste products out of the blood. There are two types.",
         "- Peritoneal dialysis (tummy dialysis): a soft tube is placed into the abdomen and a special solution is passed through it. The solution collects the waste products and is then drained away",
         "- Haemodialysis (blood dialysis): blood is taken through a tube or a fistula to a dialysis machine, which removes the waste products and returns the cleaned blood to the body",
-        "Haemodialysis is the most common form. Each session lasts about 3 hours, and two to three sessions a week are usually needed. For most people, dialysis is needed for the long term. Our dialysis service and the procedures that make dialysis possible are described on their own pages.",
+        "Haemodialysis is the most common form. Each session lasts about 4 hours, and two to three sessions a week are usually needed. For most people, dialysis is needed for the long term. Our dialysis service and the procedures that make dialysis possible are described on their own pages.",
         "## Kidney transplant",
         "In a kidney transplant, one healthy kidney from a donor is placed in a patient whose kidneys have failed. The donor can live a normal life with the one remaining healthy kidney. The person who receives the kidney needs medicines for the long term to help the new kidney to keep working. A transplanted kidney can work for many years. If it eventually stops working, the person goes back on dialysis.",
         "## When to see a specialist",
