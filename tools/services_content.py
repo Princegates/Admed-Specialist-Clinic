@@ -53,7 +53,7 @@ SERVICES = [
  },
  {
   "slug": "dialysis", "name": "Dialysis Treatment", "select": "Dialysis Treatment", "icon": "kidney",
-  "photo": "dialysis-unit-wide.jpg", "pos": "center 55%", "tile": "Dialysis sessions with monthly specialist consults, a doctor available during treatment, renal nutrition guidance and monthly laboratory monitoring.",
+  "photo": "dialysis-unit-wide.jpg", "pos": "72% 70%", "banner_right": True, "tile": "Dialysis sessions with monthly specialist consults, a doctor available during treatment, renal nutrition guidance and monthly laboratory monitoring.",
   "banner": "ADMed Specialist Clinic: Exceptional Dialysis Care. A Better Quality of Life",
   "figure": ["dialysis-unit-wide.jpg", "The ADMed dialysis unit, with dialysis machines and reclining patient chairs"],
   "intro": [

@@ -675,3 +675,11 @@ body.promo-open{overflow:hidden}
 
 .dl-box{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 1rem;margin:1.2rem 0;padding:1rem 1.1rem;border:1px solid var(--line,#d9dcea);border-left:4px solid var(--amber);border-radius:12px;background:var(--surface,#fff)}
 .dl-box span{flex:1 1 220px;font-size:.95rem}
+
+/* Banner photo kept to the right so the heading never sits on top of the equipment */
+.svc-banner--right .svc-banner__img{left:34%;background-size:cover}
+.svc-banner--right::before{background:linear-gradient(90deg,var(--dark-bg) 0%,var(--dark-bg) 34%,rgba(8,8,112,.55) 44%,rgba(8,8,112,0) 62%)}
+@media (max-width:900px){
+  .svc-banner--right .svc-banner__img{left:0}
+  .svc-banner--right::before{background:linear-gradient(180deg,rgba(8,8,112,.7),rgba(8,8,112,.5))}
+}

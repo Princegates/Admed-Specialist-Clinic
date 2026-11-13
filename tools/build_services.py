@@ -339,7 +339,7 @@ PAGE = """<!doctype html>
 %(header)s
 <main id="main">
 
-<section class="svc-banner">
+<section class="svc-banner%(bcls)s">
   <div class="svc-banner__img" style="background-image:url('../assets/photos/%(photo)s');background-position:%(pos)s" role="img" aria-label="%(title)s"></div>
   <div class="container svc-banner__in">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Home</a><span aria-hidden="true">/</span><a href="../index.html#services">Services</a><span aria-hidden="true">/</span><span aria-current="page">%(name)s</span></nav>
@@ -391,6 +391,7 @@ for s in SERVICES:
         "page": "MedicalWebPage", "name": seo_name}
     book = SELECT_QS[s["slug"]]
     page = PAGE % {
+        "bcls": " svc-banner--right" if s.get("banner_right") else "",
         "title": e(title),
         "seo_title": e(full_title(seo_title)),
         "name": e(s["name"]),
