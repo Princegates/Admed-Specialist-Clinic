@@ -54,9 +54,10 @@ SERVICES = [
  {
   "slug": "dialysis", "name": "Dialysis Treatment", "select": "Dialysis Treatment", "icon": "kidney",
   "photo": "dialysis-unit-wide.jpg", "pos": "center 55%", "tile": "Dialysis sessions with monthly specialist consults, a doctor available during treatment, renal nutrition guidance and monthly laboratory monitoring.",
-  "banner": "Compassionate Care. Advanced Treatment. Better Living.",
+  "banner": "ADMed Specialist Clinic: Exceptional Dialysis Care. A Better Quality of Life",
   "figure": ["dialysis-unit-wide.jpg", "The ADMed dialysis unit, with dialysis machines and reclining patient chairs"],
   "intro": [
+   "Compassionate Care. Advanced Treatment. Better Living.",
    "At ADMed Specialist Clinic, our dialysis service is built around you. We provide compassionate, patient-centred dialysis care in a professional and supportive environment for people living with kidney failure or other conditions that need dialysis, in line with their clinical needs and the recommendations of their treating healthcare professionals.",
    "Our dialysis unit is equipped with dialysis machines and reclining patient chairs to support your comfort during treatment. Weekend dialysis appointments may be available, subject to scheduling and clinical assessment.",
   ],
