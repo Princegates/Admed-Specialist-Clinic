@@ -33,12 +33,12 @@ CLINIC_ID = SITE_URL + "/#clinic"
 
 # What each service is called in search results (the page heading keeps the short name)
 SEO_DESCRIPTIONS = {
-    "dialysis": "Hemodialysis (haemodialysis) in Spintex, Accra: dialysis machines, a doctor during treatment, monthly nephrologist consult, renal nutrition and lab monitoring. Call 024 356 0080.",
+    "dialysis": "ADMed Specialist Clinic: Exceptional Dialysis Care, A Better Quality of Life. Hemodialysis in Spintex, Accra with a doctor present, nephrologist consults, renal nutrition and lab monitoring. Call 024 356 0080.",
 }
 SEO_NAMES = {
     "cardiac": "Cardiac Clinic & Cardiology",
     "nephrology": "Nephrology & Kidney Care",
-    "dialysis": "Hemodialysis & Dialysis Treatment",
+    "dialysis": "Dialysis Treatment Centre",
     "dialysis-access": "Dialysis Access Procedures",
     "orthopaedic": "Orthopaedic Care",
     "gynaecology": "Gynaecology Clinic",
