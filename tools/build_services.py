@@ -266,6 +266,8 @@ def article(s):
             out.append(bullets(sec["bullets"], "dots"))
         if sec.get("link"):
             out.append('<p><a class="more-link" href="%s">%s &rarr;</a></p>' % (e(sec["link"][1]), e(sec["link"][0])))
+        if sec.get("download"):
+            out.append(download_box(sec["download"], "../"))
         for lk in sec.get("links", []):
             out.append('<p><a class="more-link" href="%s">%s &rarr;</a></p>' % (e(lk[1]), e(lk[0])))
     if s.get("faq"):
@@ -367,6 +369,13 @@ PAGE = """<!doctype html>
 </body>
 </html>
 """
+
+
+def download_box(d, prefix):
+    if not d:
+        return ""
+    return ('<p class="dl-box"><a class="btn btn--primary" href="%s%s" download><svg class="ic" aria-hidden="true"><use href="#i-download"/></svg> %s</a>'
+            '<span>%s</span></p>' % (prefix, e(d[1]), e(d[0]), e(d[2]) if len(d) > 2 else "")).replace('<svg class="ic" aria-hidden="true"><use href="#i-download"/></svg> ', '')
 
 out_dir = os.path.join(PUBLIC, "services")
 os.makedirs(out_dir, exist_ok=True)
@@ -771,6 +780,7 @@ for n in INSIGHTS:
 <section class="section">
   <div class="container">
     <article class="svc-article" id="articleBody">
+        %(dl)s
         %(body)s
         %(svc)s
         <p class="small-print">This article gives general information and does not replace advice from a doctor. To discuss your own situation, please book a consultation.</p>
@@ -780,7 +790,7 @@ for n in INSIGHTS:
   </div>
 </section>
 """ % {"crumb": e(title), "title": e(title), "lead": e(n.get("summary", "")), "date": e(nice_date(n.get("date"))),
-       "body": render_body(n["body"]), "svc": svc, "more": more}
+       "body": render_body(n["body"]), "svc": svc, "more": more, "dl": download_box(n.get("download"), "../")}
     head = sub_head_t % {"title": e(title), "seo_title": e(full_title(title)), "desc": e(desc), "sprite": sprite, "header": header}
     write_sub(rel, head, main)
     SEO_REG[rel] = {"path": "insights/%s" % n["id"], "kind": "article", "article": n,

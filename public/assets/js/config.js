@@ -311,6 +311,7 @@ window.ADMED = {
     },
     {
       type: "insight", id: "av-fistula-guide", date: "2026-10-10", service: "dialysis-access",
+      download: ["Download: Care of Your AV-Fistula (PDF)", "assets/docs/care-of-your-av-fistula.pdf", "Do's and don'ts after your fistula operation. Save it or print it to keep."],
       title: "AV fistula: what to know before and after the operation",
       summary: "A patient guide to the AV fistula, the long-lasting access for haemodialysis: how it works, how it is made and how to look after it.",
       body: [
