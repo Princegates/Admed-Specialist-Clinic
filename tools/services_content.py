@@ -17,8 +17,11 @@ SERVICES = [
    "The cardiac service at ADMed Specialist Clinic offers a cardiac clinic with a cardiologist, care for thoracic conditions, pacemaker implantation and IVC filter placement. It supports people with heart, chest and blood pressure concerns. A specialist listens to your symptoms, reviews your history and any earlier results, and explains what is happening and what the next step is.",
    "Heart conditions are common, and many develop quietly. Seeing a specialist early gives you the best chance of keeping a problem under control.",
   ],
+  "day": "Saturdays at 8:00 AM",
   "offers": ["Cardiac Clinic (Cardiologist)", "Thoracic Conditions", "Pacemaker Implantation", "IVC Filter Placement"],
   "sections": [
+   {"h": "Cardiac Clinic: our specialists", "id": "cardiac-clinic", "p": ["The cardiac clinic is run by two consultant specialists:"],
+    "bullets": ["Prof. Martin N. Tamatey, Consultant Cardiovascular Surgeon", "Dr. Kwame Adomako Acheampong, Consultant Cardiovascular Surgeon"]},
    {"h": "What is cardiology?", "p": ["Cardiology is the branch of medicine that looks after the heart and the blood vessels. A cardiologist assesses how well your heart is working and treats conditions that affect it, including problems with blood pressure and heart rhythm."]},
    {"h": "High blood pressure: no pain, no warning", "p": [
      "High blood pressure (hypertension) often causes no pain and no obvious symptoms. Over time it puts extra pressure on the blood vessels and can harm the heart, the brain and the kidneys.",
