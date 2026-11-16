@@ -14,8 +14,9 @@ SERVICES = [
   "photo": "cardiac-care.jpg", "tile": "Cardiac clinic (cardiologist), thoracic conditions, pacemaker implantation and IVC filter placement.",
   "banner": "Cardiac clinic, thoracic care, pacemaker implantation and IVC filters",
   "intro": [
-   "The cardiac service at ADMed Specialist Clinic offers a cardiac clinic with a cardiologist, care for thoracic conditions, pacemaker implantation and IVC filter placement. It supports people with heart, chest and blood pressure concerns. A specialist listens to your symptoms, reviews your history and any earlier results, and explains what is happening and what the next step is.",
-   "Heart conditions are common, and many develop quietly. Seeing a specialist early gives you the best chance of keeping a problem under control.",
+   "At ADMed Specialist Clinic, our Cardiac Clinic provides comprehensive cardiovascular assessment, diagnosis and management of heart-related conditions. Our services are delivered by experienced cardiology specialists, offering professional care for patients with heart disease, chest-related concerns, hypertension and other cardiovascular conditions.",
+   "We provide specialist consultations, thorough clinical evaluations, review of medical histories and diagnostic results, and personalised treatment recommendations. Our services also include advanced cardiac interventions such as pacemaker implantation and Inferior Vena Cava (IVC) filter placement.",
+   "We are committed to the early detection, effective management and ongoing monitoring of cardiovascular conditions, helping patients achieve better heart health and an improved quality of life.",
   ],
   "day": "Saturdays at 8:00 AM",
   "offers": ["Cardiac Clinic (Cardiologist)", "Thoracic Conditions", "Pacemaker Implantation", "IVC Filter Placement"],
