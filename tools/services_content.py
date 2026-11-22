@@ -73,7 +73,10 @@ SERVICES = [
    ["Iron Sucrose Therapy (prescribed when appropriate)", "Iron sucrose therapy to help manage anaemia, boost energy and improve your quality of life."],
    ["In-House Laboratory Services", "We now have an in-house laboratory. Access reliable and timely laboratory investigations through our in-house laboratory. Our facility provides essential diagnostic testing to support accurate clinical assessments, guide treatment decisions and ensure continuous monitoring of your health and progress."],
   ],
-  "poster": ["dialysis-flyer.jpg", "ADMed Specialist Clinic dialysis services flyer: monthly specialist consult, a medical doctor available during treatment, renal nutrition, iron sucrose therapy when appropriate and transparent patient monitoring. Call 024 356 0080 to book."],
+  "posters": [
+   ["dialysis-service.jpg", "ADMed Specialist Clinic dialysis service flyer: expert care every session, a comfortable treatment area, flexible scheduling and patient-centred care. Call 024 356 0080 to book."],
+   ["dialysis-weekend.jpg", "Dialysis that fits your life: one session during the week and one at the weekend (Saturday or Sunday) for patients who are still working. Call 024 356 0080."],
+  ],
   "faq": [
    ["What is haemodialysis (hemodialysis)?", "Haemodialysis, also spelt hemodialysis, is a treatment that does part of the work of failed kidneys. A dialysis machine takes blood from the body, filters out waste products and extra fluid, and returns the cleaned blood. A session usually lasts about 4 hours, and two to three sessions a week are usually needed."],
    ["Where is the ADMed dialysis unit?", "Our dialysis unit is at ADMed Specialist Clinic at 6 Worship Curve, Spintex Road (off Coca-Cola Roundabout), Accra, Ghana. The unit has dialysis machines and reclining patient chairs."],

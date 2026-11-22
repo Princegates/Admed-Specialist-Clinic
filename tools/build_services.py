@@ -246,6 +246,10 @@ def article(s):
         out.append('<figure class="svc-fig"><img src="../assets/photos/%s" alt="%s" width="1080" height="810" loading="lazy"></figure>' % (e(s["figure"][0]), e(s["figure"][1])))
     if s.get("cards"):
         out.append("<h2>%s</h2>" % e(s.get("cards_h", "What we offer")) + '<div class="values">%s</div>' % "".join('<div class="value"><h3>%s</h3><p>%s</p></div>' % (e(h), e(b)) for h, b in s["cards"]))
+    if s.get("posters"):
+        out.append('<div class="svc-posters">%s</div>' % "".join(
+            '<figure class="svc-poster"><a href="../assets/photos/%s" target="_blank" rel="noopener"><img src="../assets/photos/%s" alt="%s" width="1080" height="1080" loading="lazy"></a></figure>' % (e(f), e(f), e(a))
+            for f, a in s["posters"]))
     if s.get("poster"):
         out.append('<figure class="svc-poster"><a href="../assets/photos/%s" target="_blank" rel="noopener"><img src="../assets/photos/%s" alt="%s" width="854" height="1280" loading="lazy"></a></figure>' % (e(s["poster"][0]), e(s["poster"][0]), e(s["poster"][1])))
     if not s.get("offers"):
