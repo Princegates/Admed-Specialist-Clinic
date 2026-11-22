@@ -214,12 +214,14 @@ SERVICES = [
  },
  {
   "slug": "medical-laboratory", "name": "Medical Laboratory", "select": "Medical Laboratory", "icon": "flask",
-  "photo": "laboratory-care.jpg", "tile": "Medical laboratory services to support your consultation.",
-  "banner": "Medical laboratory services",
+  "photo": "laboratory-care.jpg", "tile": "Our in-house laboratory: reliable, timely tests to support your consultation and monitor your progress.",
+  "banner": "We now have an in-house laboratory",
   "intro": [
-   "The medical laboratory service at ADMed Specialist Clinic supports your care with laboratory investigations. Accurate tests help your doctor reach a diagnosis, choose the right treatment and check how well it is working.",
+   "We now have an in-house laboratory.",
+   "Access reliable and timely laboratory investigations through our in-house laboratory. Our facility provides essential diagnostic testing to support accurate clinical assessments, guide treatment decisions and ensure continuous monitoring of your health and progress.",
+   "Accurate tests help your doctor reach a diagnosis, choose the right treatment and check how well it is working.",
   ],
-  "offers": ["Medical laboratory services", "Laboratory investigations requested by your doctor"],
+  "offers": ["In-House Laboratory Services", "Laboratory investigations requested by your doctor"],
   "sections": [
    {"h": "Getting ready for a test", "p": ["Some tests need preparation, such as not eating for a number of hours beforehand. Ask when you book, or follow the instructions your doctor gives you. Bring your test request and your ID, and let the team know about any medicines you take."]},
    {"h": "Your results", "p": ["Your doctor will explain your results and what they mean for your care. If you have a question about a result, please ask your doctor or call the clinic."]},
