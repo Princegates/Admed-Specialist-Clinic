@@ -315,7 +315,7 @@ window.ADMED = {
       title: "AV fistula: what to know before and after the operation",
       summary: "A patient guide to the AV fistula, the long-lasting access for haemodialysis: how it works, how it is made and how to look after it.",
       body: [
-        "An AV fistula is the preferred long-term access for haemodialysis. This guide explains what it is, how the operation works, what helps it to work well and what to watch for afterwards. It does not replace the advice of your own surgeon or nephrologist.",
+        "An AV fistula is the preferred long-term access for haemodialysis. This guide explains what it is, how the operation works, what helps it to work well and what to watch for afterwards.",
         "## What is an AV fistula?",
         "Arteries carry blood from the heart to the body, quickly and under pressure. Veins carry it back, slowly and close to the skin. Usually the two are not directly joined. In an arterio-venous (AV) fistula, a surgeon connects an artery to a vein.",
         "The reason is simple. Blood from the artery now flows through the vein at high speed and pressure, and over several weeks the vein grows larger and stronger. It becomes big enough for the dialysis needles to be placed in it and connected to the dialysis machine.",
