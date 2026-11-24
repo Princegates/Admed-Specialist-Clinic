@@ -108,6 +108,7 @@ SERVICES = [
   "offers": ["Central Venous Catheter (CVC) insertion", "AV Fistula (AVF) creation", "AV Graft (AVG) creation"],
   "offers_ids": ["cvc", "avf", "avg"],
   "sections": [
+   {"h": "Our specialist", "id": "specialist", "p": ["Prof. Martin N. Tamatey, Consultant Cardiovascular Surgeon."]},
    {"h": "Central Venous Catheter (CVC) insertion", "id": "cvc", "p": [
      "A central venous catheter is a soft tube placed into a large vein, usually in the neck, so that blood can be taken to the dialysis machine and returned. It can be used for dialysis straight away, which makes it useful when treatment is needed urgently.",
      "Catheters are generally used for a limited time, for example while a fistula or graft is healing, or when other forms of access are not possible. Because the tube sits in a large vein, it needs to be kept clean and dry and checked regularly to lower the risk of infection."], "link": ["Read our patient guide to the dialysis catheter", "/insights/dialysis-catheter-guide"]},
